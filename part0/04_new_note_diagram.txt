@@ -12,9 +12,34 @@ sequenceDiagram
 
   browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
   activate server
-  server->>browser: 302 /exampleapp/notes
+  server pushes user submitted data to notes array
+  server->>browser: Redirect to /exampleapp/notes
   end server
 
-  Note right of server: The server receives the post request, after which it responds with HTTP status code 302. This is the server asking the browser to perform a GET request to the address specified in the location, which in this case is /exampleapp/notes
+  Note right of server: The server receives the post request to exampleapp/new_note. This post request also includes a payload of the user input. Then the server adds the user input into the notes array as an object with content and data properties. Then it responds with HTTP status code 302. This triggers a redirect, where the server asks the browser to perform a GET request to the address specified in the location, which in this case is /exampleapp/notes
 
   browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+  activate server
+  server->>browser: HTML Document
+  end server
+
+  Note right of browser: The redirect to the new_notes now causes the get request to the link, reloading the page with the new note submitted by the browser. This causes three more HTTP requests for the css file, js file and the raw data of notes.
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+  activate server
+  server->> browser: main.css file
+  end server
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+  activate server
+  server->>browser: main.js file
+  end server
+
+  Note right of browser: The browser executes the JS code that gets the updated JSON file from the server
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+  activate server
+  server->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ..., { "content": "New Note", "date": "2025-05-27" } ]
+  deactivate server
+
+  Note right of browser: The browser executes the callback function that renders the updated notes, which should contain the last updated note submitted by the user. 
