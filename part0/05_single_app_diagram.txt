@@ -1,0 +1,11 @@
+sequenceDiagram
+  participant user
+  participant server
+  participant browser
+
+  user clicks on input form
+  user enters data in input form
+  user clicks save
+  deactivate user
+
+  
