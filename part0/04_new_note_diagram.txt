@@ -1,0 +1,9 @@
+sequenceDiagram
+  participant user
+  participant browser
+  participant server
+
+  user clicks on input form
+  user enters data in input form
+  user clicks save
+  end user
