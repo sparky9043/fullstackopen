@@ -25,4 +25,4 @@ sequenceDiagram
   activate server: server updates data
   deactivate server
 
-  Note right of server: The update data is sent as the body of the POST request, which can be accessed using req.body. The server is updated and the DOM is updated separately, assuming the POST request was successful.
+  Note right of server: The update data is sent as the body of the POST request, which can be accessed using req.body. The browser only sends the new note as JSON to the server. The server is updated and the DOM is updated separately, assuming the POST request was successful.
