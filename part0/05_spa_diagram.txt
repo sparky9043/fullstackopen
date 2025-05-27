@@ -1,0 +1,31 @@
+sequenceDiagram
+  participant user
+  participant browser
+  participant browser
+
+  user->>browser: inputs intended address to browser
+  activate browser
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+  activate server
+  server->>browser: HTML document sent back to browser
+  deactivate server
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+  activate server
+  server->>browser: main.css file
+  deactivate server
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+  activate server
+  server->>browser: spa.js file
+  deactivate
+
+  Note on right of browser: Unlike traditional multipage, the js file will not redirect the page. Instead, it will decouple the process between the post request and the rerendering of the UI.
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+  activate server
+  server->>browser: JSON file returned
+  deactivate
+
+  Note: Up to here, there is almost no difference between traditional HTML webpage and the SPA page. The main difference will occur when submitting the form.
