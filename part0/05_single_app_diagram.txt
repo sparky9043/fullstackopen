@@ -8,4 +8,4 @@ sequenceDiagram
   user clicks save
   deactivate user
 
-  
+  Note right of user: When the user clicks save button, the page is not reloaded. Unlike traditional multipage application, the form elements in SPA does not contain action or method attributes.
