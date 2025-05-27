@@ -6,7 +6,7 @@ sequenceDiagram
   user clicks on input form
   user enters data in input form
   user clicks save
-  end user
+  deactivate user
 
   Note right of user: The browser makes a post request when user clicks the save button and the form gets submitted to the server with the user input
 
@@ -14,26 +14,26 @@ sequenceDiagram
   activate server
   server pushes user submitted data to notes array
   server->>browser: Redirect to /exampleapp/notes
-  end server
+  deactivate server
 
   Note right of server: The server receives the post request to exampleapp/new_note. This post request also includes a payload of the user input. Then the server adds the user input into the notes array as an object with content and data properties. Then it responds with HTTP status code 302. This triggers a redirect, where the server asks the browser to perform a GET request to the address specified in the location, which in this case is /exampleapp/notes
 
   browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
   activate server
   server->>browser: HTML Document
-  end server
+  deactivate server
 
   Note right of browser: The redirect to the new_notes now causes the get request to the link, reloading the page with the new note submitted by the browser. This causes three more HTTP requests for the css file, js file and the raw data of notes.
 
   browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
   activate server
   server->> browser: main.css file
-  end server
+  deactivate server
 
   browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
   activate server
   server->>browser: main.js file
-  end server
+  deactivate server
 
   Note right of browser: The browser executes the JS code that gets the updated JSON file from the server
 
