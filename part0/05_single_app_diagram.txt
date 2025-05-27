@@ -9,3 +9,18 @@ sequenceDiagram
   deactivate user
 
   Note right of user: When the user clicks save button, the page is not reloaded. Unlike traditional multipage application, the form elements in SPA does not contain action or method attributes.
+
+  browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+  activate server
+  server->>browser: 201 Status but no redirect
+  deactivate server
+
+  Note right of server: The POST request contains the user input (new note) as JSON with content and date properties. Unlike in traditional webpages, the input data now also specifies content type as application/json.
+
+  browser: JS code already fetched from the server
+  browser creates note in correct format
+  browser pushes note in notes
+  browser updates DOM API
+  browser->>server: updated notes
+  activate server: server updates data
+  deactivate server
