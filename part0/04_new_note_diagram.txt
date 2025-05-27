@@ -7,3 +7,14 @@ sequenceDiagram
   user enters data in input form
   user clicks save
   end user
+
+  Note right of user: The browser makes a post request when user clicks the save button and the form gets submitted to the server with the user input
+
+  browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+  activate server
+  server->>browser: 302 /exampleapp/notes
+  end server
+
+  Note right of server: The server receives the post request, after which it responds with HTTP status code 302. This is the server asking the browser to perform a GET request to the address specified in the location, which in this case is /exampleapp/notes
+
+  browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
