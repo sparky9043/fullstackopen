@@ -16,6 +16,7 @@ const App = () => {
 
   const total = good + neutral + bad;
   const average = total > 0 ? (good + bad * -1) / total : 0;
+  const positivePercent = (good / total) * 100;
 
   function handleGood() {
     setGood((good) => good + 1);
@@ -41,6 +42,7 @@ const App = () => {
       <Stats text="bad" stat={bad} />
       <Stats text="all" stat={total} />
       <Stats text="average" stat={average} />
+      <Stats text="positive" stat={`${positivePercent}%`} />
     </div>
   );
 };
