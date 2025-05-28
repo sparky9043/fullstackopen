@@ -14,6 +14,8 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  const total = good + neutral + bad;
+
   function handleGood() {
     setGood((good) => good + 1);
   }
@@ -36,6 +38,7 @@ const App = () => {
       <Stats text="good" stat={good} />
       <Stats text="neutral" stat={neutral} />
       <Stats text="bad" stat={bad} />
+      <Stats text="all" stat={total} />
     </div>
   );
 };
