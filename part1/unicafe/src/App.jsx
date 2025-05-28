@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const Header = ({ text }) => <h2>{text}</h2>;
+
 const StatisticLine = ({ text, value }) => (
   <tr>
     <td>{text}</td>
@@ -54,11 +56,11 @@ const App = () => {
 
   return (
     <div>
-      <h2>give feedback</h2>
+      <Header text="give feedback" />
       <Button text="good" onClick={handleGood} />
       <Button text="neutral" onClick={handleNeutral} />
       <Button text="bad" onClick={handleBad} />
-      <h2>stats</h2>
+      <Header text="stats" />
       <Statistics stats={{ good, neutral, bad }} />
     </div>
   );
