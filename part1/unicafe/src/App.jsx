@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const Stat = ({ text, stat }) => (
+const StatisticLine = ({ text, value }) => (
   <p>
-    {text} {stat}
+    {text} {value}
   </p>
 );
 
@@ -19,12 +19,12 @@ const Statistics = ({ stats }) => {
         <p>No feedback given</p>
       ) : (
         <>
-          <Stat text="good" stat={good} />
-          <Stat text="neutral" stat={neutral} />
-          <Stat text="bad" stat={bad} />
-          <Stat text="all" stat={total} />
-          <Stat text="average" stat={average} />
-          <Stat text="positive" stat={`${positivePercent}%`} />
+          <StatisticLine text="good" value={good} />
+          <StatisticLine text="neutral" value={neutral} />
+          <StatisticLine text="bad" value={bad} />
+          <StatisticLine text="all" value={total} />
+          <StatisticLine text="average" value={average} />
+          <StatisticLine text="positive" value={`${positivePercent}%`} />
         </>
       )}
     </>
