@@ -26,8 +26,6 @@ const App = () => {
   const values = Object.values(votes);
   const largestValueIndex = values.indexOf(Math.max(...values));
 
-  console.log(votes);
-
   function handleClick() {
     const random = Math.floor(Math.random() * anecdotes.length);
     setSelected(random);
