@@ -23,6 +23,10 @@ const App = () => {
     6: 0,
     7: 0,
   });
+  const values = Object.values(votes);
+  const largestValueIndex = values.indexOf(Math.max(...values));
+
+  console.log(votes);
 
   function handleClick() {
     const random = Math.floor(Math.random() * anecdotes.length);
@@ -39,10 +43,14 @@ const App = () => {
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={handleVote}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[largestValueIndex]}</p>
+      <p>has {votes[largestValueIndex]} votes</p>
     </div>
   );
 };
