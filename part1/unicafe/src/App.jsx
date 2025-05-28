@@ -15,12 +15,18 @@ const Statistics = ({ stats }) => {
   return (
     <>
       <h2>stats</h2>
-      <Stat text="good" stat={good} />
-      <Stat text="neutral" stat={neutral} />
-      <Stat text="bad" stat={bad} />
-      <Stat text="all" stat={total} />
-      <Stat text="average" stat={average} />
-      <Stat text="positive" stat={`${positivePercent}%`} />
+      {total === 0 ? (
+        <p>No feedback given</p>
+      ) : (
+        <>
+          <Stat text="good" stat={good} />
+          <Stat text="neutral" stat={neutral} />
+          <Stat text="bad" stat={bad} />
+          <Stat text="all" stat={total} />
+          <Stat text="average" stat={average} />
+          <Stat text="positive" stat={`${positivePercent}%`} />
+        </>
+      )}
     </>
   );
 };
