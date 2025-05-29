@@ -58,7 +58,7 @@ const App = () => {
     };
 
     personServices.createPerson(personObject).then((returnedPerson) => {
-      setMessage(`Added ${returnedPerson.name}`);
+      setMessage(`success: Added ${returnedPerson.name}`);
       setTimeout(() => {
         setMessage(null);
       }, 5000);
