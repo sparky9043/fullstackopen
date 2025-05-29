@@ -7,6 +7,11 @@ const App = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (persons.map((person) => person.name).includes(newName)) {
+      alert(`${newName} is already added to phonebook`);
+      return;
+    }
+
     const personObject = {
       name: newName,
     };
