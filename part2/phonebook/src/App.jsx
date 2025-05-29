@@ -101,7 +101,11 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
-      <Persons persons={personsToShow} setPersons={setPersons} />
+      <Persons
+        persons={personsToShow}
+        setPersons={setPersons}
+        setMessage={setMessage}
+      />
     </div>
   );
 };

@@ -3,7 +3,12 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/persons";
 
 const fetchPersons = async () => {
-  return axios.get(baseUrl).then((response) => response.data);
+  const test = {
+    id: "djiod24",
+    name: "DURRRRR",
+    phone: "1231-313123-123",
+  };
+  return axios.get(baseUrl).then((response) => response.data.concat(test));
 };
 
 const createPerson = async (personObject) => {
@@ -11,7 +16,6 @@ const createPerson = async (personObject) => {
 };
 
 const deletePerson = async (id) => {
-  console.log(id);
   return axios.delete(`${baseUrl}/${id}`).then((response) => response.data);
 };
 
