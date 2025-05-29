@@ -15,8 +15,15 @@ const deletePerson = async (id) => {
   return axios.delete(`${baseUrl}/${id}`).then((response) => response.data);
 };
 
+const updatePerson = async (id, newObject) => {
+  return axios
+    .put(`${baseUrl}/${id}`, newObject)
+    .then((response) => response.data);
+};
+
 export default {
   fetchPersons,
   createPerson,
   deletePerson,
+  updatePerson,
 };
