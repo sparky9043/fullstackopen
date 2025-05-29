@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 
 const App = () => {
@@ -53,18 +54,13 @@ const App = () => {
       </div>
 
       <h3>add a new</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          name: <input type="text" value={newName} onChange={handleNameInput} />
-        </div>
-        <div>
-          number:{" "}
-          <input type="text" value={newNumber} onChange={handleNumberInput} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm
+        onSubmit={handleSubmit}
+        newName={newName}
+        onNameChange={handleNameInput}
+        newNumber={newNumber}
+        onNumberChange={handleNumberInput}
+      />
 
       <h3>Numbers</h3>
       <Persons persons={personsToShow} />
