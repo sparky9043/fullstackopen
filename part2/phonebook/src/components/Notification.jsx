@@ -2,8 +2,11 @@ const Notification = ({ message }) => {
   if (message === null) {
     return null;
   }
+
+  const messageType = message.includes("success") ? "success" : "error";
+
   return (
-    <div>
+    <div className={messageType}>
       <span>{message}</span>
     </div>
   );
