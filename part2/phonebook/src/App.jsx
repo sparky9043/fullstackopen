@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
+import Notification from "./components/Notification";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import personServices from "./services/persons";
@@ -9,6 +10,7 @@ const App = () => {
   const [filterInput, setFilterInput] = useState("");
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     personServices
@@ -55,11 +57,13 @@ const App = () => {
       id: crypto.randomUUID().slice(0, 7),
     };
 
-    personServices
-      .createPerson(personObject)
-      .then((returnedPerson) =>
-        setPersons((persons) => [...persons, returnedPerson])
-      );
+    personServices.createPerson(personObject).then((returnedPerson) => {
+      setMessage(`Added ${returnedPerson.name}`);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+      setPersons((persons) => [...persons, returnedPerson]);
+    });
 
     setNewName("");
     setNewNumber("");
@@ -80,6 +84,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
+
       <Filter
         filterInput={filterInput}
         onFilterInputChange={handleFilterInput}
