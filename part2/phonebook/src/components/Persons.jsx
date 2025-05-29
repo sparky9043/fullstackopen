@@ -1,6 +1,13 @@
 const Persons = ({ persons }) => {
-  console.log(persons);
-  return <ul></ul>;
+  return (
+    <ul>
+      {persons.map((person) => (
+        <li key={person.name}>
+          {person.name} {person.number}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 export default Persons;

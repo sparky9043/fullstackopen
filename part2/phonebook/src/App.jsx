@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Persons from "./components/Persons";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -66,13 +67,7 @@ const App = () => {
       </form>
 
       <h3>Numbers</h3>
-      <ul>
-        {personsToShow.map((person) => (
-          <li key={person.name}>
-            {person.name} {person.number}
-          </li>
-        ))}
-      </ul>
+      <Persons persons={personsToShow} />
     </div>
   );
 };
