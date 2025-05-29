@@ -6,6 +6,11 @@ const fetchPersons = async () => {
   return axios.get(baseUrl).then((response) => response.data);
 };
 
+const createPerson = async (personObject) => {
+  return axios.post(baseUrl, personObject).then((response) => response.data);
+};
+
 export default {
   fetchPersons,
+  createPerson,
 };
