@@ -50,7 +50,8 @@ const App = () => {
         filter shown with{" "}
         <input type="text" value={filterInput} onChange={handleFilterInput} />
       </div>
-      <h2>add a new</h2>
+
+      <h3>add a new</h3>
       <form onSubmit={handleSubmit}>
         <div>
           name: <input type="text" value={newName} onChange={handleNameInput} />
@@ -63,7 +64,8 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
+
+      <h3>Numbers</h3>
       <ul>
         {personsToShow.map((person) => (
           <li key={person.name}>
