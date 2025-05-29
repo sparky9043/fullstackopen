@@ -23,6 +23,8 @@ const App = () => {
 
     if (persons.map((person) => person.name).includes(newName)) {
       alert(`${newName} is already added to phonebook`);
+      setNewName("");
+      setNewNumber("");
       return;
     }
 
@@ -32,6 +34,8 @@ const App = () => {
     };
 
     setPersons((persons) => [...persons, personObject]);
+    setNewName("");
+    setNewNumber("");
   }
 
   function handleNameInput(e) {
