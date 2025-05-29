@@ -1,9 +1,15 @@
-// import personServices from '../services/persons';
+import personServices from "../services/persons";
 
-function Person({ person }) {
+function Person({ person, setPersons }) {
   const { id } = person;
   function handleDelete() {
-    console.log("delete", id);
+    personServices
+      .deletePerson(id)
+      .then((returnedPerson) =>
+        setPersons((persons) =>
+          persons.filter((person) => person.id !== returnedPerson.id)
+        )
+      );
   }
 
   return (
