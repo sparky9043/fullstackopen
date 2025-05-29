@@ -3,7 +3,9 @@ const Notification = ({ message }) => {
     return null;
   }
 
-  const messageType = message.includes("success") ? "success" : "error";
+  const messageType = message.toLowerCase().includes("success")
+    ? "success"
+    : "error";
 
   return (
     <div className={messageType}>
