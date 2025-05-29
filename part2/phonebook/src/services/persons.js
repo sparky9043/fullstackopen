@@ -3,12 +3,12 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/persons";
 
 const fetchPersons = async () => {
-  const test = {
-    id: "djiod24",
-    name: "DURRRRR",
-    phone: "1231-313123-123",
-  };
-  return axios.get(baseUrl).then((response) => response.data.concat(test));
+  // const test = {
+  //   id: "djiod24",
+  //   name: "DURRRRR",
+  //   phone: "1231-313123-123",
+  // };
+  return axios.get(baseUrl).then((response) => response.data);
 };
 
 const createPerson = async (personObject) => {
