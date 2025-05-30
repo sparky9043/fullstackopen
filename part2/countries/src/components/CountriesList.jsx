@@ -5,6 +5,10 @@ const CountriesList = ({ countries }) => {
     return <p>Too many matches, specify another filter</p>;
   }
 
+  if (countries.length === 1) {
+    return <p>{countries[0].name.common} YEAHHHH</p>;
+  }
+
   return (
     <ul>
       {countries.map((country) => (
