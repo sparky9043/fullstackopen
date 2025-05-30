@@ -1,4 +1,3 @@
-import CountryDetails from "./CountryDetails";
 import CountryItem from "./CountryItem";
 
 const CountriesList = ({ countries }) => {
@@ -6,16 +5,16 @@ const CountriesList = ({ countries }) => {
     return <p>Too many matches, specify another filter</p>;
   }
 
-  if (countries.length === 1) {
-    return <CountryDetails country={countries[0]} />;
-  }
-
   return (
-    <ul>
+    <div className="countries">
       {countries.map((country) => (
-        <CountryItem key={country.name.common} country={country} />
+        <CountryItem
+          key={country.name.common}
+          country={country}
+          countries={countries}
+        />
       ))}
-    </ul>
+    </div>
   );
 };
 

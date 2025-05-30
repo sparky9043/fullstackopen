@@ -1,10 +1,15 @@
-const CountryItem = ({ country }) => {
-  console.log(country);
+import CountryDetails from "./CountryDetails";
+
+const CountryItem = ({ country, countries }) => {
+  if (countries.length === 1) {
+    return <CountryDetails country={country} />;
+  }
+
   return (
-    <li>
+    <div className="country">
       {country.name.common}
-      <button>Show</button>
-    </li>
+      <button>show</button>
+    </div>
   );
 };
 
