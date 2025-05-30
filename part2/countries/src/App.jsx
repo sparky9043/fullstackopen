@@ -14,7 +14,10 @@ const App = () => {
     return null;
   }
 
-  console.log(allCountries.length);
+  // console.log(allCountries.length);
+  if (allCountries.length > 10) {
+    return <p>Too many matches, specify another filter</p>;
+  }
 
   return <div>Hello</div>;
 };
