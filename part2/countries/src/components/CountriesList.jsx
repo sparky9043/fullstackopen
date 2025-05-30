@@ -1,3 +1,4 @@
+import CountryDetails from "./CountryDetails";
 import CountryItem from "./CountryItem";
 
 const CountriesList = ({ countries }) => {
@@ -6,7 +7,7 @@ const CountriesList = ({ countries }) => {
   }
 
   if (countries.length === 1) {
-    return <p>{countries[0].name.common} YEAHHHH</p>;
+    return <CountryDetails country={countries[0]} />;
   }
 
   return (
