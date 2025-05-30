@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Filter from "./components/Filter";
 import countriesServices from "./services/countries";
 
 const App = () => {
@@ -15,24 +16,17 @@ const App = () => {
     return null;
   }
 
-  // if (allCountries.length > 10) {
-  //   return <p>Too many matches, specify another filter</p>;
-  // }
-
   const countriesToShow = allCountries.filter((country) =>
     country.name.common.toLowerCase().includes(searchInput.toLowerCase())
   );
 
   return (
     <div>
-      <label>
-        find countries
-        <input
-          type="text"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
-      </label>
+      <Filter
+        labelText="find countries"
+        inputValue={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
       {countriesToShow.length <= 10 ? (
         <ul>
           {countriesToShow.map((country) => (
