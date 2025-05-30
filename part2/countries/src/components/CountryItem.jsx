@@ -1,5 +1,5 @@
 const CountryItem = ({ country }) => {
-  return <div></div>;
+  return <li>{country.name.common}</li>;
 };
 
 export default CountryItem;
