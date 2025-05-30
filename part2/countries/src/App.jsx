@@ -22,7 +22,7 @@ const App = () => {
   );
 
   return (
-    <div>
+    <div className="app">
       <Filter
         labelText="find countries"
         inputValue={searchInput}
