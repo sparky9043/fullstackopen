@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CountriesList from "./components/CountriesList";
 import Filter from "./components/Filter";
 import countriesServices from "./services/countries";
 
@@ -27,15 +28,7 @@ const App = () => {
         inputValue={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
       />
-      {countriesToShow.length <= 10 ? (
-        <ul>
-          {countriesToShow.map((country) => (
-            <li key={country.name.common}>{country.name.common}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Too many matches, specify another filter</p>
-      )}
+      <CountriesList countries={countriesToShow} />
     </div>
   );
 };
