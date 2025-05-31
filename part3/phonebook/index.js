@@ -2,6 +2,8 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.json());
+
 let persons = [
   {
     id: "1",
@@ -52,6 +54,38 @@ app.delete("/api/persons/:id", (request, response) => {
   persons = persons.filter((p) => p.id !== id);
 
   response.status(204).end();
+});
+
+const generateId = () => {
+  const random1 = Math.floor(Math.random() * 50);
+  const random2 = Math.floor(Math.random() * 50) + 50;
+  const newId = random1 * random2;
+
+  return String(newId);
+};
+
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+
+  if (!body.name) {
+    response.status(400).json({
+      error: "did not provide a name",
+    });
+  } else if (!body.number) {
+    response.status(400).json({
+      error: "did not provide phone number",
+    });
+  }
+
+  const newPerson = {
+    name: body.name,
+    number: body.number,
+    id: generateId(),
+  };
+
+  persons = persons.concat(newPerson);
+
+  response.json(newPerson);
 });
 
 const PORT = 3001;
