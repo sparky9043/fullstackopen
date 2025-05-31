@@ -24,3 +24,13 @@ let persons = [
     number: "39-23-6423122",
   },
 ];
+
+app.get("/api/persons", (request, response) => {
+  response.json(persons);
+});
+
+const PORT = 3001;
+
+app.listen(PORT, () => {
+  console.log(`Your server is ready at http://localhost:${PORT}/api/persons`);
+});
