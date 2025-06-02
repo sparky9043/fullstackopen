@@ -5,10 +5,8 @@ function Person({ person, setPersons, setMessage }) {
   function handleDelete() {
     personServices
       .deletePerson(id)
-      .then((returnedPerson) =>
-        setPersons((persons) =>
-          persons.filter((person) => person.id !== returnedPerson.id)
-        )
+      .then(() =>
+        setPersons((persons) => persons.filter((person) => person.id !== id))
       )
       .catch((err) => {
         console.log("ERROR DETECTED", id);
