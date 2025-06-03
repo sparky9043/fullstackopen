@@ -2,8 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const Person = require("./models/person");
 
 const app = express();
+
+console.log(Person);
 
 app.use(express.json());
 app.use(express.static("dist"));
@@ -47,9 +50,9 @@ app.use(
   })
 );
 
-// app.get("/api/persons", (request, response) => {
-//   response.json(persons);
-// });
+app.get("/api/persons", (request, response) => {
+  Person.find({}).then((persons) => response.json(persons));
+});
 
 // const getCurrentTime = () => new Date();
 
