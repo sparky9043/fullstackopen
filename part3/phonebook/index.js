@@ -29,13 +29,6 @@ app.get("/api/persons", (request, response) => {
   Person.find({}).then((persons) => response.json(persons));
 });
 
-// const getCurrentTime = () => new Date();
-
-// app.get("/info", (request, response) => {
-//   response.send(`<p>Phonebook has info for ${persons.length} people</p>
-//     <p>${getCurrentTime()}</p>`);
-// });
-
 app.get("/api/persons/:id", (request, response) => {
   Person.findById(request.params.id).then((person) => {
     response.json(person);
