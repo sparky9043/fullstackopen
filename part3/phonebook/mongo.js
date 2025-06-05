@@ -1,5 +1,3 @@
-//`mongodb+srv://sparky9043:${password}@cluster0.nveh9zx.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`;
-
 const mongoose = require('mongoose')
 
 if (process.argv.length < 3) {
@@ -35,7 +33,7 @@ if (process.argv.length === 3) {
     number: process.argv[4],
   })
 
-  person.save().then((result) => {
+  person.save().then(() => {
     console.log(`added ${person.name} number ${person.number} to phonebook`)
     mongoose.connection.close()
   })
