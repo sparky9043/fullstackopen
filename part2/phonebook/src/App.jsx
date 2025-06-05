@@ -57,13 +57,22 @@ const App = () => {
       id: crypto.randomUUID().slice(0, 7),
     };
 
-    personServices.createPerson(personObject).then((returnedPerson) => {
-      setMessage(`Success! Added ${returnedPerson.name}`);
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-      setPersons((persons) => [...persons, returnedPerson]);
-    });
+    personServices
+      .createPerson(personObject)
+      .then((returnedPerson) => {
+        setMessage(`Success! Added ${returnedPerson.name}`);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
+        setPersons((persons) => [...persons, returnedPerson]);
+      })
+      .catch((error) => {
+        setMessage(`Error! "${newName}" is too short`);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
+        console.log(error.response.data.error);
+      });
 
     setNewName("");
     setNewNumber("");

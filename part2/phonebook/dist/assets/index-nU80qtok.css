@@ -1,0 +1,1 @@
+*,*:before,*:after{box-sizing:inherit}html{box-sizing:border-box}body{margin:0;padding:0}.success{color:green;background:#d3d3d3;border:2px solid green;border-radius:5px;font-size:20px;padding:10px;margin-bottom:10px}.error{color:red;background:#d3d3d3;border:2px solid red;border-radius:5px;font-size:20px;padding:10px;margin-bottom:10px}
