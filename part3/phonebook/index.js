@@ -50,28 +50,8 @@ app.delete("/api/persons/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-// const postErrorMessages = {
-//   repeatName: "name must be unique",
-//   emptyName: "did not provide a name",
-//   emptyPhone: "did not provide phone number",
-// };
-
 app.post("/api/persons", (request, response) => {
   const body = request.body;
-
-  // if (matching) {
-  //   response.status(400).json({
-  //     error: postErrorMessages.repeatName,
-  //   });
-  // } else if (!body.name) {
-  //   response.status(400).json({
-  //     error: postErrorMessages.emptyName,
-  //   });
-  // } else if (!body.number) {
-  //   response.status(400).json({
-  //     error: postErrorMessages.emptyPhone,
-  //   });
-  // }
 
   const newPerson = new Person({
     name: body.name,
