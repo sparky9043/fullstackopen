@@ -67,7 +67,7 @@ const App = () => {
         setPersons((persons) => [...persons, returnedPerson]);
       })
       .catch((error) => {
-        setMessage(`Error! "${newName}" is too short`);
+        setMessage(error.response.data.error);
         setTimeout(() => {
           setMessage(null);
         }, 5000);
