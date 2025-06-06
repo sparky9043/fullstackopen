@@ -10,6 +10,8 @@ test('dumy returns one', () => {
 })
 
 describe('total likes', () => {
+  const listWithNoBlog = []
+
   const listWithOneBlog = [
     {
       _id: '5a422aa71b54a676234d17f8',
@@ -20,6 +22,11 @@ describe('total likes', () => {
       __v: 0
     }
   ]
+
+  test('when list has only one blog, equals zero', () => {
+    const result = listHelper.totalLikes(listWithNoBlog)
+    assert.strictEqual(result, 0)
+  })
   
   test('when list has only one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
