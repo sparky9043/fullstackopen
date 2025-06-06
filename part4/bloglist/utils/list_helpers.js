@@ -10,6 +10,10 @@ const totalLikes = (blogs) => {
         .reduce((previous, current) => previous + current.likes, 0)
 }
 
+const favoriteBlog = (blogs) => {
+  return blogs.find(blog => blog.likes === Math.max(...blogs.map(blog => blog.likes)))
+}
+
 module.exports = {
   dummy,
   totalLikes
