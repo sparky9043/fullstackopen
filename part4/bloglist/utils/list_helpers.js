@@ -11,10 +11,7 @@ const totalLikes = (blogs) => {
         .reduce((previous, current) => previous + current, 0)
 }
 
-console.log(
-  totalLikes([{ likes: 9 }, { likes: 1 }, { likes: 12 }])
-)
-
 module.exports = {
-  dummy
+  dummy,
+  totalLikes
 }
