@@ -69,8 +69,6 @@ const blogs = [
 
 
 test('dumy returns one', () => {
-  const blogs = []
-
   const result = listHelper.dummy(blogs)
   assert.strictEqual(result, 1)
 })
@@ -130,5 +128,36 @@ describe('most likes', () => {
     }
 
     assert.deepStrictEqual(result, mostLikes)
+  })
+})
+
+describe('most blogs', () => {
+
+  test('when blog is empty, return undefined', () => {
+    const result = listHelper.mostBlogs(listWithNoBlog)
+
+    assert.strictEqual(result, undefined)
+  })
+
+  test('when blog has one entry, return object with the entry author and 1 blog', () => {
+    const result = listHelper.mostBlogs(listWithOneBlog)
+
+    const mostBlog = {
+      author: 'Edsger W. Dijkstra',
+      blogs: 1
+    }
+
+    assert.deepStrictEqual(result, mostBlog)
+  })
+
+  test('when blog with multiple entries, return most blog author and number', () => {
+    const result = listHelper.mostBlogs(blogs)
+
+    const mostBlog = {
+      author: "Robert C. Martin",
+      blogs: 3
+    }
+
+    assert.deepStrictEqual(result, mostBlog)
   })
 })
