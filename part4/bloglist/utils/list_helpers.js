@@ -36,9 +36,31 @@ const mostBlogs = (blogs) => {
   return maxBlog
 }
 
+const mostLikes = (blogs) => {
+  if (blogs.length === 0) return undefined
+
+  const likesOnly = blogs.map(blog => ({ author: blog.author, likes: blog.likes }))
+
+  const filtered = []
+
+  likesOnly.forEach(person => {
+    if (!filtered.map(entry => entry.author).includes(person.author)) {
+      filtered.push(person)
+    } else {
+      filtered.find(entry => entry.author === person.author).likes += person.likes
+    }
+
+  })
+
+  const mostLiked = filtered.find(post => post.likes === Math.max(...filtered.map(post => post.likes)))
+
+  return mostLiked
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
