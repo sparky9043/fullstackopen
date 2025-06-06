@@ -74,7 +74,7 @@ describe('total likes', () => {
     }  
   ]
 
-  test('when list has only one blog, equals zero', () => {
+  test('when list is empty, equals zero', () => {
     const result = listHelper.totalLikes(listWithNoBlog)
     assert.strictEqual(result, 0)
   })
