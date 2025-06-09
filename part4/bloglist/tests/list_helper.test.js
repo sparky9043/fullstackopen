@@ -161,3 +161,35 @@ describe('most blogs', () => {
     assert.deepStrictEqual(result, mostBlog)
   })
 })
+
+describe('author with total likes', () => {
+
+  test('for blog with no entries, return undefined', () => {
+    const result = listHelper.mostLikes(listWithNoBlog)
+
+    assert.strictEqual(result, undefined)
+  })
+
+  test('for blog with one entry, return the author and likes', () => {
+    const result = listHelper.mostLikes(listWithOneBlog)
+
+    const singleBlog = {
+      author: 'Edsger W. Dijkstra',
+      likes: 5,
+    }
+
+    
+    assert.deepStrictEqual(result, singleBlog)
+  })
+
+  test('for blog with multiple entries, return author with total likes on all posts', () => {
+    const result = listHelper.mostLikes(blogs)
+
+    const authorWithTotalLikes = {
+      author: "Edsger W. Dijkstra",
+      likes: 17
+    }
+
+    assert.deepStrictEqual(result, authorWithTotalLikes)
+  })
+})
