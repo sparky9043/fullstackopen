@@ -40,6 +40,10 @@ test('blogs should return two entries', async () => {
   const response = await api.get('/api/blogs')
 
   assert.strictEqual(response.body.length, initialBlogs.length)
+
+  const titles = response.body.map(b => b.title)
+
+  assert(titles.includes(initialBlogs[0].title))
 })
 
 after(async () => {
