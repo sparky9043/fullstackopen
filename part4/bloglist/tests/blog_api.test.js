@@ -4,6 +4,13 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
-after(async() => {
+test('blogs returned as json', async () => {
+  await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
+
+after(async () => {
   await mongoose.connection.close()
 })
