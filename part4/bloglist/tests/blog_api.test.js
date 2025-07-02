@@ -127,6 +127,27 @@ test('deleting a blog returns 204 code', async () => {
   assert.strictEqual(responseAtEnd.body.length, initialBlogs.length - 1)
 })
 
+test('edit and update a blog', async () => {
+  const responseAtStart = await api.get('/api/blogs')
+  const initialPost = responseAtStart.body[responseAtStart.body.length - 1]
+
+  assert.strictEqual(initialPost.title, initialBlogs[1].title)
+
+  const postToUpdate = {
+    title: "Updated Post",
+    author: "Updated Author",
+    url: "http://thisisafakewebsite.org",
+    likes: 327
+  }
+
+  await api
+    .put(`/api/blogs/${initialPost.id}`)
+    .send(postToUpdate)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
