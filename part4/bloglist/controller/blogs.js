@@ -9,10 +9,10 @@ blogsRouter.get('/', async (request, response) => {
 blogsRouter.post('/', (request, response) => {
   const body = request.body
 
-  if (!body.title || !body.author) {
+  if (!body.title || !body.url) {
     return response
       .status(400)
-      .json({ error: "Missing title or author" })
+      .json({ error: "Missing title or url" })
   }
 
   const newBlog = {
