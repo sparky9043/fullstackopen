@@ -54,6 +54,25 @@ test('each blog has id property', async () => {
   keys.forEach(array => assert(array.includes('id')))
 })
 
+test('create a new blog post successfully', async () => {
+  const newBlog = {
+    title: "I am so hungry",
+    author: "Me",
+    url: "http://iamsohungry.com/fakeurl",
+    likes: 3281
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+  
+  const response = await api.get('/api/blogs')
+
+  assert.strictEqual(response.body.length, initialBlogs.length + 1)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
