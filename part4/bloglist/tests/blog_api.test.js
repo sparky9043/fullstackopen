@@ -89,6 +89,10 @@ test('new blog entry with missing likes defaults to 0', async () => {
     .send(newBlogNoLikes)
     .expect(201)
     .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  assert.strictEqual(response.body.length, initialBlogs.length + 1)
 })
 
 after(async () => {
