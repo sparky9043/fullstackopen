@@ -114,6 +114,19 @@ test('missing title or url returns bad request', async () => {
   assert.strictEqual(response.body.length, initialBlogs.length)
 })
 
+test('deleting a blog returns 204 code', async () => {
+  const responseAtStart = await api.get('/api/blogs')
+  const ids = responseAtStart.body.map(b => b.id)
+
+  await api
+    .delete(`/api/blogs/${ids[responseAtStart.body.length - 1]}`)
+    .expect(204)
+  
+  const responseAtEnd = await api.get('/api/blogs')
+  
+  assert.strictEqual(responseAtEnd.body.length, initialBlogs.length - 1)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
