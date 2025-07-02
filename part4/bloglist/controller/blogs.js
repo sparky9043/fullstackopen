@@ -7,6 +7,12 @@ blogsRouter.get('/', async (request, response) => {
 })
 
 blogsRouter.post('/', (request, response) => {
+  const body = request.body
+
+  if (!body.title || !body.author) {
+    response.status(404).json({ error: "Missing title or author" })
+  }
+
   const blog = new Blog(request.body)
 
   blog.save().then(result => {
