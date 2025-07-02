@@ -46,6 +46,14 @@ test('blogs should return two entries', async () => {
   assert(titles.includes(initialBlogs[0].title))
 })
 
+test('each blog has id property', async () => {
+  const response = await api.get('/api/blogs')
+
+  const keys = response.body.map(n => Object.keys(n))
+
+  keys.forEach(array => assert(array.includes('id')))
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
