@@ -128,6 +128,9 @@ test('deleting a blog returns 204 code', async () => {
 })
 
 test('edit and update a blog', async () => {
+  const responseAtStart = await api.get('/api/blogs')
+  const initialPost = responseAtStart.body[responseAtStart.body.length - 1]
+
   const postToUpdate = {
     title: "Updated Post",
     author: "Updated Author",
