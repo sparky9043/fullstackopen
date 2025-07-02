@@ -15,7 +15,14 @@ blogsRouter.post('/', (request, response) => {
       .json({ error: "Missing title or author" })
   }
 
-  const blog = new Blog(request.body)
+  const newBlog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes || 0
+  }
+
+  const blog = new Blog(newBlog)
 
   blog.save().then(result => {
     response.status(201).json(result)
