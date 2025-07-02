@@ -108,6 +108,10 @@ test('missing title or url returns bad request', async () => {
     .post('/api/blogs')
     .send(newBlog)
     .expect(400)
+
+  const response = await api.get('/api/blogs')
+
+  assert.strictEqual(response.body.length, initialBlogs.length)
 })
 
 after(async () => {
