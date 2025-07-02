@@ -10,7 +10,7 @@ blogsRouter.post('/', (request, response) => {
   const body = request.body
 
   if (!body.title || !body.author) {
-    response.status(404).json({ error: "Missing title or author" })
+    return response.status(400).json({ error: "Missing title or author" })
   }
 
   const blog = new Blog(request.body)
