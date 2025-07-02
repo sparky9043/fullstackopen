@@ -93,6 +93,10 @@ test('new blog entry with missing likes defaults to 0', async () => {
   const response = await api.get('/api/blogs')
 
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
+
+  const lastBlog = response.body[response.body.length - 1]
+  
+  assert.strictEqual(lastBlog.likes, 0)
 })
 
 after(async () => {
