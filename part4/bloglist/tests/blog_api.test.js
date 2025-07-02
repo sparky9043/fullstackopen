@@ -77,6 +77,20 @@ test('create a new blog post successfully', async () => {
   assert(titles.includes(newBlog.title))
 })
 
+test('new blog entry with missing likes defaults to 0', async () => {
+  const newBlogNoLikes = {
+    title: "fake notes",
+    author: "fake user",
+    url: "http://iamsohungry.com/fakeurl",    
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlogNoLikes)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
