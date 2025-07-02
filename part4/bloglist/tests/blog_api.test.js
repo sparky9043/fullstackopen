@@ -95,8 +95,19 @@ test('new blog entry with missing likes defaults to 0', async () => {
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
 
   const lastBlog = response.body[response.body.length - 1]
-  
+
   assert.strictEqual(lastBlog.likes, 0)
+})
+
+test('missing title or url returns bad request', async () => {
+  const newBlog = {
+    author: "fake author"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
 })
 
 after(async () => {
