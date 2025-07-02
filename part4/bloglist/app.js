@@ -18,7 +18,8 @@ mongoose.connect(configs.MONGODB_URI)
   })
 
 app.use(express.json())
-app.use(middleware.requestLogger)
 app.use('/api/blogs', blogsRouter)
+app.use(middleware.requestLogger)
+app.use(middleware.errorHandler)
 
 module.exports = app
