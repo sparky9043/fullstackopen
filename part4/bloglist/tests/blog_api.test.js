@@ -146,6 +146,11 @@ test('edit and update a blog', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
+  const responseAtEnd = await api.get('/api/blogs')
+
+  const editedPost = responseAtEnd.body[responseAtEnd.body.length - 1]
+
+  assert.strictEqual(editedPost.title, postToUpdate.title)
 })
 
 after(async () => {
