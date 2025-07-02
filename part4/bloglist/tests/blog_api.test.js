@@ -71,6 +71,10 @@ test('create a new blog post successfully', async () => {
   const response = await api.get('/api/blogs')
 
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
+
+  const titles = response.body.map(b => b.title)
+
+  assert(titles.includes(newBlog.title))
 })
 
 after(async () => {
