@@ -19,6 +19,10 @@ const errorHandler = (error, request, response, next) => {
     response.status(401).json({
       error: 'token invalid'
     })
+  } else if (error.name === 'TokenExpiredError') {
+    response.status(401).json({
+      error: 'token expired'
+    })
   }
 
   next(error)
