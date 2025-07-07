@@ -4,6 +4,7 @@ const configs = require('./utils/configs')
 const express = require('express')
 const app = express()
 const blogsRouter = require('./controller/blogs')
+const usersRouter = require('./controller/users')
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 
@@ -18,7 +19,10 @@ mongoose.connect(configs.MONGODB_URI)
   })
 
 app.use(express.json())
+
 app.use('/api/blogs', blogsRouter)
+app.use('/api/users', usersRouter)
+
 app.use(middleware.requestLogger)
 app.use(middleware.errorHandler)
 
