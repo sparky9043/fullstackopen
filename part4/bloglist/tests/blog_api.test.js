@@ -196,6 +196,9 @@ describe('user: making POST request to user db', () => {
       .send(newUser)
       .expect(201)
       .expect('Content-Type', /application\/json/)
+
+    const usersAtEnd = await helper.usersInDb()
+    assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
   })
 })
 
