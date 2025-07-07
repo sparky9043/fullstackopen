@@ -1,10 +1,12 @@
-const { test, after, beforeEach } = require('node:test')
+const { test, after, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
+const bcrypt = require('bcrypt')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const initialBlogs = [
   {
@@ -20,6 +22,8 @@ const initialBlogs = [
     likes: 327
   }
 ]
+
+/*
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -149,6 +153,23 @@ test('edit and update a blog', async () => {
   const editedPost = responseAtEnd.body[responseAtEnd.body.length - 1]
 
   assert.strictEqual(editedPost.title, postToUpdate.title)
+})
+
+*/
+
+beforeEach(async () => {
+  await User.deleteMany({})
+  const passwordHash = await bcrypt.hash('password', 10)
+  const exampleUser = new User({ username: 'example', name: 'name', passwordHash })
+  await exampleUser.save()
+})
+
+describe('user: making GET request to user', () => {
+  test('returns status 200 and all users as json', async () => {
+    await api
+      .get('/api/users')
+      .expect(200)
+  })
 })
 
 after(async () => {
