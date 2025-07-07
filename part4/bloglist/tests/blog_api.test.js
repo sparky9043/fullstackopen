@@ -5,6 +5,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const bcrypt = require('bcrypt')
+const helper = require('./test_helper')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
@@ -157,18 +158,43 @@ test('edit and update a blog', async () => {
 
 */
 
-beforeEach(async () => {
-  await User.deleteMany({})
-  const passwordHash = await bcrypt.hash('password', 10)
-  const exampleUser = new User({ username: 'example', name: 'name', passwordHash })
-  await exampleUser.save()
-})
+describe('user: making GET request to user db', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+    const passwordHash = await bcrypt.hash('password', 10)
+    const exampleUser = new User({ username: 'example', name: 'name', passwordHash })
+    await exampleUser.save()
+  })
 
-describe('user: making GET request to user', () => {
   test('returns status 200 and all users as json', async () => {
     await api
       .get('/api/users')
       .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+})
+
+describe('user: making POST request to user db', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+    const passwordHash = await bcrypt.hash('password', 10)
+    const exampleUser = new User({ username: 'example', name: 'name', passwordHash })
+    await exampleUser.save()
+  })
+
+  test('returns status 201 and json if correct format', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      username: 'testing',
+      name: 'tester',
+      password: 'password'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
   })
 })
