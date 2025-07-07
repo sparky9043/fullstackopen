@@ -203,6 +203,35 @@ describe('user: making POST request to user db', () => {
     const usernames = usersAtEnd.map(u => u.username)
     assert(usernames.includes(newUser.username))
   })
+
+  test('return an error expected', async() => {
+    const usersAtStart = await helper.usersInDb()
+
+    const badUsers = [
+      {
+        name: 'hello',
+        password: 'password'
+      },
+      {
+        username: 'fake',
+        name: 'turner',
+        password: 'hi'
+      }
+    ]
+
+    for (const user of badUsers) {
+      const result = await api
+        .post('/api/users')
+        .send(user)
+        .expect(404)
+        .expect('Content-Type', /application\/json/)
+
+      assert(result.body.error)
+
+      const usersAtEnd = await helper.usersInDb()
+      assert.strictEqual(usersAtEnd.length, usersAtStart.length)
+    }
+  })
 })
 
 after(async () => {
