@@ -22,6 +22,7 @@ const App = () => {
 
   const handleLogin = (event) => {
     event.preventDefault()
+
   }
 
   const loginForm = () => {
@@ -39,7 +40,7 @@ const App = () => {
         <div>
           password
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
