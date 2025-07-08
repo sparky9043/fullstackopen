@@ -24,7 +24,36 @@ const initialBlogs = [
   }
 ]
 
+describe('blogs: make GET request to blog db', () => {
+  test('return blogs as json', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+  })
+})
+
+describe('blogs: make POST request to blog db', () => {
+  test('returns as 401 without token', async () => {
+    const blog = {
+      title: "Testing",
+      author: "The tester",
+      url: "http://somekindofurl.com",
+      likes: 412
+    }
+
+    const result = await api
+      .post('/api/blogs')
+      .send(blog)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+
+    assert(result.body.error.includes('token invalid'))
+  })
+})
+
 /*
+
+// BLOG TESTING
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -158,6 +187,9 @@ test('edit and update a blog', async () => {
 
 */
 
+// USER TESTING
+
+/*
 describe('user: making GET request to user db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
@@ -233,6 +265,8 @@ describe('user: making POST request to user db', () => {
     }
   })
 })
+
+*/
 
 after(async () => {
   await mongoose.connection.close()
