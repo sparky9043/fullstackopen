@@ -34,16 +34,8 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   response.status(201).json(savedBlog)
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
-
-  if (!decodedToken.id) {
-    return response.status(401).json({
-      error: 'token invalid'
-    })
-  }
-
-  const user = await User.findById(decodedToken.id)
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
+  const user = request.user
 
   if (!user) {
     return response.status(401).json({
