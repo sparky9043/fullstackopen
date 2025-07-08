@@ -33,7 +33,7 @@ describe('blogs: make GET request to blog db', () => {
 })
 
 describe('blogs: make POST request to blog db', () => {
-  test('returns as 401 without token', async () => {
+  test('returns code 401 without token', async () => {
     const blog = {
       title: "Testing",
       author: "The tester",
@@ -48,6 +48,10 @@ describe('blogs: make POST request to blog db', () => {
       .expect('Content-Type', /application\/json/)
 
     assert(result.body.error.includes('token invalid'))
+  })
+
+  test('returns code 201 with token', async () => {
+    
   })
 })
 
