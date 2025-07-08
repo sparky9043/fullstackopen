@@ -51,7 +51,31 @@ describe('blogs: make POST request to blog db', () => {
   })
 
   test('returns code 201 with token', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+
+    const blog = {
+      title: "Testing",
+      author: "The tester",
+      url: "http://somekindofurl.com",
+      likes: 412
+    }
+
+    const secretToken = process.env.TEST_TOKEN
+
+    const token = `Bearer ${secretToken}`
+
+    await api
+      .post('/api/blogs')
+      .send(blog)
+      .set('Authorization', token)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
     
+    const blogsAtEnd = await helper.blogsInDb()
+    assert.strictEqual(blogsAtEnd.length, blogsAtStart.length + 1)
+
+    const titles = blogsAtEnd.map(b => b.title)
+    assert(titles.includes(blog.title))
   })
 })
 
