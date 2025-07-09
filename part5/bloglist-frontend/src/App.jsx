@@ -23,6 +23,7 @@ const App = () => {
     if (userString) {
       const savedUser = JSON.parse(userString)
       setUser(savedUser)
+      blogService.setToken(savedUser.token)
     }
   }, [])
 
@@ -35,11 +36,12 @@ const App = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
+      const savedUser = await loginService.login({
         username, password
       })
-      window.localStorage.setItem('userLoginBlogApp', JSON.stringify(user))
-      setUser(user)
+      window.localStorage.setItem('userLoginBlogApp', JSON.stringify(savedUser))
+      blogService.setToken(savedUser.token)
+      setUser(savedUser)
       setUsername('')
       setPassword('')
     } catch (exception) {
@@ -79,8 +81,21 @@ const App = () => {
     setUser(null)
   }
 
-  const handleCreateBlog = (event) => {
+  const handleCreateBlog = async (event) => {
     event.preventDefault()
+    console.log(user)
+    if (!title || !author || !url) return
+    try {
+      const data = await blogService.create({
+        title, author, url
+      })
+      setBlogs(currentBlogs => [...currentBlogs, data])
+      setTitle('')
+      setAuthor('')
+      setUrl('')
+    } catch (exception) {
+      console.log(exception)
+    }
   }
 
   return (
