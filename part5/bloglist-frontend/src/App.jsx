@@ -15,6 +15,14 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const userString = window.localStorage.getItem('userLoginBlogApp')
+    if (userString) {
+      const savedUser = JSON.parse(userString)
+      setUser(savedUser)
+    }
+  }, [])
+
   if (!blogs) {
     return (
       <div>Waiting to load...</div>
@@ -27,7 +35,7 @@ const App = () => {
       const user = await loginService.login({
         username, password
       })
-
+      window.localStorage.setItem('userLoginBlogApp', JSON.stringify(user))
       setUser(user)
       setUsername('')
       setPassword('')
