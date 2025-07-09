@@ -21,6 +21,7 @@ const App = () => {
 
   useEffect(() => {
     const userString = window.localStorage.getItem('userLoginBlogApp')
+    
     if (userString) {
       const savedUser = JSON.parse(userString)
       setUser(savedUser)
@@ -50,8 +51,18 @@ const App = () => {
       setUser(savedUser)
       setUsername('')
       setPassword('')
+      setNotification({ type: 'success', message: `Successfully logged in as ${savedUser.name}` })
+
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     } catch (exception) {
       console.log(exception)
+      setNotification({ type: 'fail', message: 'invalid username or password' })
+
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     }
   }
 
@@ -59,6 +70,7 @@ const App = () => {
     return (
       <form onSubmit={handleLogin}>
         <h2>log in to application</h2>
+        {notification ? <p className={`message ${notification.type}`}>{notification.message}</p> : null}
         <div>
           username
           <input
@@ -84,11 +96,14 @@ const App = () => {
     console.log('logged out successfully')
     window.localStorage.removeItem('userLoginBlogApp')
     setUser(null)
+    setNotification({ type: 'success', message: 'logged out successfully' })
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
   }
 
   const handleCreateBlog = async (event) => {
     event.preventDefault()
-    console.log(user)
     if (!title || !author || !url) return
     try {
       const data = await blogService.create({
@@ -106,7 +121,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {notification ? <p className={notification.type}>{notification.message}</p> : null}
+      {notification ? <p className={`message ${notification.type}`}>{notification.message}</p> : null}
       <div>
         {user.name} logged in
         <span>
