@@ -11,6 +11,7 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -24,7 +25,12 @@ const App = () => {
       const savedUser = JSON.parse(userString)
       setUser(savedUser)
       blogService.setToken(savedUser.token)
+      setNotification({ type: 'success', message:'Success! user data loaded'})
     }
+
+    return () => setTimeout(() => {
+      setNotification(null)
+    }, 5000)
   }, [])
 
   if (!blogs) {
@@ -47,7 +53,6 @@ const App = () => {
     } catch (exception) {
       console.log(exception)
     }
-
   }
 
   if (user === null) {
@@ -101,7 +106,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-
+      {notification ? <p className={notification.type}>{notification.message}</p> : null}
       <div>
         {user.name} logged in
         <span>
