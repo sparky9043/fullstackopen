@@ -23,7 +23,7 @@ const Toggleable = ({ children, buttonLabel = 'input' }) => {
   )
 }
 
-Toggleable.proptypes = {
+Toggleable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 }
 
