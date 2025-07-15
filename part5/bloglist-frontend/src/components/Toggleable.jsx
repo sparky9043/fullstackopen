@@ -6,7 +6,6 @@ const Toggleable = ({ children, buttonLabel = 'input' }) => {
   return (
     <div>
       <div style={{ display: visibility && 'none' }}>
-        <p>Show actual content by pressing button</p>
         <button onClick={() => setVisibility(!visibility)}>
           {buttonLabel}
         </button>
