@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Toggleable from './components/Toggleable'
 
 const App = () => {
   const [blogs, setBlogs] = useState(null)
@@ -120,6 +121,9 @@ const App = () => {
 
   return (
     <div>
+      <Toggleable>
+        <p>Hello</p>
+      </Toggleable>
       <h2>blogs</h2>
       {notification ? <p className={`message ${notification.type}`}>{notification.message}</p> : null}
       <div>
