@@ -79,6 +79,11 @@ const App = () => {
       await blogService.deleteOne(id)
       const updatedBlogs = await blogService.getAll()
       setBlogs(updatedBlogs)
+      setNotification({ type: 'success', message: 'post successfully deleted!' })
+      
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     } catch (exception) {
       console.log(exception)
     }
