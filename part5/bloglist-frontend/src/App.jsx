@@ -121,9 +121,6 @@ const App = () => {
 
   return (
     <div>
-      <Toggleable>
-        <p>Hello</p>
-      </Toggleable>
       <h2>blogs</h2>
       {notification ? <p className={`message ${notification.type}`}>{notification.message}</p> : null}
       <div>
@@ -133,34 +130,37 @@ const App = () => {
         </span>
       </div>
 
-      <form onSubmit={handleCreateBlog}>
-        <h2>create new</h2>
-        <div>
-          title:
-          <input
-            type="text"
-            value={title}
-            onChange={({ target }) => setTitle(target.value)}
-          />
-        </div>
-        <div>
-          author:
-          <input
-            type="text"
-            value={author}
-            onChange={({ target }) => setAuthor(target.value)}
-          />
-        </div>
-        <div>
-          url:
-          <input
-            type="text"
-            value={url}
-            onChange={({ target }) => setUrl(target.value)}
-          />
-        </div>
-        <button type="submit">create</button>
-      </form>
+      <Toggleable buttonLabel='new note'>
+        <form onSubmit={handleCreateBlog}>
+          <h2>create new</h2>
+          <div>
+            title:
+            <input
+              type="text"
+              value={title}
+              onChange={({ target }) => setTitle(target.value)}
+            />
+          </div>
+          <div>
+            author:
+            <input
+              type="text"
+              value={author}
+              onChange={({ target }) => setAuthor(target.value)}
+            />
+          </div>
+          <div>
+            url:
+            <input
+              type="text"
+              value={url}
+              onChange={({ target }) => setUrl(target.value)}
+            />
+          </div>
+          <button type="submit">create</button>
+        </form>
+      </Toggleable>
+
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Toggleable = ({ children }) => {
+const Toggleable = ({ children, buttonLabel = 'input' }) => {
   const [visibility, setVisibility] = useState(false)
 
   return (
@@ -8,7 +8,7 @@ const Toggleable = ({ children }) => {
       <div style={{ display: visibility && 'none' }}>
         <p>Show actual content by pressing button</p>
         <button onClick={() => setVisibility(!visibility)}>
-          show content
+          {buttonLabel}
         </button>
       </div>
       <div style={{ display: !visibility && 'none' }}>
