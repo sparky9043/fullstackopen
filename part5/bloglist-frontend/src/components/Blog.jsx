@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, likePost }) => {
+const Blog = ({ blog, likePost, deletePost }) => {
   const blogStyle = {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'flex-start',
     gap: '.5rem',
     padding: '10px 0',
     border: '2px solid black',
@@ -22,6 +23,10 @@ const Blog = ({ blog, likePost }) => {
       author: blog.author,
       id: blog.id,
     })
+  }
+
+  const handleDelete = () => {
+    deletePost(blog.id)
   }
 
   return (
@@ -46,6 +51,7 @@ const Blog = ({ blog, likePost }) => {
           <div>
           {blog.author}
           </div>
+          <button onClick={handleDelete}>remove</button>
         </>}
     </div>  
   )

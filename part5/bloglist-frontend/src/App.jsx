@@ -74,6 +74,16 @@ const App = () => {
     }
   }
 
+  const handleDeleteBlog = async (id) => {
+    try {
+      await blogService.deleteOne(id)
+      const updatedBlogs = await blogService.getAll()
+      setBlogs(updatedBlogs)
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   const blogsToShow = [...blogs].sort((a, b) => b.likes - a.likes)
   console.log(blogsToShow)
 
@@ -146,7 +156,12 @@ const App = () => {
       </Toggleable>
 
       {sortedBlogs.map(blog =>
-        <Blog key={blog.id} blog={blog} likePost={handleLike} />
+        <Blog
+          key={blog.id}
+          blog={blog} 
+          likePost={handleLike}
+          deletePost={handleDeleteBlog}
+        />
       )}
     </div>
   )
