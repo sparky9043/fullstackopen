@@ -31,6 +31,8 @@ loginRouter.post('/', async (request, response) => {
     }
   )
 
+  console.log(token)
+
   response
     .status(200)
     .send({ token, username: user.username, name: user.name })

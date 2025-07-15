@@ -61,21 +61,25 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   }
 })
 
-blogsRouter.put('/:id', async (request, response) => {
+blogsRouter.put('/:id', userExtractor, async (request, response) => {
   const { title, author, url, likes } = request.body
+  const user = request.user
+  
   const returnedBlog = await Blog.findById(request.params.id)
 
-  if (!returnedBlog) {
-    return response.status(404).json({ error: "malformatted id" })
-  }
+  console.log(request.user, returnedBlog)
 
-  returnedBlog.title = title
-  returnedBlog.author = author
-  returnedBlog.url = url
-  returnedBlog.likes = likes || 0
+  // if (!returnedBlog) {
+  //   return response.status(404).json({ error: "malformatted id" })
+  // }
 
-  const savedBlog = await returnedBlog.save()
-  response.status(201).json(savedBlog)
+  // returnedBlog.title = title
+  // returnedBlog.author = author
+  // returnedBlog.url = url
+  // returnedBlog.likes = likes || 0
+
+  // const savedBlog = await returnedBlog.save()
+  // response.status(201).json(savedBlog)
 })
 
 module.exports = blogsRouter
