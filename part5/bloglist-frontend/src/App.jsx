@@ -84,9 +84,6 @@ const App = () => {
     }
   }
 
-  const blogsToShow = [...blogs].sort((a, b) => b.likes - a.likes)
-  console.log(blogsToShow)
-
   if (user === null) {
     return (
       <form onSubmit={handleLogin}>
