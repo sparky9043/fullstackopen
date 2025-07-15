@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, likePost }) => {
   const blogStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -13,6 +13,16 @@ const Blog = ({ blog }) => {
   const [viewDetails, setViewDetails] = useState(false) 
   
   const handleView = () => setViewDetails(!viewDetails)
+
+  const handleLike = () => {
+    likePost({
+      title: blog.title,
+      url: blog.url,
+      likes: blog.likes + 1,
+      author: blog.author,
+      id: blog.id,
+    })
+  }
 
   return (
     <div style={blogStyle}>
@@ -31,7 +41,7 @@ const Blog = ({ blog }) => {
           <div>
             {blog.likes}
 
-            <button>like</button>
+            <button onClick={handleLike}>like</button>
           </div>
           <div>
           {blog.author}

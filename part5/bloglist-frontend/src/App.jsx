@@ -65,21 +65,6 @@ const App = () => {
     }
   }
 
-  // const handleCreateBlog = async (event) => {
-  //   event.preventDefault()
-  //   try {
-  //     const data = await blogService.create({
-  //       title, author, url
-  //     })
-  //     setBlogs(currentBlogs => [...currentBlogs, data])
-  //     setTitle('')
-  //     setAuthor('')
-  //     setUrl('')
-  //   } catch (exception) {
-  //     console.log(exception)
-  //   }
-  // }
-
   const handleCreateBlog = async (blogObject) => {
     try {
       const blog = await blogService.create(blogObject)
@@ -125,6 +110,21 @@ const App = () => {
     }, 5000)
   }
 
+  const handleLike = async (newObject) => {
+    try {
+      const returnedBlog = await blogService.update(newObject)
+      const updatedBlogs = blogs.map(blog => {
+        if (blog.id === returnedBlog.id) {
+          blog.likes++
+        }
+        return blog
+      })
+      setBlogs(updatedBlogs)
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   return (
     <div>
       <h2>blogs</h2>
@@ -141,7 +141,7 @@ const App = () => {
       </Toggleable>
 
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} likePost={handleLike} />
       )}
     </div>
   )
