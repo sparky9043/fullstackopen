@@ -13,9 +13,9 @@ const App = () => {
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
+    blogService.getAll().then(blogs => {
       setBlogs( blogs )
-    )  
+    })  
   }, [])
 
   useEffect(() => {
@@ -74,6 +74,9 @@ const App = () => {
     }
   }
 
+  const blogsToShow = [...blogs].sort((a, b) => b.likes - a.likes)
+  console.log(blogsToShow)
+
   if (user === null) {
     return (
       <form onSubmit={handleLogin}>
@@ -126,7 +129,6 @@ const App = () => {
   }
 
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
-  console.log(sortedBlogs)
 
   return (
     <div>
@@ -143,7 +145,7 @@ const App = () => {
         <BlogForm createBlog={handleCreateBlog} />
       </Toggleable>
 
-      {blogs.map(blog =>
+      {sortedBlogs.map(blog =>
         <Blog key={blog.id} blog={blog} likePost={handleLike} />
       )}
     </div>
