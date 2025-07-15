@@ -26,7 +26,7 @@ const Blog = ({ blog, likePost, deletePost }) => {
   }
 
   const handleDelete = () => {
-    if (window.confirm(`Would you ilke like to delete "${blog.title}"?`)) {
+    if (window.confirm(`Would you like to delete "${blog.title}"?`)) {
       deletePost(blog.id)
     }
   }
