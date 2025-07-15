@@ -15,13 +15,20 @@ const Blog = ({ blog }) => {
             view
           </button>
         </div>
+
         {viewDetails && <div>
-          <div>{blog.url}</div>
-          <div>{blog.likes}</div>
-        </div>}
+          <div>
+            {blog.url}
+          </div>
+          <div>
+            {blog.likes}
+
+            <button>likes</button>
+          </div>
         <div>
          {blog.author}
         </div>
+        </div>}
       </div>
     </div>  
   )
