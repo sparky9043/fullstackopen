@@ -3,15 +3,13 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Toggleable from './components/Toggleable'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
@@ -67,6 +65,30 @@ const App = () => {
     }
   }
 
+  // const handleCreateBlog = async (event) => {
+  //   event.preventDefault()
+  //   try {
+  //     const data = await blogService.create({
+  //       title, author, url
+  //     })
+  //     setBlogs(currentBlogs => [...currentBlogs, data])
+  //     setTitle('')
+  //     setAuthor('')
+  //     setUrl('')
+  //   } catch (exception) {
+  //     console.log(exception)
+  //   }
+  // }
+
+  const handleCreateBlog = async (blogObject) => {
+    try {
+      const blog = await blogService.create(blogObject)
+      setBlogs(blogs => [...blogs, blog])
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   if (user === null) {
     return (
       <form onSubmit={handleLogin}>
@@ -103,22 +125,6 @@ const App = () => {
     }, 5000)
   }
 
-  const handleCreateBlog = async (event) => {
-    event.preventDefault()
-    if (!title || !author || !url) return
-    try {
-      const data = await blogService.create({
-        title, author, url
-      })
-      setBlogs(currentBlogs => [...currentBlogs, data])
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-    } catch (exception) {
-      console.log(exception)
-    }
-  }
-
   return (
     <div>
       <h2>blogs</h2>
@@ -130,35 +136,8 @@ const App = () => {
         </span>
       </div>
 
-      <Toggleable buttonLabel='new note'>
-        <form onSubmit={handleCreateBlog}>
-          <h2>create new</h2>
-          <div>
-            title:
-            <input
-              type="text"
-              value={title}
-              onChange={({ target }) => setTitle(target.value)}
-            />
-          </div>
-          <div>
-            author:
-            <input
-              type="text"
-              value={author}
-              onChange={({ target }) => setAuthor(target.value)}
-            />
-          </div>
-          <div>
-            url:
-            <input
-              type="text"
-              value={url}
-              onChange={({ target }) => setUrl(target.value)}
-            />
-          </div>
-          <button type="submit">create</button>
-        </form>
+      <Toggleable buttonLabel='new blog'>
+        <BlogForm createBlog={handleCreateBlog} />
       </Toggleable>
 
       {blogs.map(blog =>
