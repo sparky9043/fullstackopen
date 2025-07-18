@@ -29,7 +29,7 @@ describe('<Blog />', () => {
     expect(authorEl).toHaveTextContent(blog.author)
   })
 
-  test.only('blog url and likes not rendered without click', () => {
+  test('blog url and likes not rendered without click', () => {
     const urlEl = screen.queryByText(blog.url)
     const likesEl = screen.queryByText(blog.likes)
 
