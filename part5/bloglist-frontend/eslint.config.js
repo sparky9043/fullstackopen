@@ -12,6 +12,10 @@ export default defineConfig([
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
+      'eslint:recommended',
+      'plugin:react/recommended',
+      'plugin:react/jsx-runtime',
+      'plugin:react-hooks/recommended',
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -23,7 +27,39 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      "indent": [
+          "error",
+          2  
+      ],
+      "linebreak-style": [
+          "error",
+          "unix"
+      ],
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "semi": [
+          "error",
+          "never"
+      ],
+      "eqeqeq": "error",
+      "no-trailing-spaces": "error",
+      "object-curly-spacing": [
+          "error", "always"
+      ],
+      "arrow-spacing": [
+          "error", { "before": true, "after": true }
+      ],
+      "no-console": 0,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": 0,
+      "no-unused-vars": 0
+    },
+    root: true,
+    env: {
+      browser: true,
+      es2020: true,
     },
   },
 ])
