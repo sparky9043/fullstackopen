@@ -28,4 +28,12 @@ describe('<Blog />', () => {
     expect(titleEl).toHaveTextContent(blog.title)
     expect(authorEl).toHaveTextContent(blog.author)
   })
+
+  test.only('blog url and likes not rendered without click', () => {
+    const urlEl = screen.queryByText(blog.url)
+    const likesEl = screen.queryByText(blog.likes)
+
+    expect(urlEl).toBeNull()
+    expect(likesEl).toBeNull()
+  })
 })
