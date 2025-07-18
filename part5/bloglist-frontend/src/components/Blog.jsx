@@ -34,22 +34,21 @@ const Blog = ({ blog, likePost, deletePost }) => {
 
   return (
     <div style={blogStyle}>
-      <div>{blog.title} </div>
+      <div id="blog-title">{blog.title} </div>
 
       {viewDetails && 
-        <>
-          <div>
+        <div className='hidden'>
+          <div id="blog-url">
             {blog.url}
           </div>
-          <div>
+          <div id="blog-likes">
             {blog.likes}
-
             <button onClick={handleLike}>like</button>
           </div>
           <button onClick={handleDelete}>remove</button>
-        </>
+        </div>
       }
-      <div>{blog.author}</div>
+      <div id="blog-author">{blog.author}</div>
       <button onClick={handleView}>
         view
       </button>

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import Blog from './Blog'
 
-test('render contents', () => {
+describe('<Blog />', () => {
   const blog = {
     title: 'this is the way',
     author: 'the mandalorian',
@@ -9,7 +9,17 @@ test('render contents', () => {
     likes: 341,
   }
 
-  render(<Blog blog={blog} />)
+  let container
 
-  screen.debug()
+  beforeEach(() => {
+    container = render(
+      <Blog blog={blog} />      
+    )
+  })
+
+  test('render contents', async () => {
+    await screen.findAllByText('this is the way')
+    screen.debug()
+  })
+
 })
