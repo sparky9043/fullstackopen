@@ -14,12 +14,18 @@ describe('<Blog />', () => {
   beforeEach(() => {
     container = render(
       <Blog blog={blog} />      
-    )
+    ).container
   })
 
   test('render contents', async () => {
     await screen.findAllByText('this is the way')
-    screen.debug()
   })
 
+  test('blog title and author rendered', () => {
+    const titleEl = container.querySelector('#blog-title')
+    const authorEl = container.querySelector('#blog-author')
+
+    expect(titleEl).toHaveTextContent(blog.title)
+    expect(authorEl).toHaveTextContent(blog.author)
+  })
 })
