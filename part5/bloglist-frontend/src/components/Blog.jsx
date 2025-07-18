@@ -34,7 +34,7 @@ const Blog = ({ blog, likePost, deletePost }) => {
 
   return (
     <div style={blogStyle}>
-      <span>{blog.title} </span>
+      <div>{blog.title} </div>
 
       {viewDetails && 
         <>
