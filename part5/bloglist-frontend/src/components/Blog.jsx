@@ -49,7 +49,7 @@ const Blog = ({ blog, likePost, deletePost }) => {
         </div>
       }
       <div id="blog-author">{blog.author}</div>
-      <button onClick={handleView}>
+      <button onClick={handleView} id="view-button">
         view
       </button>
     </div>  

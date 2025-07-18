@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
 describe('<Blog />', () => {
@@ -35,5 +36,17 @@ describe('<Blog />', () => {
 
     expect(urlEl).toBeNull()
     expect(likesEl).toBeNull()
+  })
+
+  test.only('pressing view button renders blog url and likes', async () => {
+    const user = userEvent.setup()
+    const viewButton = container.querySelector('#view-button')
+    await user.click(viewButton)
+
+    const urlEl = container.querySelector('#blog-url')
+    const likesEl = container.querySelector('#blog-likes')
+
+    expect(urlEl).toHaveTextContent(blog.url)
+    expect(likesEl).toHaveTextContent(blog.likes)
   })
 })
