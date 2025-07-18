@@ -38,15 +38,35 @@ describe('<Blog />', () => {
     expect(likesEl).toBeNull()
   })
 
-  test.only('pressing view button renders blog url and likes', async () => {
+  test('pressing view button renders blog url and likes', async () => {
     const user = userEvent.setup()
     const viewButton = container.querySelector('#view-button')
     await user.click(viewButton)
-
+    
     const urlEl = container.querySelector('#blog-url')
     const likesEl = container.querySelector('#blog-likes')
-
+    
     expect(urlEl).toHaveTextContent(blog.url)
     expect(likesEl).toHaveTextContent(blog.likes)
+  })
+  
+  test('pressing like post button', async () => {
+    const likePost = vi.fn()
+
+    const { container } = render(
+      <Blog blog={blog} likePost={likePost} />
+    )
+
+    const user = userEvent.setup()
+    const viewButton = container.querySelector('#view-button')
+    await user.click(viewButton)
+    
+    const likeButton = screen.getByText('like')
+
+    for (let i = 0; i < 2; i++) {
+      await user.click(likeButton)
+    }
+
+    expect(likePost.mock.calls).toHaveLength(2)
   })
 })
