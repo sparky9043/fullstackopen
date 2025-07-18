@@ -34,15 +34,10 @@ const Blog = ({ blog, likePost, deletePost }) => {
 
   return (
     <div style={blogStyle}>
-        <div>
-          {blog.title}
-          
-          <button onClick={handleView}>
-            view
-          </button>
-        </div>
+      <span>{blog.title} </span>
 
-        {viewDetails && <>
+      {viewDetails && 
+        <>
           <div>
             {blog.url}
           </div>
@@ -51,11 +46,13 @@ const Blog = ({ blog, likePost, deletePost }) => {
 
             <button onClick={handleLike}>like</button>
           </div>
-          <div>
-          {blog.author}
-          </div>
           <button onClick={handleDelete}>remove</button>
-        </>}
+        </>
+      }
+      <div>{blog.author}</div>
+      <button onClick={handleView}>
+        view
+      </button>
     </div>  
   )
 }
