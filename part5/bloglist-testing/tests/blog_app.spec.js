@@ -55,5 +55,17 @@ describe('Blog app', () => {
       await clickButton(page, 'first blog', 'like')
       await expect(page.getByText('1')).toBeVisible()
     })
+
+    describe('when there are pre-defined blogs', () => {
+      beforeEach(async ({ page }) => {
+        await createBlog(page, 'first blog', 'john', 'http://one.co.uk')
+        await createBlog(page, 'second blog', 'mary', 'http://two.co.uk')
+        await createBlog(page, 'third blog', 'jane', 'http://three.co.uk')
+      })
+
+      test('test reached', async({ page }) => {
+        
+      })
+    })
   })
 })
