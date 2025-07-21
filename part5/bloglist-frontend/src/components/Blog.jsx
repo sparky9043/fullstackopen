@@ -2,9 +2,6 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 
 const Blog = ({ blog, likePost, deletePost, user }) => {
-  // console.log(user)
-  // console.log(blog.user)
-
   const blogStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -35,7 +32,6 @@ const Blog = ({ blog, likePost, deletePost, user }) => {
     }
   }
 
-  console.log(blog.user, user.id)
   const isUserSame = blog.user === user.id
 
   return (
