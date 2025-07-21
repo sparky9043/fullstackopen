@@ -147,6 +147,10 @@ const App = () => {
 
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
 
+  const compareUsername = (username) => {
+    return user.username === username
+  }
+
   return (
     <div>
       <h2>blogs</h2>
@@ -168,6 +172,7 @@ const App = () => {
           blog={blog} 
           likePost={handleLike}
           deletePost={handleDeleteBlog}
+          compareUsername={compareUsername}
         />
       )}
     </div>
