@@ -11,6 +11,13 @@ describe('Blog app', () => {
         password: 'password123',
       }
     })
+    await request.post('/api/users', {
+      data: {
+        username: 'seconduser',
+        name: 'tommy hilfiger',
+        password: 'testing123',
+      }
+    })
     await page.goto('/')
   })
 
@@ -63,7 +70,7 @@ describe('Blog app', () => {
         await createBlog(page, 'third blog', 'jane', 'http://three.co.uk')
       })
 
-      test('test reached', async({ page }) => {
+      test('clicking remove button deletes target blog', async({ page }) => {
         page.on('dialog', async (dialog) => {
           console.log(`Dialog type: ${dialog.type()}`)
           console.log(`Dialog message: ${dialog.message()}`)
@@ -73,10 +80,10 @@ describe('Blog app', () => {
 
         const secondBlog = await page.getByText('second blog').locator('..')
         await secondBlog.getByRole('button', { name: 'view' }).click()
-        await secondBlog.getByRole('button', { name: 'remove'}).click()
+        await page.pause()
+        await secondBlog.getByRole('button', { name: 'remove' }).click()
 
         await expect(secondBlog).not.toBeVisible()
-        await page.pause()
       })
     })
   })
