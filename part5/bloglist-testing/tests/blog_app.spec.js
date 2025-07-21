@@ -64,7 +64,19 @@ describe('Blog app', () => {
       })
 
       test('test reached', async({ page }) => {
-        
+        page.on('dialog', async (dialog) => {
+          console.log(`Dialog type: ${dialog.type()}`)
+          console.log(`Dialog message: ${dialog.message()}`)
+
+          await dialog.accept()
+        })
+
+        const secondBlog = await page.getByText('second blog').locator('..')
+        await secondBlog.getByRole('button', { name: 'view' }).click()
+        await secondBlog.getByRole('button', { name: 'remove'}).click()
+
+        await expect(secondBlog).not.toBeVisible()
+        await page.pause()
       })
     })
   })
