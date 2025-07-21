@@ -40,24 +40,14 @@ describe('Blog app', () => {
     })
 
     test('a new blog can be created', async ({ page }) => {
-      await createBlog(
-        page,
-        'first blog',
-        'jenna marbles',
-        'http://someurl.co.uk',
-      )
+      await createBlog(page, 'first blog', 'john', 'http://someurl.co.uk')
 
       await expect(page.getByText('first blog')).toBeVisible()
-      await expect(page.getByText('jenna marbles')).toBeVisible()
+      await expect(page.getByText('john')).toBeVisible()
     })
 
     test('clicking view displays like button in task and blog can be liked', async ({ page }) => {
-      await createBlog(
-        page,
-        'first blog',
-        'jenna marbles',
-        'http://someurl.co.uk',
-      )
+      await createBlog(page, 'first blog', 'john', 'http://someurl.co.uk')
 
       await clickButton(page, 'first blog', 'view')
       await expect(page.getByRole('button', { name: 'like' })).toBeVisible()
