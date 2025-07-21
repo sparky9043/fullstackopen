@@ -1,5 +1,5 @@
 const { test, expect, beforeEach, describe } = require('@playwright/test')
-const { loginWith, createBlog } = require('./helper')
+const { loginWith, createBlog, clickButton } = require('./helper')
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
@@ -49,6 +49,21 @@ describe('Blog app', () => {
 
       await expect(page.getByText('first blog')).toBeVisible()
       await expect(page.getByText('jenna marbles')).toBeVisible()
+    })
+
+    test('clicking view displays like button in task and blog can be liked', async ({ page }) => {
+      await createBlog(
+        page,
+        'first blog',
+        'jenna marbles',
+        'http://someurl.co.uk',
+      )
+
+      await clickButton(page, 'first blog', 'view')
+      await expect(page.getByRole('button', { name: 'like' })).toBeVisible()
+      await expect(page.getByText('0')).toBeVisible()
+      await clickButton(page, 'first blog', 'like')
+      await expect(page.getByText('1')).toBeVisible()
     })
   })
 })
