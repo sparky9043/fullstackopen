@@ -80,7 +80,6 @@ describe('Blog app', () => {
 
         const secondBlog = await page.getByText('second blog').locator('..')
         await secondBlog.getByRole('button', { name: 'view' }).click()
-        await page.pause()
         await secondBlog.getByRole('button', { name: 'remove' }).click()
 
         await expect(secondBlog).not.toBeVisible()
