@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const Blog = ({ blog, likePost, deletePost, compareUsername }) => {
-  console.log(blog)
+const Blog = ({ blog, likePost, deletePost, user }) => {
+  // console.log(user)
+  // console.log(blog.user)
 
   const blogStyle = {
     display: 'flex',
@@ -34,9 +35,8 @@ const Blog = ({ blog, likePost, deletePost, compareUsername }) => {
     }
   }
 
-  const showRemoveButton = () => {
-    return compareUsername(blog.user.username)
-  }
+  console.log(blog.user, user.id)
+  const isUserSame = blog.user === user.id
 
   return (
     <div style={blogStyle}>
@@ -51,7 +51,7 @@ const Blog = ({ blog, likePost, deletePost, compareUsername }) => {
             {blog.likes}
             <button onClick={handleLike}>like</button>
           </div>
-          {showRemoveButton() && <button onClick={handleDelete}>remove</button>}
+          {isUserSame && <button onClick={handleDelete}>remove</button>}
         </div>
       }
       <div id="blog-author">{blog.author}</div>
