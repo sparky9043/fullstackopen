@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Blog from './components/Blog'
+import BlogForm from './components/BlogForm'
+import Toggleable from './components/Toggleable'
 import blogService from './services/blogs'
 import loginService from './services/login'
-import Toggleable from './components/Toggleable'
-import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState(null)
@@ -98,6 +98,7 @@ const App = () => {
           username
           <input
             type="text"
+            data-testid="username"
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
@@ -106,6 +107,7 @@ const App = () => {
           password
           <input
             type="password"
+            data-testid="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
