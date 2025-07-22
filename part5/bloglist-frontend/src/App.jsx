@@ -162,9 +162,10 @@ const App = () => {
         <BlogForm createBlog={handleCreateBlog} />
       </Toggleable>
 
-      {sortedBlogs.map(blog =>
+      {sortedBlogs.map((blog, index) =>
         <Blog
           key={blog.id}
+          index={index}
           blog={blog} 
           likePost={handleLike}
           deletePost={handleDeleteBlog}
