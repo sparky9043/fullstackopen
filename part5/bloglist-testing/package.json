@@ -8,7 +8,7 @@
     "test:report": "playwright show-report",
     "test:ui": "playwright test --ui",
     "test:chrome": "playwright test --project chromium",
-    "test:debug": "playwright test -g"
+    "test:debug": "playwright test -g \"code reached\" --headed --debug"
   },
   "keywords": [],
   "author": "",

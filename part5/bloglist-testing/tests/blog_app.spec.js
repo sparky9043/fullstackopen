@@ -68,6 +68,7 @@ describe('Blog app', () => {
         await createBlog(page, 'first blog', 'john', 'http://one.co.uk')
         await createBlog(page, 'second blog', 'mary', 'http://two.co.uk')
         await createBlog(page, 'third blog', 'jane', 'http://three.co.uk')
+        await createBlog(page, 'fourth blog', 'tom', 'http://four.co.uk')
       })
 
       test('clicking remove button deletes target blog', async({ page }) => {
@@ -92,6 +93,40 @@ describe('Blog app', () => {
         await secondBlog.getByRole('button', { name: 'view' }).click()
         
         await expect(page.getByRole('button', { name: 'remove '})).not.toBeVisible()
+      })
+
+      test.only('code reached', async ({ page }) => {
+        const buttons = await page.getByRole('button', { name: 'view' }).all()
+
+        for (const button of buttons) {
+          console.log(button)
+          await button.click()
+        }
+
+        await page.pause()
+
+        const firstBlog = page.getByTestId('0')
+        await firstBlog.getByRole('button', { name: 'like' }).click()
+        await firstBlog.getByRole('button', { name: 'like' }).click()
+
+        const secondBlog = page.getByTestId('1')
+        await secondBlog.getByRole('button', { name: 'like' }).click()
+
+        const thirdBlog = page.getByTestId('2')
+        await thirdBlog.getByRole('button', { name: 'like' }).click()
+        await thirdBlog.getByRole('button', { name: 'like' }).click()
+        await thirdBlog.getByRole('button', { name: 'like' }).click()
+
+        const fourthBlog = page.getByTestId('3')
+        await fourthBlog.getByRole('button', { name: 'like' }).click()
+        await fourthBlog.getByRole('button', { name: 'like' }).click()
+        await fourthBlog.getByRole('button', { name: 'like' }).click()
+        await fourthBlog.getByRole('button', { name: 'like' }).click()
+        await fourthBlog.getByRole('button', { name: 'like' }).click()
+        await fourthBlog.getByRole('button', { name: 'like' }).click()
+
+        // await expect(firstBlog).toBeVisible()
+        await page.pause()
       })
     })
   })
