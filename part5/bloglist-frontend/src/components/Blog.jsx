@@ -35,8 +35,8 @@ const Blog = ({ blog, index, likePost, deletePost, user }) => {
   const isUserSame = blog.user === user.id
 
   return (
-    <div style={blogStyle} data-testid={String(index)}>
-      <div id="blog-title">{blog.title} </div>
+    <div style={blogStyle} className='blog'>
+      <div id="blog-title">{blog.title}</div>
 
       {viewDetails && 
         <div className='hidden'>
@@ -44,7 +44,7 @@ const Blog = ({ blog, index, likePost, deletePost, user }) => {
             {blog.url}
           </div>
           <div id="blog-likes">
-            {blog.likes}
+            <span data-testid='likes'>{blog.likes}</span>
             <button onClick={handleLike}>like</button>
           </div>
           {isUserSame && <button onClick={handleDelete}>remove</button>}

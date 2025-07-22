@@ -93,14 +93,6 @@ describe('Blog app', () => {
         
         await expect(page.getByRole('button', { name: 'remove '})).not.toBeVisible()
       })
-
-      test.only('code reached', async ({ page }) => {
-        const buttons = await page.getByRole('button', { name: 'view' }).all().then(button => console.log(button))
-
-
-        // await expect(firstBlog).toBeVisible()
-        await page.pause()
-      })
     })
   })
 })
