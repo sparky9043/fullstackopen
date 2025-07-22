@@ -85,7 +85,7 @@ describe('Blog app', () => {
         await expect(secondBlog).not.toBeVisible()
       })
 
-      test('code reached', async ({ page }) => {
+      test('remove button only shown with matching user', async ({ page }) => {
         await page.getByRole('button', { name: 'logout' }).click()
         await loginWith(page, 'seconduser', 'testing123')
         const secondBlog = await page.getByText('second blog').locator('..')
