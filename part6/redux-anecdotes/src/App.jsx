@@ -7,7 +7,7 @@ const App = () => {
   const vote = (id) => {
     return {
       type: 'VOTE',
-      id,
+      payload: { id }
     }
   }
 
