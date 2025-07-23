@@ -1,12 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { filterChange } from '../reducers/filterReducer'
 
 const Filter = () => {
   const dispatch = useDispatch()
-  // const state = useSelector(state => {
-    
-  // })
-
   // console.log(state)
 
   const handleChange = (event) => {
