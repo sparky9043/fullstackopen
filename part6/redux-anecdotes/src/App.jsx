@@ -13,6 +13,7 @@ const App = () => {
     event.preventDefault()
     const anecdote = event.target.anecdote.value
     dispatch(create(anecdote))
+    event.target.anecdote.value = ''
   }
 
   const anecdotesSorted = [...anecdotes].sort((a, b) => b.votes - a.votes)
