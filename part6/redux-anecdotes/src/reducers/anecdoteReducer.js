@@ -23,7 +23,7 @@ const anecdoteReducer = (state = initialState, action) => {
   console.log('state now: ', state)
   console.log('action', action)
   switch (action.type) {
-    case "VOTE": 
+    case 'VOTE': 
       return state.map(
         a => {
           if (a.id === action.payload.id) {
@@ -33,6 +33,10 @@ const anecdoteReducer = (state = initialState, action) => {
           return a
         }
       )
+    case 'CREATE': {
+      const newAnecdote = asObject(action.payload.anecdote)
+      return [...state, newAnecdote]
+    }
     default:
       return state
   }
