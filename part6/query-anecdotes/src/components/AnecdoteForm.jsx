@@ -6,27 +6,26 @@ const AnecdoteForm = () => {
   const dispatch = useNotificationDispatch()
   const queryClient = useQueryClient()
 
+  const handleError = () => {
+    dispatch({ type: 'updateMessage', payload: 'too short anecdote, must have length 5 or more' })
+    setTimeout(() => {
+      dispatch({ type: 'removeMessage' })
+    }, 5000)
+  }
+
   const newAnecdoteMutation = useMutation({
     mutationFn: createAnecdote,
     onSuccess: (newAnecdote) => {
       const currentAnecdotes = queryClient.getQueryData(['anecdotes'])
       queryClient.setQueryData(['anecdotes'], [...currentAnecdotes, newAnecdote])
     },
+    onError: handleError
   })
 
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
-    
-    if (content.length < 5) {
-      dispatch({ type: 'updateMessage', payload: 'too short anecdote, must have length 5 or more' })
-      setTimeout(() => {
-        dispatch({ type: 'removeMessage' })
-      }, 5000)
-      return;
-    }
-
     newAnecdoteMutation.mutate({ content, votes: 0 })
     console.log('new anecdote')
 }
