@@ -37,3 +37,10 @@ export const createAnecdote = (content) => {
     dispatch(appendAnecdote(note))
   }
 }
+
+export const updateVote = (anecdoteObject) => {
+  return async (dispatch) => {
+    const anecdote = await anecdoteService.update(anecdoteObject)
+    dispatch(vote(anecdote.id))
+  }
+}

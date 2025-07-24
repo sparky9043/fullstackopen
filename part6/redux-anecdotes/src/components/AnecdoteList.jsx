@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from 'react-redux'
-import { vote, initializeAnecdotes } from '../reducers/anecdoteReducer'
+import { updateVote, initializeAnecdotes } from '../reducers/anecdoteReducer'
 import { updateMessage, removeMessage } from '../reducers/notificationReducer'
 import { useEffect } from 'react'
 
@@ -34,10 +34,14 @@ const AnecdoteList = () => {
   const anecdotesSorted = [...anecdotes].sort((a, b) => b.votes - a.votes)
 
   const handleVote = (id) => {
-    const clickedAnecdote = anecdotes.find(a => a.id === id).content
-
-    dispatch(vote(id))
-    dispatch(updateMessage(`you voted '${clickedAnecdote}'`))
+    const clickedAnecdote = anecdotes.find(a => a.id === id)
+    const anecdoteContent = clickedAnecdote.content
+    dispatch(updateVote({
+      content: anecdoteContent,
+      votes: clickedAnecdote.votes + 1,
+      id,
+    }))
+    dispatch(updateMessage(`you voted '${anecdoteContent}'`))
     setTimeout(() => {
       dispatch(removeMessage())
     }, 5000)
