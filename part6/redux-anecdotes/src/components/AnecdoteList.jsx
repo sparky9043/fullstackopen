@@ -46,7 +46,6 @@ const AnecdoteList = () => {
     }, 5000)
   }
 
-
   return (
     <>
       {anecdotesSorted.map(anecdote =>
