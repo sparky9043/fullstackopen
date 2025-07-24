@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from 'react-redux'
-import { vote, setAnecdotes } from '../reducers/anecdoteReducer'
+import { vote, initializeAnecdotes } from '../reducers/anecdoteReducer'
 import { updateMessage, removeMessage } from '../reducers/notificationReducer'
-import anecdoteService from '../services/anecdotes'
+// import anecdoteService from '../services/anecdotes'
 import { useEffect } from 'react'
 
 const AnecdoteItem = ({ anecdote, handleClick }) => {
@@ -22,9 +22,7 @@ const AnecdoteItem = ({ anecdote, handleClick }) => {
 const AnecdoteList = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    anecdoteService.getAll()
-      .then(data => 
-        dispatch(setAnecdotes(data)))
+    dispatch(initializeAnecdotes())
   }, [dispatch])
 
   const anecdotes = useSelector(state => {
