@@ -2,7 +2,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { vote, initializeAnecdotes } from '../reducers/anecdoteReducer'
 import { updateMessage, removeMessage } from '../reducers/notificationReducer'
-// import anecdoteService from '../services/anecdotes'
 import { useEffect } from 'react'
 
 const AnecdoteItem = ({ anecdote, handleClick }) => {
