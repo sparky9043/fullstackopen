@@ -62,7 +62,7 @@ const App = () => {
         </Menu>
 
         <Routes>
-          <Route />
+          <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
         </Routes>
 
       </Router>
