@@ -1,4 +1,4 @@
-const Anecdote = () => {
+const Anecdote = ({ anecdote }) => {
 
 }
 
