@@ -5,7 +5,7 @@ import About from './components/About'
 import Footer from './components/Footer'
 import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useMatch } from 'react-router-dom'
 import Anecdote from './components/Anecdote'
 
 
@@ -52,10 +52,11 @@ const App = () => {
     padding: '5px'
   }
 
+  const match = useMatch('/anecdotes/:id')
+
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Router>
         <Menu>
           <Link to='/' style={padding}>anecdotes</Link>
           <Link to='/create' style={padding}>create new</Link>
@@ -80,7 +81,6 @@ const App = () => {
             element={<CreateNew addNew={addNew} />}
           />
         </Routes>
-      </Router>
       <Footer />
     </div>
   )
