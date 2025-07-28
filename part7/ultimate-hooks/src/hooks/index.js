@@ -10,16 +10,17 @@ export const useResource = (baseUrl) => {
       .catch(error => console.log(error.message))
   }, [baseUrl])
 
-  // const create = (resource) => {
+  const create = async (resource) => {
+    const response = await axios.post(baseUrl, resource)
+    setResources(current => [...current, response.data])
+  }
 
-  // }
-
-  // const service = {
-  //   create
-  // }
+  const service = {
+    create
+  }
 
   return [
-    resources
+    resources, service
   ]
 }
 

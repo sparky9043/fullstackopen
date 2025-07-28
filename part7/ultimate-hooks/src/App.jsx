@@ -5,18 +5,16 @@ const App = () => {
   const name = useField('text')
   const number = useField('text')
 
-  const [ notes ] = useResource('http://localhost:3005/notes')
+  const [ notes, noteService ] = useResource('http://localhost:3005/notes')
   const [ persons ] = useResource('http://localhost:3005/persons')
-
-  console.log(notes, persons)
 
   // const [notes, noteService] = useResource('http://localhost:3005/notes')
   // const [persons, personService] = useResource('http://localhost:3005/persons')
 
-  // const handleNoteSubmit = (event) => {
-  //   event.preventDefault()
-  //   noteService.create({ content: content.value })
-  // }
+  const handleNoteSubmit = (event) => {
+    event.preventDefault()
+    noteService.create({ content: content.value })
+  }
  
   // const handlePersonSubmit = (event) => {
   //   event.preventDefault()
@@ -26,7 +24,7 @@ const App = () => {
   return (
     <div>
       <h2>notes</h2>
-      <form>
+      <form onSubmit={handleNoteSubmit}>
         <input {...content} />
         <button>create</button>
       </form>
