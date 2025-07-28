@@ -62,13 +62,20 @@ const App = () => {
         </Menu>
 
         <Routes>
-          <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
+          <Route
+            path='/'
+            element={<AnecdoteList anecdotes={anecdotes} />}
+          />
+          <Route
+            path='/about'
+            element={<About />}
+          />
+          <Route
+            path='/create'
+            element={<CreateNew addNew={addNew} />}
+          />
         </Routes>
-
       </Router>
-      {/* <AnecdoteList anecdotes={anecdotes} /> */}
-      {/* <About /> */}
-      {/* <CreateNew addNew={addNew} /> */}
       <Footer />
     </div>
   )
