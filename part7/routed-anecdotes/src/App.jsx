@@ -5,7 +5,7 @@ import About from './components/About'
 import Footer from './components/Footer'
 import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 
 const App = () => {
@@ -56,9 +56,9 @@ const App = () => {
       <h1>Software anecdotes</h1>
       <Router>
         <Menu>
-          <a href='#' style={padding}>anecdotes</a>
-          <a href='#' style={padding}>create new</a>
-          <a href='#' style={padding}>about</a>
+          <Link to='/' style={padding}>anecdotes</Link>
+          <Link to='/create' style={padding}>create new</Link>
+          <Link to='/about' style={padding}>about</Link>
         </Menu>
 
         <Routes>
