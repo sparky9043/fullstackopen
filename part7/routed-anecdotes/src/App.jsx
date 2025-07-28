@@ -54,6 +54,10 @@ const App = () => {
 
   const match = useMatch('/anecdotes/:id')
 
+  const anecdote = match
+    ? anecdoteById(Number(match.params.id))
+    : null
+
   return (
     <div>
       <h1>Software anecdotes</h1>
@@ -70,7 +74,7 @@ const App = () => {
           />
           <Route
             path='/anecdotes/:id'
-            element={<Anecdote />}
+            element={<Anecdote anecdote={anecdote} />}
           />
           <Route
             path='/about'
