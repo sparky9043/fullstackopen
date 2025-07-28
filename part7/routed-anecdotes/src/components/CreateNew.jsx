@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const CreateNew = (props) => {
+const CreateNew = ({ addNew, updateNotification }) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
@@ -12,12 +12,16 @@ const CreateNew = (props) => {
     e.preventDefault()
     if (!content || !author || !info) return;
 
-    props.addNew({
+    addNew({
       content,
       author,
       info,
       votes: 0
     })
+
+    updateNotification(
+      `a new anecdote ${content} created!`
+    )
 
     navigate('/')
   }

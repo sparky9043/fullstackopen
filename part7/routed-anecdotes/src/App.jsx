@@ -5,7 +5,7 @@ import About from './components/About'
 import Footer from './components/Footer'
 import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
-import { BrowserRouter as Router, Routes, Route, Link, useMatch } from 'react-router-dom'
+import { Routes, Route, Link, useMatch } from 'react-router-dom'
 import Anecdote from './components/Anecdote'
 
 
@@ -32,6 +32,13 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+  }
+
+  const updateNotification = (content) => {
+    setNotification(content)
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
   }
 
   const anecdoteById = (id) =>
@@ -65,6 +72,10 @@ const App = () => {
           <Link to='/' style={padding}>anecdotes</Link>
           <Link to='/create' style={padding}>create new</Link>
           <Link to='/about' style={padding}>about</Link>
+          {notification
+            ? <p>{notification}</p>
+            : null
+          }
         </Menu>
 
         <Routes>
@@ -82,7 +93,10 @@ const App = () => {
           />
           <Route
             path='/create'
-            element={<CreateNew addNew={addNew} />}
+            element={<CreateNew
+                      addNew={addNew}
+                      updateNotification={updateNotification}
+                    />}
           />
         </Routes>
       <Footer />
