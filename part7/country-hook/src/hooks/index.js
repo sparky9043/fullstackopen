@@ -32,8 +32,8 @@ export const useCountry = (name) => {
         setCountry(country)
       })
       .catch(error => {
-        console.log('Error: ',error.message)
-        setCountry(null)
+        setCountry({ found: false })
+        throw new Error('Error:', error.message)
       })
   }, [name])
 

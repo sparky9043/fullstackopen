@@ -1,10 +1,4 @@
 const Country = ({ country }) => {
-  console.log(country)
-
-  if (!country) {
-    return null
-  }
-
   if (!country.found) {
     return (
       <div>
