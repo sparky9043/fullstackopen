@@ -1,10 +1,15 @@
 import { useState } from 'react'
 
 export const useField = (type, name = null, defaultText = '') => {
+
   const [value, setValue] = useState(defaultText)
 
   const onChange = (event) => {
-    setValue(event.target.value)
+    if (event.type === 'reset') {
+      setValue('')
+    } else {
+      setValue(event.target.value)
+    }
   }
 
   return {

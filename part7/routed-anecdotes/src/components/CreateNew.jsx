@@ -29,10 +29,20 @@ const CreateNew = ({ addNew, updateNotification }) => {
     navigate('/')
   }
 
+  const handleReset = (e) => {
+    e.preventDefault()
+    content.onChange(e)
+    author.onChange(e)
+    info.onChange(e)
+  }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        onReset={handleReset}
+      >
         <div>
           content
           <input name='content' {...content} />
@@ -45,7 +55,8 @@ const CreateNew = ({ addNew, updateNotification }) => {
           url for more info
           <input {...info} />
         </div>
-        <button>create</button>
+        <input type="submit" value="submit" />
+        <input type="reset" value="reset" />
       </form>
     </div>
   )
