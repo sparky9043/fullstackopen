@@ -8,9 +8,6 @@ const App = () => {
   const [ notes, noteService ] = useResource('http://localhost:3005/notes')
   const [ persons, personService ] = useResource('http://localhost:3005/persons')
 
-  // const [notes, noteService] = useResource('http://localhost:3005/notes')
-  // const [persons, personService] = useResource('http://localhost:3005/persons')
-
   const handleNoteSubmit = (event) => {
     event.preventDefault()
     noteService.create({ content: content.value })
