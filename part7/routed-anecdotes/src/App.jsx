@@ -4,15 +4,8 @@ import Menu from './components/Menu'
 import About from './components/About'
 import Footer from './components/Footer'
 import CreateNew from './components/CreateNew'
+import AnecdoteList from './components/AnecdoteList'
 
-const AnecdoteList = ({ anecdotes }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
-    </ul>
-  </div>
-)
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
