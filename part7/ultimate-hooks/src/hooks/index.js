@@ -1,20 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export const useResource = (baseUrl) => {
   const [resources, setResources] = useState([])
 
-  // ...
+  useEffect(() => {
+    axios.get(baseUrl)
+      .then(res => setResources(res.data))
+      .catch(error => console.log(error.message))
+  }, [baseUrl])
 
-  const create = (resource) => {
-    // ...
-  }
+  // const create = (resource) => {
 
-  const service = {
-    create
-  }
+  // }
+
+  // const service = {
+  //   create
+  // }
 
   return [
-    resources, service
+    resources
   ]
 }
 
