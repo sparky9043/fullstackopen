@@ -31,9 +31,9 @@ const CreateNew = ({ addNew, updateNotification }) => {
 
   const handleReset = (e) => {
     e.preventDefault()
-    content.onChange(e)
-    author.onChange(e)
-    info.onChange(e)
+    content.onReset()
+    author.onReset()
+    info.onReset()
   }
 
   return (
@@ -45,7 +45,7 @@ const CreateNew = ({ addNew, updateNotification }) => {
       >
         <div>
           content
-          <input name='content' {...content} />
+          <input {...content} />
         </div>
         <div>
           author

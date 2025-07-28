@@ -12,11 +12,16 @@ export const useField = (type, name = null, defaultText = '') => {
     }
   }
 
+  const onReset = () => {
+    setValue('')
+  }
+
   return {
     type,
     name,
     value,
     onChange,
+    onReset,
   }
 }
 
