@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Country from './components/Country'
-import { useField } from './hooks'
+import { useField, useCountry } from './hooks'
 import axios from 'axios'
-
-const useCountry = (name) => {
-  const [country, setCountry] = useState(null)
-
-  useEffect(() => {})
-
-  return country
-}
 
 const App = () => {
   const nameInput = useField('text')
   const [name, setName] = useState('')
-  const country = useCountry(name)
+  // const country = useCountry(name)
+
+  const country = null
 
   const fetch = (e) => {
     e.preventDefault()

@@ -13,3 +13,11 @@ export const useField = (type) => {
     onChange
   }
 }
+
+export const useCountry = (name) => {
+  const [country, setCountry] = useState(null)
+
+  useEffect(() => {})
+
+  return country
+}
