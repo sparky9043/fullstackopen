@@ -6,7 +6,7 @@ const App = () => {
   const number = useField('text')
 
   const [ notes, noteService ] = useResource('http://localhost:3005/notes')
-  const [ persons ] = useResource('http://localhost:3005/persons')
+  const [ persons, personService ] = useResource('http://localhost:3005/persons')
 
   // const [notes, noteService] = useResource('http://localhost:3005/notes')
   // const [persons, personService] = useResource('http://localhost:3005/persons')
@@ -16,10 +16,10 @@ const App = () => {
     noteService.create({ content: content.value })
   }
  
-  // const handlePersonSubmit = (event) => {
-  //   event.preventDefault()
-  //   personService.create({ name: name.value, number: number.value})
-  // }
+  const handlePersonSubmit = (event) => {
+    event.preventDefault()
+    personService.create({ name: name.value, number: number.value})
+  }
 
   return (
     <div>
@@ -31,7 +31,7 @@ const App = () => {
       {notes.map(n => <p key={n.id}>{n.content}</p>)}
 
       <h2>persons</h2>
-      <form>
+      <form onSubmit={handlePersonSubmit}>
         name <input {...name} /> <br/>
         number <input {...number} />
         <button>create</button>
