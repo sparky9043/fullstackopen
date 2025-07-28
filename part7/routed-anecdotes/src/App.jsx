@@ -7,6 +7,7 @@ import CreateNew from './components/CreateNew'
 import AnecdoteList from './components/AnecdoteList'
 import { Routes, Route, Link, useMatch } from 'react-router-dom'
 import Anecdote from './components/Anecdote'
+import { useNotification } from './hooks'
 
 
 const App = () => {
@@ -27,18 +28,11 @@ const App = () => {
     }
   ])
 
-  const [notification, setNotification] = useState('')
+  const {notification, updateNotification} = useNotification(5)
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
-  }
-
-  const updateNotification = (content) => {
-    setNotification(content)
-    setTimeout(() => {
-      setNotification(null)
-    }, 5000)
   }
 
   const anecdoteById = (id) =>

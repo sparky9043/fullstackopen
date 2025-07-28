@@ -13,15 +13,17 @@ const CreateNew = ({ addNew, updateNotification }) => {
     e.preventDefault()
     if (!content.value || !author.value || !info.value) return;
 
+    console.log(content.value, author.value, info.value)
+
     addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0
     })
 
     updateNotification(
-      `a new anecdote ${content} created!`
+      `a new anecdote ${content.value} created!`
     )
 
     navigate('/')
