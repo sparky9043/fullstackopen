@@ -1,5 +1,20 @@
+import { useNavigate } from 'react-router-dom'
+
 const Anecdote = ({ anecdote }) => {
-  console.log(anecdote)
+  const navigate = useNavigate()
+
+  if (!anecdote) {
+    setTimeout(() => {
+      navigate('/')
+    }, 5000)
+    
+    return (
+      <div>
+        <p>Invalid id. Redirecting to home...</p>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h2>{anecdote.content}</h2>
