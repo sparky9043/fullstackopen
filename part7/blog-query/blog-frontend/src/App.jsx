@@ -7,12 +7,14 @@ import loginService from './services/login'
 import { useContext } from 'react'
 import { NotificationContext } from './contexts/NotificationContext'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { CurrentUserContext } from './contexts/CurrentUserContext'
 
 const App = () => {
-  const [notification, dispatch] = useContext(NotificationContext)
+  const [notification, notificationDispatch] = useContext(NotificationContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  // const [user, userDispatch] = useContext(CurrentUserContext)
   const blogFormRef = useRef()
   
   useEffect(() => {
@@ -22,11 +24,11 @@ const App = () => {
       const savedUser = JSON.parse(userString)
       setUser(savedUser)
       blogService.setToken(savedUser.token)
-      dispatch({ type: 'updateNotification', payload:'Success! user data loaded'})
+      notificationDispatch({ type: 'updateNotification', payload:'Success! user data loaded'})
     }
 
     return () => setTimeout(() => {
-      dispatch({ type: 'removeNotification' })
+      notificationDispatch({ type: 'removeNotification' })
     }, 5000)
   }, [])
 
@@ -41,17 +43,17 @@ const App = () => {
       setUser(savedUser)
       setUsername('')
       setPassword('')
-      dispatch({ type: 'updateNotification', payload: `Successfully logged in as ${savedUser.name}` })
+      notificationDispatch({ type: 'updateNotification', payload: `Successfully logged in as ${savedUser.name}` })
 
       setTimeout(() => {
-        dispatch({ type: 'removeNotification' })
+        notificationDispatch({ type: 'removeNotification' })
       }, 5000)
     } catch (exception) {
       console.log(exception)
-      dispatch({ type: 'updateNotification', payload: 'invalid username or password' })
+      notificationDispatch({ type: 'updateNotification', payload: 'invalid username or password' })
 
       setTimeout(() => {
-        dispatch({ type: 'removeNotification' })
+        notificationDispatch({ type: 'removeNotification' })
       }, 5000)
     }
   }
@@ -104,12 +106,12 @@ const App = () => {
 
   const handleDeleteBlog = (id) => {
     deleteBlogMutation.mutate(id)
-    dispatch({
+    notificationDispatch({
       type: 'updateNotification',
       payload: 'post successfully deleted!',
     })
     setTimeout(() => {
-      dispatch({ type: 'removeNotification' })
+      notificationDispatch({ type: 'removeNotification' })
     }, 5000)
   }
 
@@ -145,9 +147,9 @@ const App = () => {
     console.log('logged out successfully')
     window.localStorage.removeItem('userLoginBlogApp')
     setUser(null)
-    dispatch({ type: 'updateNotification', payload: 'logged out successfully' })
+    notificationDispatch({ type: 'updateNotification', payload: 'logged out successfully' })
     setTimeout(() => {
-      dispatch({ type: 'removeNotification' })
+      notificationDispatch({ type: 'removeNotification' })
     }, 5000)
   }
 
