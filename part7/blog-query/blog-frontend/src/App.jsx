@@ -45,6 +45,10 @@ const App = () => {
           path='/users'
           element={<UsersPage />}
         />
+        <Route
+          path='/users/:id'
+          element={<p>Individual User</p>}
+        />
       </Routes>
     </div>
   )
