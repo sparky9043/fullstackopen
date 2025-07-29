@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const UsersPage = ({ users }) => {
   const navigate = useNavigate()
@@ -19,8 +19,10 @@ const UsersPage = ({ users }) => {
           </tr>
           {users.map(
             user => <tr key={user.id}>
-              <td onClick={() => navigate(`${user.id}`)}>
-                {user.name}
+              <td>
+                <Link to={`${user.id}`}>
+                  {user.name}
+                </Link>
               </td>
               <td>
                 {user.blogs.length}
