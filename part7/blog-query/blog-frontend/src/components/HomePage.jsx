@@ -93,6 +93,7 @@ const HomePage = () => {
 
   return (
     <div>
+      {notification ? <p className='message'>{notification}</p> : null}
       <div>
         {user.name} logged in
         <span>

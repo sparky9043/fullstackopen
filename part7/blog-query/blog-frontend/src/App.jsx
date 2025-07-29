@@ -35,11 +35,14 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {notification ? <p className='message'>{notification}</p> : null}
       <Routes>
         <Route
           path='/'
           element={user ? <HomePage /> : <LoginForm /> }
+        />
+        <Route
+          path='/users'
+          element={<p>USERS PAGE</p>}
         />
       </Routes>
     </div>
