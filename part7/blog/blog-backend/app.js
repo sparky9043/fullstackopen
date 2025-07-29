@@ -1,5 +1,5 @@
 require('express-async-errors')
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const configs = require('./utils/configs')
 const express = require('express')
 const app = express()
@@ -11,11 +11,12 @@ const middleware = require('./utils/middleware')
 
 mongoose.set('strictQuery', false)
 
-mongoose.connect(configs.MONGODB_URI)
+mongoose
+  .connect(configs.MONGODB_URI)
   .then(() => {
     logger.info('connecting to MongoDB')
   })
-  .catch(error => {
+  .catch((error) => {
     logger.error('Error: ', error.message)
   })
 

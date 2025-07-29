@@ -11,34 +11,32 @@ const User = require('../models/user')
 
 const initialBlogs = [
   {
-    title: "We are the champions",
-    author: "Queen",
-    url: "http://fakeurl.com",
-    likes: 441
+    title: 'We are the champions',
+    author: 'Queen',
+    url: 'http://fakeurl.com',
+    likes: 441,
   },
   {
-    title: "I am levitating",
-    author: "Dua Lipa",
-    url: "http://thisisafakewebsite.org",
-    likes: 327
-  }
+    title: 'I am levitating',
+    author: 'Dua Lipa',
+    url: 'http://thisisafakewebsite.org',
+    likes: 327,
+  },
 ]
 
 describe('blogs: make GET request to blog db', () => {
   test('return blogs as json', async () => {
-    await api
-      .get('/api/blogs')
-      .expect(200)
+    await api.get('/api/blogs').expect(200)
   })
 })
 
 describe('blogs: make POST request to blog db', () => {
   test('returns code 401 without token', async () => {
     const blog = {
-      title: "Testing",
-      author: "The tester",
-      url: "http://somekindofurl.com",
-      likes: 412
+      title: 'Testing',
+      author: 'The tester',
+      url: 'http://somekindofurl.com',
+      likes: 412,
     }
 
     const result = await api
@@ -54,10 +52,10 @@ describe('blogs: make POST request to blog db', () => {
     const blogsAtStart = await helper.blogsInDb()
 
     const blog = {
-      title: "Testing",
-      author: "The tester",
-      url: "http://somekindofurl.com",
-      likes: 412
+      title: 'Testing',
+      author: 'The tester',
+      url: 'http://somekindofurl.com',
+      likes: 412,
     }
 
     const secretToken = process.env.TEST_TOKEN
@@ -70,11 +68,11 @@ describe('blogs: make POST request to blog db', () => {
       .set('Authorization', token)
       .expect(201)
       .expect('Content-Type', /application\/json/)
-    
+
     const blogsAtEnd = await helper.blogsInDb()
     assert.strictEqual(blogsAtEnd.length, blogsAtStart.length + 1)
 
-    const titles = blogsAtEnd.map(b => b.title)
+    const titles = blogsAtEnd.map((b) => b.title)
     assert(titles.includes(blog.title))
   })
 })

@@ -5,8 +5,7 @@ const User = require('../models/user')
 const { userExtractor } = require('../utils/middleware')
 
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog
-    .find({})
+  const blogs = await Blog.find({})
   response.json(blogs)
 })
 
@@ -23,7 +22,7 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes || 0,
-    user: user._id
+    user: user._id,
   })
 
   const savedBlog = await blog.save()
@@ -38,7 +37,7 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
 
   if (!user) {
     return response.status(401).json({
-      error: 'user not found'
+      error: 'user not found',
     })
   }
 
@@ -46,7 +45,7 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
 
   if (!blog) {
     return response.status(404).json({
-      error: 'blog not found'
+      error: 'blog not found',
     })
   }
 
@@ -55,7 +54,7 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     response.status(204).end()
   } else {
     return response.status(400).json({
-      error: 'the blog could not be deleted'
+      error: 'the blog could not be deleted',
     })
   }
 })

@@ -3,8 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User
-    .find({})
+  const users = await User.find({})
   response.json(users)
 })
 
@@ -12,11 +11,9 @@ usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
 
   if (password.length < 3) {
-    return response
-      .status(404)
-      .json({
-        error: 'password length too short'
-      })
+    return response.status(404).json({
+      error: 'password length too short',
+    })
   }
 
   const saltRounds = 10
@@ -29,7 +26,7 @@ usersRouter.post('/', async (request, response) => {
   })
 
   const savedUser = await user.save()
-  
+
   response.status(201).json(savedUser)
 })
 
