@@ -31,13 +31,15 @@ const App = () => {
       notificationDispatch({ type: 'removeNotification' })
     }, 5000)
   }, [])
-  
+
   return (
     <div>
       <h2>blogs</h2>
-      {notification ? <p className='message'>{notification}</p> : null}
       <Routes>
-        <Route path='/' element={user ? <HomePage /> : <LoginForm /> } />
+        <Route
+          path='/'
+          element={user ? <HomePage /> : <LoginForm /> }
+        />
       </Routes>
     </div>
   )
