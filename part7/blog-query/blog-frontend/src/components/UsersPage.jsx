@@ -1,20 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
-import userService from '../services/users'
+import { useNavigate } from 'react-router-dom'
 
-const UsersPage = () => {
+const UsersPage = ({ users }) => {
+  const navigate = useNavigate()
 
-  const result = useQuery({
-    queryKey: ['users'],
-    queryFn: userService.getUsers
-  })
-
-  if ( result.isLoading ) {
+  if (!users) {
     return (
       <p>Waiting to load users...</p>
     )
   }
-
-  const users = result.data
 
   return (
     <div>
@@ -26,8 +19,12 @@ const UsersPage = () => {
           </tr>
           {users.map(
             user => <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.blogs.length}</td>
+              <td onClick={() => navigate(`${user.id}`)}>
+                {user.name}
+              </td>
+              <td>
+                {user.blogs.length}
+              </td>
             </tr>
           )}
         </tbody>
