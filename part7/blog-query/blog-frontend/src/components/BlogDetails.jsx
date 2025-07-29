@@ -12,6 +12,11 @@ const BlogDetails = ({ blog }) => {
       <h2>{blog.title}</h2>
       <p>{blog.likes} likes</p>
       <p>added by {blog.author}</p>
+      <ul>
+        {blog.comments.map(comment => <li key={comment}>
+          {comment}
+        </li>)}
+      </ul>
     </div>
   )
 }
