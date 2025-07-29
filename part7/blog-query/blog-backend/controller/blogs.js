@@ -48,8 +48,10 @@ blogsRouter.post('/:id/comments', userExtractor, async (request, response) => {
     return response.status(404).json({ error: 'user not found' })
   }
 
-  console.log(user, blog)
+  blog.comments = blog.comments.concat(body.comments)
+  await blog.save()
 
+  response.status(201).json(blog)
 })
 
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
