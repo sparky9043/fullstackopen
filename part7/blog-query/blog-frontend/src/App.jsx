@@ -16,9 +16,14 @@ const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
   const [user, userDispatch] = useContext(CurrentUserContext)
   const match = useMatch('/users/:id')
-  const result = useQuery({
+  const usersResult = useQuery({
     queryKey: ['users'],
     queryFn: userService.getUsers
+  })
+
+  const blogsResult = useQuery({
+    queryKey: ['blogs'],
+    queryFn: blogService.getAll
   })
 
   useEffect(() => {
@@ -36,13 +41,19 @@ const App = () => {
     }, 5000)
   }, [])
 
-  if ( result.isLoading ) {
+  if ( usersResult.isLoading ) {
     return (
       <p>Waiting to load users...</p>
     )
   }
 
-  const users = result.data
+  if (blogsResult.isLoading) {
+    return <div>Waiting to load blogs...</div>
+  }
+
+  const blogs = blogsResult.data
+
+  const users = usersResult.data
 
   const matchedUser = match
     ? users.find(user => user.id === match.params.id)
@@ -59,7 +70,7 @@ const App = () => {
         />
         <Route
           path='/'
-          element={user ? <HomePage /> : <Navigate replace to='/login' /> }
+          element={user ? <HomePage blogs={blogs} /> : <Navigate replace to='/login' /> }
         />
         <Route
           path='/users'

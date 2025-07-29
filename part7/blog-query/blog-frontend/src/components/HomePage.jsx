@@ -8,7 +8,7 @@ import { useRef } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Blog from './Blog'
 
-const HomePage = () => {
+const HomePage = ({ blogs }) => {
   const [user, userDispatch] = useContext(CurrentUserContext)
   const [notification, notificationDispatch] = useContext(NotificationContext)
 
@@ -36,6 +36,12 @@ const HomePage = () => {
       queryClient.invalidateQueries(['blogs'])
     }
   })
+
+  if (!blogs) {
+    return (
+      <div>Waiting to load...</div>
+    )
+  }
 
   const handleDeleteBlog = (id) => {
     deleteBlogMutation.mutate(id)
@@ -69,24 +75,6 @@ const HomePage = () => {
     setTimeout(() => {
       notificationDispatch({ type: 'removeNotification' })
     }, 5000)
-  }
-
-
-  const result = useQuery({
-    queryKey: ['blogs'],
-    queryFn: blogService.getAll
-  })
-
-  if (result.isLoading) {
-    return <div>Waiting to load...</div>
-  }
-
-  const blogs = result.data
-
-  if (!blogs) {
-    return (
-      <div>Waiting to load...</div>
-    )
   }
 
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
