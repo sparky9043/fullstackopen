@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const Blog = ({ blog, index, likePost, deletePost, user }) => {
+const Blog = ({ blog, likePost, deletePost, user }) => {
   const blogStyle = {
     display: 'flex',
     flexDirection: 'column',

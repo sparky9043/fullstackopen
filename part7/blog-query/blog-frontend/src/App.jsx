@@ -70,6 +70,13 @@ const App = () => {
     }
   })
 
+  const likeBlogMutation = useMutation({
+    mutationFn: blogService.update,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['blogs'])
+    }
+  })
+
   const handleCreateBlog = (blogObject) => {
     createNewBlogMutation.mutate(blogObject)
     blogFormRef.current.setVisibility()
@@ -146,14 +153,7 @@ const App = () => {
 
   const handleLike = async (newObject) => {
     try {
-      const returnedBlog = await blogService.update(newObject)
-      const updatedBlogs = blogs.map(blog => {
-        if (blog.id === returnedBlog.id) {
-          blog.likes++
-        }
-        return blog
-      })
-      setBlogs(updatedBlogs)
+      likeBlogMutation.mutate(newObject)
     } catch (exception) {
       console.log(exception)
     }
@@ -179,7 +179,6 @@ const App = () => {
       {sortedBlogs.map((blog, index) =>
         <Blog
           key={blog.id}
-          index={index}
           blog={blog} 
           likePost={handleLike}
           deletePost={handleDeleteBlog}
