@@ -115,7 +115,7 @@ const App = () => {
     }, 5000)
   }
 
-  if (user === null) {
+  const loginForm = () => {
     return (
       <form onSubmit={handleLogin}>
         <h2>log in to application</h2>
@@ -141,6 +141,10 @@ const App = () => {
         <button type="submit">login</button>
       </form>
     )
+  }
+
+  if (user === null) {
+    return loginForm()
   }
 
   function handleLogout() {
