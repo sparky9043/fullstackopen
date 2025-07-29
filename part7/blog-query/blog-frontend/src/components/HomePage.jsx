@@ -93,7 +93,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <p>This is the homepage!</p>
       <div>
         {user.name} logged in
         <span>
