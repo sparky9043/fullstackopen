@@ -20,6 +20,10 @@ const UsersPage = () => {
     <div>
       <table>
         <tbody>
+          <tr>
+            <th>users</th>
+            <th>blogs created</th>
+          </tr>
           {users.map(
             user => <tr key={user.id}>
               <td>{user.name}</td>
