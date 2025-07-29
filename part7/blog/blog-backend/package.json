@@ -24,6 +24,7 @@
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
+    "prettier": "3.6.2",
     "supertest": "^7.1.1"
   }
 }
