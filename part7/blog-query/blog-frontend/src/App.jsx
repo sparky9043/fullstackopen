@@ -6,16 +6,15 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import { useContext } from 'react'
 import { NotificationContext } from './contexts/NotificationContext'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 const App = () => {
+  const [notification, dispatch] = useContext(NotificationContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [notification, dispatch] = useContext(NotificationContext)
-
   const blogFormRef = useRef()
-
+  
   useEffect(() => {
     const userString = window.localStorage.getItem('userLoginBlogApp')
     
@@ -30,23 +29,6 @@ const App = () => {
       dispatch({ type: 'removeNotification' })
     }, 5000)
   }, [])
-
-  const result = useQuery({
-    queryKey: ['blogs'],
-    queryFn: blogService.getAll
-  })
-
-  if (result.isLoading) {
-    return <div>Waiting to load...</div>
-  }
-
-  const blogs = result.data
-
-  if (!blogs) {
-    return (
-      <div>Waiting to load...</div>
-    )
-  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -74,15 +56,38 @@ const App = () => {
     }
   }
 
-  const handleCreateBlog = async (blogObject) => {
-    try {
-      const blog = await blogService.create(blogObject)
-      setBlogs(blogs => [...blogs, blog])
-      blogFormRef.current.setVisibility()
-    } catch (exception) {
-      console.log(exception)
+
+  const createNewBlogMutation = useMutation({
+    mutationFn: blogService.create,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogs'] })
     }
+  })
+
+  const handleCreateBlog = (blogObject) => {
+    createNewBlogMutation.mutate(blogObject)
+    blogFormRef.current.setVisibility()
   }
+
+  const queryClient = useQueryClient()
+  
+  const result = useQuery({
+    queryKey: ['blogs'],
+    queryFn: blogService.getAll
+  })
+
+  if (result.isLoading) {
+    return <div>Waiting to load...</div>
+  }
+
+  const blogs = result.data
+
+  if (!blogs) {
+    return (
+      <div>Waiting to load...</div>
+    )
+  }
+
 
   const handleDeleteBlog = async (id) => {
     try {
