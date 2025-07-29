@@ -33,6 +33,25 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   response.status(201).json(savedBlog)
 })
 
+blogsRouter.post('/:id/comments', userExtractor, async (request, response) => {
+
+  const body = request.body
+  const user = request.user
+
+  if (!user) {
+    return response.status(400).json({ error: 'userId missing or not valid' })
+  }
+
+  const blog = await Blog.findById(request.params.id)
+
+  if (!blog) {
+    return response.status(404).json({ error: 'user not found' })
+  }
+
+  console.log(user, blog)
+
+})
+
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   const user = request.user
 
