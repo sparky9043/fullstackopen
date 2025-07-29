@@ -6,22 +6,15 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import { useContext } from 'react'
 import { NotificationContext } from './contexts/NotificationContext'
+import { useQuery } from '@tanstack/react-query'
 
 const App = () => {
-  const [blogs, setBlogs] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  // const [notification, setNotification] = useState(null)
   const [notification, dispatch] = useContext(NotificationContext)
 
   const blogFormRef = useRef()
-
-  useEffect(() => {
-    blogService.getAll().then(blogs => {
-      setBlogs( blogs )
-    })  
-  }, [])
 
   useEffect(() => {
     const userString = window.localStorage.getItem('userLoginBlogApp')
@@ -37,6 +30,17 @@ const App = () => {
       dispatch({ type: 'removeNotification' })
     }, 5000)
   }, [])
+
+  const result = useQuery({
+    queryKey: ['blogs'],
+    queryFn: blogService.getAll
+  })
+
+  if (result.isLoading) {
+    return <div>Waiting to load...</div>
+  }
+
+  const blogs = result.data
 
   if (!blogs) {
     return (
