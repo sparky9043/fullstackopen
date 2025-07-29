@@ -56,11 +56,17 @@ const App = () => {
     }
   }
 
-
   const createNewBlogMutation = useMutation({
     mutationFn: blogService.create,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['blogs'] })
+    }
+  })
+
+  const deleteBlogMutation = useMutation({
+    mutationFn: blogService.deleteOne,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['blogs'])
     }
   })
 
@@ -89,19 +95,15 @@ const App = () => {
   }
 
 
-  const handleDeleteBlog = async (id) => {
-    try {
-      await blogService.deleteOne(id)
-      const updatedBlogs = await blogService.getAll()
-      setBlogs(updatedBlogs)
-      dispatch({ type: 'updateNotification', payload: 'post successfully deleted!' })
-      
-      setTimeout(() => {
-        dispatch({ type: 'removeNotification' })
-      }, 5000)
-    } catch (exception) {
-      console.log(exception)
-    }
+  const handleDeleteBlog = (id) => {
+    deleteBlogMutation.mutate(id)
+    dispatch({
+      type: 'updateNotification',
+      payload: 'post successfully deleted!',
+    })
+    setTimeout(() => {
+      dispatch({ type: 'removeNotification' })
+    }, 5000)
   }
 
   if (user === null) {
