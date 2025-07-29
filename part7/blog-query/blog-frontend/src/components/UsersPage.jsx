@@ -20,7 +20,12 @@ const UsersPage = () => {
 
   return (
     <div>
-      users page
+      <table>
+        {users.map(user => <tr key={user.id}>
+          <td>{user.name}</td>
+          <td>{user.blogs.length}</td>
+        </tr>)}
+      </table>
     </div>
   )
 }
