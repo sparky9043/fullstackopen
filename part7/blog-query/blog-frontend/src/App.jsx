@@ -41,7 +41,7 @@ const App = () => {
         />
         <Route
           path='/users'
-          element={user ? <p>USERS PAGE</p> : <LoginForm />}
+          element={<p>Users</p>}
         />
       </Routes>
     </div>
