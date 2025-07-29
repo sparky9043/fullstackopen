@@ -1,12 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import Blog from './components/Blog'
-import BlogForm from './components/BlogForm'
-import Toggleable from './components/Toggleable'
+import { useEffect } from 'react'
 import blogService from './services/blogs'
-import loginService from './services/login'
 import { useContext } from 'react'
 import { NotificationContext } from './contexts/NotificationContext'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { CurrentUserContext } from './contexts/CurrentUserContext'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
@@ -15,8 +10,7 @@ import LoginForm from './components/LoginForm'
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
   const [user, userDispatch] = useContext(CurrentUserContext)
-  const blogFormRef = useRef()
-  
+
   useEffect(() => {
     const userString = window.localStorage.getItem('userLoginBlogApp')
     
