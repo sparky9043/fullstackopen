@@ -41,22 +41,11 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     })
   }
 
-  const blog = await Blog.findById(request.params.id)
+  await Blog.findByIdAndDelete(request.params.id)
+  user.blogs = user.blogs.filter(id => id.toString() !== request.params.id)
+  await user.save()
 
-  if (!blog) {
-    return response.status(404).json({
-      error: 'blog not found',
-    })
-  }
-
-  if (user._id.toString() === blog.user.toString()) {
-    await Blog.findByIdAndDelete(request.params.id)
-    response.status(204).end()
-  } else {
-    return response.status(400).json({
-      error: 'the blog could not be deleted',
-    })
-  }
+  response.status(204).end()
 })
 
 blogsRouter.put('/:id', userExtractor, async (request, response) => {
