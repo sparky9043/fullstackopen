@@ -4,13 +4,16 @@ import BlogForm from './components/BlogForm'
 import Toggleable from './components/Toggleable'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import { useContext } from 'react'
+import { NotificationContext } from './contexts/NotificationContext'
 
 const App = () => {
   const [blogs, setBlogs] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState(null)
+  // const [notification, setNotification] = useState(null)
+  const [notification, dispatch] = useContext(NotificationContext)
 
   const blogFormRef = useRef()
 
@@ -27,11 +30,11 @@ const App = () => {
       const savedUser = JSON.parse(userString)
       setUser(savedUser)
       blogService.setToken(savedUser.token)
-      setNotification({ type: 'success', message:'Success! user data loaded'})
+      dispatch({ type: 'updateNotification', payload:'Success! user data loaded'})
     }
 
     return () => setTimeout(() => {
-      setNotification(null)
+      dispatch({ type: 'removeNotification' })
     }, 5000)
   }, [])
 
@@ -52,17 +55,17 @@ const App = () => {
       setUser(savedUser)
       setUsername('')
       setPassword('')
-      setNotification({ type: 'success', message: `Successfully logged in as ${savedUser.name}` })
+      dispatch({ type: 'updateNotification', payload: `Successfully logged in as ${savedUser.name}` })
 
       setTimeout(() => {
-        setNotification(null)
+        dispatch({ type: 'removeNotification' })
       }, 5000)
     } catch (exception) {
       console.log(exception)
-      setNotification({ type: 'fail', message: 'invalid username or password' })
+      dispatch({ type: 'updateNotification', payload: 'invalid username or password' })
 
       setTimeout(() => {
-        setNotification(null)
+        dispatch({ type: 'removeNotification' })
       }, 5000)
     }
   }
@@ -82,10 +85,10 @@ const App = () => {
       await blogService.deleteOne(id)
       const updatedBlogs = await blogService.getAll()
       setBlogs(updatedBlogs)
-      setNotification({ type: 'success', message: 'post successfully deleted!' })
+      dispatch({ type: 'updateNotification', payload: 'post successfully deleted!' })
       
       setTimeout(() => {
-        setNotification(null)
+        dispatch({ type: 'removeNotification' })
       }, 5000)
     } catch (exception) {
       console.log(exception)
@@ -96,7 +99,7 @@ const App = () => {
     return (
       <form onSubmit={handleLogin}>
         <h2>log in to application</h2>
-        {notification ? <p className={`message ${notification.type}`}>{notification.message}</p> : null}
+        {notification ? <p className='message'>{notification}</p> : null}
         <div>
           username
           <input
@@ -124,9 +127,9 @@ const App = () => {
     console.log('logged out successfully')
     window.localStorage.removeItem('userLoginBlogApp')
     setUser(null)
-    setNotification({ type: 'success', message: 'logged out successfully' })
+    dispatch({ type: 'updateNotification', payload: 'logged out successfully' })
     setTimeout(() => {
-      setNotification(null)
+      dispatch({ type: 'removeNotification' })
     }, 5000)
   }
 
@@ -150,7 +153,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {notification ? <p className={`message ${notification.type}`}>{notification.message}</p> : null}
+      {notification ? <p className='message'>{notification}</p> : null}
       <div>
         {user.name} logged in
         <span>

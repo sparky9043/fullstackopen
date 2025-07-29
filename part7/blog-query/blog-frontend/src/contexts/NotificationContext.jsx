@@ -1,7 +1,7 @@
 import { useReducer } from 'react'
 import { createContext } from 'react'
 
-const NotificationContext = createContext()
+export const NotificationContext = createContext()
 
 const notificationReducer = (state, action) => {
   switch(action.type) {
