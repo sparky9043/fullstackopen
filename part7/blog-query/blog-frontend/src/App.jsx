@@ -6,6 +6,7 @@ import { CurrentUserContext } from './contexts/CurrentUserContext'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import LoginForm from './components/LoginForm'
+import { Navigate } from 'react-router-dom'
 
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
@@ -31,12 +32,16 @@ const App = () => {
       <h2>blogs</h2>
       <Routes>
         <Route
+          path='/login'
+          element={!user ? <LoginForm /> : <Navigate replace to='/' />}
+        />
+        <Route
           path='/'
-          element={user ? <HomePage /> : <LoginForm /> }
+          element={user ? <HomePage /> : <Navigate replace to='/login' /> }
         />
         <Route
           path='/users'
-          element={<p>USERS PAGE</p>}
+          element={user ? <p>USERS PAGE</p> : <LoginForm />}
         />
       </Routes>
     </div>
