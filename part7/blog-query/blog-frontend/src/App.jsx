@@ -8,12 +8,13 @@ import { useContext } from 'react'
 import { NotificationContext } from './contexts/NotificationContext'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { CurrentUserContext } from './contexts/CurrentUserContext'
+import { Routes, Route } from 'react-router-dom'
+import HomePage from './components/HomePage'
 
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  // const [user, setUser] = useState(null)
   const [user, userDispatch] = useContext(CurrentUserContext)
   const blogFormRef = useRef()
   
@@ -147,16 +148,6 @@ const App = () => {
     return loginForm()
   }
 
-  function handleLogout() {
-    console.log('logged out successfully')
-    window.localStorage.removeItem('userLoginBlogApp')
-    userDispatch({ type: 'removeUser' })
-    notificationDispatch({ type: 'updateNotification', payload: 'logged out successfully' })
-    setTimeout(() => {
-      notificationDispatch({ type: 'removeNotification' })
-    }, 5000)
-  }
-
   const handleLike = async (newObject) => {
     try {
       likeBlogMutation.mutate(newObject)
@@ -171,12 +162,9 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       {notification ? <p className='message'>{notification}</p> : null}
-      <div>
-        {user.name} logged in
-        <span>
-          <button onClick={handleLogout}>logout</button>
-        </span>
-      </div>
+      <Routes>
+        <Route path='/' element={user ? <HomePage /> : loginForm() } />
+      </Routes>
 
       <Toggleable buttonLabel='new blog' ref={blogFormRef}>
         <BlogForm createBlog={handleCreateBlog} />
