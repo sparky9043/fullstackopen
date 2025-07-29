@@ -13,8 +13,8 @@ const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
-  // const [user, userDispatch] = useContext(CurrentUserContext)
+  // const [user, setUser] = useState(null)
+  const [user, userDispatch] = useContext(CurrentUserContext)
   const blogFormRef = useRef()
   
   useEffect(() => {
@@ -22,7 +22,7 @@ const App = () => {
     
     if (userString) {
       const savedUser = JSON.parse(userString)
-      setUser(savedUser)
+      userDispatch({ type: 'updateUser' ,payload:savedUser})
       blogService.setToken(savedUser.token)
       notificationDispatch({ type: 'updateNotification', payload:'Success! user data loaded'})
     }
@@ -40,7 +40,7 @@ const App = () => {
       })
       window.localStorage.setItem('userLoginBlogApp', JSON.stringify(savedUser))
       blogService.setToken(savedUser.token)
-      setUser(savedUser)
+      userDispatch({ type: 'updateUser', payload:savedUser })
       setUsername('')
       setPassword('')
       notificationDispatch({ type: 'updateNotification', payload: `Successfully logged in as ${savedUser.name}` })
@@ -146,7 +146,7 @@ const App = () => {
   function handleLogout() {
     console.log('logged out successfully')
     window.localStorage.removeItem('userLoginBlogApp')
-    setUser(null)
+    userDispatch({ type: 'removeUser' })
     notificationDispatch({ type: 'updateNotification', payload: 'logged out successfully' })
     setTimeout(() => {
       notificationDispatch({ type: 'removeNotification' })
