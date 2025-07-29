@@ -31,6 +31,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      {user && <p>{user.name} logged in</p>}
       <Routes>
         <Route
           path='/login'
