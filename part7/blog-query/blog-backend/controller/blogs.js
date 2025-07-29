@@ -22,6 +22,7 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes || 0,
+    comments: body.comments,
     user: user._id,
   })
 

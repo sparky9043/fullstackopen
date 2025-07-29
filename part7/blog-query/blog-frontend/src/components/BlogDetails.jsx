@@ -4,7 +4,9 @@ const BlogDetails = ({ blog }) => {
       <p>invalid blog...</p>
     )
   }
-  
+
+  console.log(blog)
+
   return (
     <div>
       <h2>{blog.title}</h2>
