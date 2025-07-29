@@ -40,7 +40,6 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleLogin}>
       <h2>log in to application</h2>
-      {notification ? <p className='message'>{notification}</p> : null}
       <div>
         username
         <input

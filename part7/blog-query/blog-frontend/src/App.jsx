@@ -35,6 +35,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      {notification ? <p className='message'>{notification}</p> : null}
       <Routes>
         <Route
           path='/'
