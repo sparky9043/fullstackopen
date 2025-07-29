@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import LoginForm from './components/LoginForm'
 import { Navigate } from 'react-router-dom'
+import UsersPage from './components/UsersPage'
 
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
@@ -41,7 +42,7 @@ const App = () => {
         />
         <Route
           path='/users'
-          element={<p>Users</p>}
+          element={<UsersPage />}
         />
       </Routes>
     </div>
