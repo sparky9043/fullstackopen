@@ -5,10 +5,11 @@ const BlogDetails = ({ blog }) => {
     )
   }
   
-  console.log(blog)
   return (
     <div>
-
+      <h2>{blog.title}</h2>
+      <p>{blog.likes} likes</p>
+      <p>added by {blog.author}</p>
     </div>
   )
 }
