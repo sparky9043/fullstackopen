@@ -4,15 +4,18 @@ import App from './App.jsx'
 import './index.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NotificationContextProvider } from './contexts/NotificationContext.jsx'
+import { CurrentUserContextProvider } from './contexts/CurrentUserContext.jsx'
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <NotificationContextProvider>
-        <App />
-      </NotificationContextProvider>
+      <CurrentUserContextProvider>
+        <NotificationContextProvider>
+          <App />
+        </NotificationContextProvider>
+      </CurrentUserContextProvider>
     </QueryClientProvider>
   </StrictMode>,
 )
