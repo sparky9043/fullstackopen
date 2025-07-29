@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Blog = ({ blog, likePost, deletePost, user }) => {
   const blogStyle = {
@@ -36,7 +37,11 @@ const Blog = ({ blog, likePost, deletePost, user }) => {
 
   return (
     <div style={blogStyle} className='blog'>
-      <div id="blog-title">{blog.title}</div>
+      <div id="blog-title">
+        <Link to={`/blogs/${blog.id}`}>
+          {blog.title}
+        </Link>
+      </div>
 
       {viewDetails && 
         <div className='hidden'>
