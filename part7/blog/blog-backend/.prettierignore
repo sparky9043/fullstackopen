@@ -2,3 +2,6 @@
 build
 coverage
 node_modules/
+.env
+.gitignore
+*.json
