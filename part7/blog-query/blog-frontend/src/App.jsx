@@ -7,14 +7,15 @@ import { CurrentUserContext } from './contexts/CurrentUserContext'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import LoginForm from './components/LoginForm'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useMatch } from 'react-router-dom'
 import UsersPage from './components/UsersPage'
 import UserDetail from './components/UserDetail'
 import { useQuery } from '@tanstack/react-query'
 
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
-  const [user, userDispatch] = useContext(CurrentUserContext)  
+  const [user, userDispatch] = useContext(CurrentUserContext)
+  const match = useMatch('/users/:id')
   const result = useQuery({
     queryKey: ['users'],
     queryFn: userService.getUsers
@@ -43,6 +44,10 @@ const App = () => {
 
   const users = result.data
 
+  const matchedUser = match
+    ? users.find(user => user.id === match.params.id)
+    : null
+
   return (
     <div>
       <h2>blogs</h2>
@@ -62,7 +67,7 @@ const App = () => {
         />
         <Route
           path='/users/:id'
-          element={<UserDetail />}
+          element={<UserDetail user={matchedUser} />}
         />
       </Routes>
     </div>
