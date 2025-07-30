@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import PropTypes from 'prop-types'
 import { forwardRef, useImperativeHandle, useState } from 'react'
 
@@ -10,20 +11,34 @@ const Toggleable = forwardRef(({ children, buttonLabel = 'input' }, refs) => {
     }
   })
 
+  const margin = {
+    margin: '5px 0',
+  }
+
   return (
     <div>
       <div style={{ display: visibility && 'none' }}>
-        <button onClick={() => setVisibility(!visibility)}>
+        <Button
+          style={margin}
+          variant='outlined'
+          color="seconary"
+          onClick={() => setVisibility(!visibility)}
+        >
           {buttonLabel}
-        </button>
+        </Button>
       </div>
       <div style={{ display: !visibility && 'none' }}>
         <div>
           {children}
         </div>
-        <button onClick={() => setVisibility(!visibility)}>
+        <Button
+          style={margin}
+          variant='outlined'
+          color='secondary'
+          onClick={() => setVisibility(!visibility)}
+        >
           cancel
-        </button>
+        </Button>
       </div>
     </div>
   )
