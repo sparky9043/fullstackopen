@@ -1,3 +1,5 @@
+import helper from './utils/helper';
+
 const calculateBmi = (height: number, weight: number): string => {
 
   const heightInMeters = height / 100

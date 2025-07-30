@@ -20,4 +20,4 @@ const parseArguments = (args: string[]): bmiBio => {
   }
 }
 
-export default parseArguments
+export default { parseArguments }
