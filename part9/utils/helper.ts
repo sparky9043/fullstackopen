@@ -3,7 +3,7 @@ interface bmiBio {
   weight: number,
 }
 
-const parseArguments = (args: string[]): bmiBio => {
+const parseArgumentsBmi = (args: string[]): bmiBio => {
   if (args.length < 4) throw new Error('Not enough arguments')
   if (args.length > 4) throw new Error('Too many arguments')
 
@@ -20,4 +20,4 @@ const parseArguments = (args: string[]): bmiBio => {
   }
 }
 
-export default { parseArguments }
+export default { parseArgumentsBmi }

@@ -17,7 +17,7 @@ const calculateBmi = (height: number, weight: number): string => {
 }
 
 try {
-  const { height, weight } = helper.parseArguments(process.argv)
+  const { height, weight } = helper.parseArgumentsBmi(process.argv)
   console.log(calculateBmi(height, weight))
 } catch (error) {
   let errorMessage = 'Error: ';
