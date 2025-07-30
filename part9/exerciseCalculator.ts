@@ -30,6 +30,8 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
     rating = 2;
   } else if (Math.abs(difference) <= 1) {
     rating = 1;
+  } else {
+    throw new Error('invalid rating')
   }
 
   return {
