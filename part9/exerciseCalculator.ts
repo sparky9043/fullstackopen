@@ -1,3 +1,5 @@
+import helper from './utils/helper'
+
 interface TrainingStats {
   periodLength: number,
   trainingDays: number,
@@ -41,6 +43,13 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
   }
 }
 
-console.log(
-  exercisesCalculator([3, 0, 2, 4.5, 0, 3, 1], 2)
-)
+try {
+  const { target, days } = helper.parseArgumentsTraining(process.argv);
+  console.log(exercisesCalculator(days, target));
+} catch (error: unknown) {
+  let errorMessage = 'Error: ';
+  if (error instanceof Error) {
+    errorMessage += error.message
+  }
+  console.log(errorMessage)
+}
