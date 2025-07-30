@@ -7,7 +7,7 @@ import { CurrentUserContext } from './contexts/CurrentUserContext'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import LoginForm from './components/LoginForm'
-import { Navigate, useMatch } from 'react-router-dom'
+import { Navigate, useMatch, Link } from 'react-router-dom'
 import UsersPage from './components/UsersPage'
 import UserDetail from './components/UserDetail'
 import { useQuery } from '@tanstack/react-query'
@@ -71,6 +71,7 @@ const App = () => {
   return (
     <Container>
       <h2>blogs</h2>
+      <Link to='/users'>Click to view all users</Link>
       {user && <p>{user.name} logged in</p>}
       <Routes>
         <Route
