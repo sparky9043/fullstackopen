@@ -1,8 +1,7 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const UsersPage = ({ users }) => {
-  const navigate = useNavigate()
-
   if (!users) {
     return (
       <p>Waiting to load users...</p>
@@ -10,28 +9,34 @@ const UsersPage = ({ users }) => {
   }
 
   return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>users</th>
-            <th>blogs created</th>
-          </tr>
+    <TableContainer>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              users
+            </TableCell>
+            <TableCell>
+              blogs created
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {users.map(
-            user => <tr key={user.id}>
-              <td>
+            user => <TableRow key={user.id}>
+              <TableCell>
                 <Link to={`${user.id}`}>
                   {user.name}
                 </Link>
-              </td>
-              <td>
+              </TableCell>
+              <TableCell>
                 {user.blogs.length}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           )}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 }
 
