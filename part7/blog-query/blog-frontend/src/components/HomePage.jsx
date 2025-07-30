@@ -83,7 +83,6 @@ const HomePage = ({ blogs }) => {
     <div>
       {notification ? <p className='message'>{notification}</p> : null}
       <div>
-        {user.name} logged in
         <span>
           <button onClick={handleLogout}>logout</button>
         </span>
