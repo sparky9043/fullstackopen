@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 const Blog = ({ blog, likePost, deletePost, user }) => {
   const blogStyle = {
@@ -56,9 +57,13 @@ const Blog = ({ blog, likePost, deletePost, user }) => {
         </div>
       }
       <div id="blog-author">{blog.author}</div>
-      <button onClick={handleView} id="view-button">
+      <Button
+        variant={viewDetails ? "contained" : "outlined"}
+        onClick={handleView}
+        id="view-button"
+      >
         {viewDetails ? 'hide' : 'info'}
-      </button>
+      </Button>
     </div>  
   )
 }
