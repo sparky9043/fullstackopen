@@ -7,7 +7,7 @@ import BlogForm from './BlogForm'
 import { useRef } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Blog from './Blog'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
 const HomePage = ({ blogs }) => {
   const [user, userDispatch] = useContext(CurrentUserContext)
@@ -85,7 +85,11 @@ const HomePage = ({ blogs }) => {
       {notification ? <p className='message'>{notification}</p> : null}
       <div>
         <span>
-          <button onClick={handleLogout}>logout</button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleLogout}
+          >logout</Button>
         </span>
       </div>
 
