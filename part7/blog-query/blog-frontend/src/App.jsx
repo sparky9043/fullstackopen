@@ -12,6 +12,7 @@ import UsersPage from './components/UsersPage'
 import UserDetail from './components/UserDetail'
 import { useQuery } from '@tanstack/react-query'
 import BlogDetails from './components/BlogDetails'
+import { Container } from '@mui/material'
 
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
@@ -66,7 +67,7 @@ const App = () => {
     : null
 
   return (
-    <div>
+    <Container>
       <h2>blogs</h2>
       {user && <p>{user.name} logged in</p>}
       <Routes>
@@ -91,7 +92,7 @@ const App = () => {
           element={<UserDetail user={matchedUser} />}
         />
       </Routes>
-    </div>
+    </Container>
   )
 }
 
