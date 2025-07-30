@@ -16,21 +16,28 @@ const LoginForm = () => {
     event.preventDefault()
     try {
       const savedUser = await loginService.login({
-        username, password
+        username,
+        password,
       })
       window.localStorage.setItem('userLoginBlogApp', JSON.stringify(savedUser))
       blogService.setToken(savedUser.token)
-      userDispatch({ type: 'updateUser', payload:savedUser })
+      userDispatch({ type: 'updateUser', payload: savedUser })
       setUsername('')
       setPassword('')
-      notificationDispatch({ type: 'updateNotification', payload: `Successfully logged in as ${savedUser.name}` })
+      notificationDispatch({
+        type: 'updateNotification',
+        payload: `Successfully logged in as ${savedUser.name}`,
+      })
 
       setTimeout(() => {
         notificationDispatch({ type: 'removeNotification' })
       }, 5000)
     } catch (exception) {
       console.log(exception)
-      notificationDispatch({ type: 'updateNotification', payload: 'invalid username or password' })
+      notificationDispatch({
+        type: 'updateNotification',
+        payload: 'invalid username or password',
+      })
 
       setTimeout(() => {
         notificationDispatch({ type: 'removeNotification' })
@@ -41,11 +48,11 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleLogin}>
       <h2>log in to application</h2>
-      {notification ? <p className='message'>{notification}</p> : null}
+      {notification ? <p className="message">{notification}</p> : null}
       <div>
         <TextField
-          label='username'
-          variant='outlined'
+          label="username"
+          variant="outlined"
           type="text"
           data-testid="username"
           value={username}
@@ -54,15 +61,17 @@ const LoginForm = () => {
       </div>
       <div>
         <TextField
-          label='password'
-          variant='outlined'
+          label="password"
+          variant="outlined"
           type="password"
           data-testid="password"
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <Button variant="contained" type="submit">login</Button>
+      <Button variant="contained" type="submit">
+        login
+      </Button>
     </form>
   )
 }

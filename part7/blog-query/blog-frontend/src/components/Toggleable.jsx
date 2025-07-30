@@ -7,7 +7,7 @@ const Toggleable = forwardRef(({ children, buttonLabel = 'input' }, refs) => {
 
   useImperativeHandle(refs, () => {
     return {
-      setVisibility
+      setVisibility,
     }
   })
 
@@ -20,7 +20,7 @@ const Toggleable = forwardRef(({ children, buttonLabel = 'input' }, refs) => {
       <div style={{ display: visibility && 'none' }}>
         <Button
           style={margin}
-          variant='outlined'
+          variant="outlined"
           color="seconary"
           onClick={() => setVisibility(!visibility)}
         >
@@ -28,13 +28,11 @@ const Toggleable = forwardRef(({ children, buttonLabel = 'input' }, refs) => {
         </Button>
       </div>
       <div style={{ display: !visibility && 'none' }}>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
         <Button
           style={margin}
-          variant='outlined'
-          color='secondary'
+          variant="outlined"
+          color="secondary"
           onClick={() => setVisibility(!visibility)}
         >
           cancel
@@ -45,7 +43,7 @@ const Toggleable = forwardRef(({ children, buttonLabel = 'input' }, refs) => {
 })
 
 Toggleable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
+  buttonLabel: PropTypes.string.isRequired,
 }
 
 export default Toggleable

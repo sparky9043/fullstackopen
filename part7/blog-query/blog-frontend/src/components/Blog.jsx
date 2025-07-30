@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { Button, TableCell, TableRow } from '@mui/material'
 
 const Blog = ({ blog, likePost, deletePost, user }) => {
-
   const handleLike = () => {
     likePost({
       title: blog.title,
@@ -27,14 +26,14 @@ const Blog = ({ blog, likePost, deletePost, user }) => {
     <TableRow>
       <TableCell>
         <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-        {isUserSame && <Button variant="contained" size="small" onClick={handleDelete}>remove</Button>}
+        {isUserSame && (
+          <Button variant="contained" size="small" onClick={handleDelete}>
+            remove
+          </Button>
+        )}
       </TableCell>
-      <TableCell>
-        {blog.author}
-      </TableCell>
-      <TableCell>
-        {blog.url}
-      </TableCell>
+      <TableCell>{blog.author}</TableCell>
+      <TableCell>{blog.url}</TableCell>
       <TableCell>
         {blog.likes}
         <Button onClick={handleLike}>👍</Button>

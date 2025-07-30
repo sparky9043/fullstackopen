@@ -7,7 +7,15 @@ import BlogForm from './BlogForm'
 import { useRef } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Blog from './Blog'
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material'
 
 const HomePage = ({ blogs }) => {
   const [user, userDispatch] = useContext(CurrentUserContext)
@@ -21,27 +29,25 @@ const HomePage = ({ blogs }) => {
     mutationFn: blogService.create,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['blogs'] })
-    }
+    },
   })
 
   const deleteBlogMutation = useMutation({
     mutationFn: blogService.deleteOne,
     onSuccess: () => {
       queryClient.invalidateQueries(['blogs'])
-    }
+    },
   })
 
   const likeBlogMutation = useMutation({
     mutationFn: blogService.update,
     onSuccess: () => {
       queryClient.invalidateQueries(['blogs'])
-    }
+    },
   })
 
   if (!blogs) {
-    return (
-      <div>Waiting to load...</div>
-    )
+    return <div>Waiting to load...</div>
   }
 
   const handleDeleteBlog = (id) => {
@@ -72,32 +78,33 @@ const HomePage = ({ blogs }) => {
     console.log('logged out successfully')
     window.localStorage.removeItem('userLoginBlogApp')
     userDispatch({ type: 'removeUser' })
-    notificationDispatch({ type: 'updateNotification', payload: 'logged out successfully' })
+    notificationDispatch({
+      type: 'updateNotification',
+      payload: 'logged out successfully',
+    })
     setTimeout(() => {
       notificationDispatch({ type: 'removeNotification' })
     }, 5000)
   }
 
   const bold = {
-    fontWeight: 700
+    fontWeight: 700,
   }
 
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
 
   return (
     <div>
-      {notification ? <p className='message'>{notification}</p> : null}
+      {notification ? <p className="message">{notification}</p> : null}
       <div>
         <span>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleLogout}
-          >logout</Button>
+          <Button variant="contained" color="secondary" onClick={handleLogout}>
+            logout
+          </Button>
         </span>
       </div>
 
-      <Toggleable buttonLabel='new blog' ref={blogFormRef}>
+      <Toggleable buttonLabel="new blog" ref={blogFormRef}>
         <BlogForm createBlog={handleCreateBlog} />
       </Toggleable>
 
@@ -105,35 +112,26 @@ const HomePage = ({ blogs }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={bold}>
-                blog title
-              </TableCell>
-              <TableCell sx={bold}>
-                author
-              </TableCell>
-              <TableCell sx={bold}>
-                link
-              </TableCell>
-              <TableCell sx={bold}>
-                likes
-              </TableCell>
+              <TableCell sx={bold}>blog title</TableCell>
+              <TableCell sx={bold}>author</TableCell>
+              <TableCell sx={bold}>link</TableCell>
+              <TableCell sx={bold}>likes</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedBlogs.map((blog, index) =>
+            {sortedBlogs.map((blog, index) => (
               <Blog
-              key={blog.id}
-              blog={blog} 
-              likePost={handleLike}
-              deletePost={handleDeleteBlog}
-              user={user}
+                key={blog.id}
+                blog={blog}
+                likePost={handleLike}
+                deletePost={handleDeleteBlog}
+                user={user}
               />
-            )}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
     </div>
-
   )
 }
 

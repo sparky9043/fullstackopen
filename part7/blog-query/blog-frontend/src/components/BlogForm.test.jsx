@@ -5,9 +5,7 @@ import BlogForm from './BlogForm'
 test.only('<BlogForm /> takes in blog properly', async () => {
   const createBlog = vi.fn()
 
-  const { container } = render(
-    <BlogForm createBlog={createBlog} />
-  )
+  const { container } = render(<BlogForm createBlog={createBlog} />)
 
   const titleInput = container.querySelector('#title-input')
   const authorInput = container.querySelector('#author-input')

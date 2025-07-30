@@ -14,7 +14,7 @@ const getAll = async () => {
 
 const create = async (newObject) => {
   const config = {
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }
 
   const response = await axios.post(baseUrl, newObject, config)
@@ -23,16 +23,20 @@ const create = async (newObject) => {
 
 const update = async (newObject) => {
   const config = {
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }
 
-  const response = await axios.put(`${baseUrl}/${newObject.id}`, newObject, config)
+  const response = await axios.put(
+    `${baseUrl}/${newObject.id}`,
+    newObject,
+    config
+  )
   return response.data
 }
 
 const deleteOne = async (id) => {
   const config = {
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }
 
   await axios.delete(`${baseUrl}/${id}`, config)
@@ -40,10 +44,14 @@ const deleteOne = async (id) => {
 
 const comment = async (newComment) => {
   const config = {
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }
 
-  const response = await axios.post(`${baseUrl}/${newComment.id}/comments`, newComment, config)
+  const response = await axios.post(
+    `${baseUrl}/${newComment.id}/comments`,
+    newComment,
+    config
+  )
   return response.data
 }
 

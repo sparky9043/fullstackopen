@@ -13,9 +13,7 @@ describe('<Blog />', () => {
   let container
 
   beforeEach(() => {
-    container = render(
-      <Blog blog={blog} />      
-    ).container
+    container = render(<Blog blog={blog} />).container
   })
 
   test('render contents', async () => {
@@ -42,25 +40,23 @@ describe('<Blog />', () => {
     const user = userEvent.setup()
     const viewButton = container.querySelector('#view-button')
     await user.click(viewButton)
-    
+
     const urlEl = container.querySelector('#blog-url')
     const likesEl = container.querySelector('#blog-likes')
-    
+
     expect(urlEl).toHaveTextContent(blog.url)
     expect(likesEl).toHaveTextContent(blog.likes)
   })
-  
+
   test('pressing like post button', async () => {
     const likePost = vi.fn()
 
-    const { container } = render(
-      <Blog blog={blog} likePost={likePost} />
-    )
+    const { container } = render(<Blog blog={blog} likePost={likePost} />)
 
     const user = userEvent.setup()
     const viewButton = container.querySelector('#view-button')
     await user.click(viewButton)
-    
+
     const likeButton = screen.getByText('like')
 
     for (let i = 0; i < 2; i++) {

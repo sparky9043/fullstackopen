@@ -21,5 +21,5 @@ createRoot(document.getElementById('root')).render(
         </NotificationContextProvider>
       </CurrentUserContextProvider>
     </QueryClientProvider>
-  </StrictMode>,
+  </StrictMode>
 )
