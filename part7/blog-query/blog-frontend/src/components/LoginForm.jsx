@@ -4,6 +4,7 @@ import { NotificationContext } from '../contexts/NotificationContext'
 import loginService from '../services/login'
 import blogService from '../services/blogs'
 import { useState } from 'react'
+import { TextField, Button } from '@mui/material'
 
 const LoginForm = () => {
   const [user, userDispatch] = useContext(CurrentUserContext)
@@ -42,8 +43,9 @@ const LoginForm = () => {
       <h2>log in to application</h2>
       {notification ? <p className='message'>{notification}</p> : null}
       <div>
-        username
-        <input
+        <TextField
+          label='username'
+          variant='outlined'
           type="text"
           data-testid="username"
           value={username}
@@ -51,15 +53,16 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        password
-        <input
+        <TextField
+          label='password'
+          variant='outlined'
           type="password"
           data-testid="password"
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button type="submit">login</button>
+      <Button variant="contained" type="submit">login</Button>
     </form>
   )
 }
