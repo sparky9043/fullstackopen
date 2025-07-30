@@ -57,7 +57,7 @@ const Blog = ({ blog, likePost, deletePost, user }) => {
       }
       <div id="blog-author">{blog.author}</div>
       <button onClick={handleView} id="view-button">
-        view
+        {viewDetails ? 'hide' : 'info'}
       </button>
     </div>  
   )
