@@ -71,7 +71,7 @@ const App = () => {
   return (
     <Container>
       <h2>blogs</h2>
-      <Link to='/users'>Click to view all users</Link>
+      <Link to="/users">Click to view all users</Link>
       {user && <p>{user.name} logged in</p>}
       <Routes>
         <Route
