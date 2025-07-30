@@ -45,8 +45,18 @@ const LoginForm = () => {
     }
   }
 
+  const formStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '.3rem',
+    alignItems: 'flex-start',
+  }
+
   return (
-    <form onSubmit={handleLogin}>
+    <form
+      onSubmit={handleLogin}
+      style={formStyles}
+    >
       <h2>log in to application</h2>
       {notification ? <p className="message">{notification}</p> : null}
       <div>
