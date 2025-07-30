@@ -78,6 +78,10 @@ const HomePage = ({ blogs }) => {
     }, 5000)
   }
 
+  const bold = {
+    fontWeight: 700
+  }
+
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
 
   return (
@@ -101,16 +105,16 @@ const HomePage = ({ blogs }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
+              <TableCell sx={bold}>
                 blog title
               </TableCell>
-              <TableCell>
+              <TableCell sx={bold}>
                 author
               </TableCell>
-              <TableCell>
+              <TableCell sx={bold}>
                 link
               </TableCell>
-              <TableCell>
+              <TableCell sx={bold}>
                 likes
               </TableCell>
             </TableRow>
