@@ -7,6 +7,7 @@ import BlogForm from './BlogForm'
 import { useRef } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Blog from './Blog'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
 const HomePage = ({ blogs }) => {
   const [user, userDispatch] = useContext(CurrentUserContext)
@@ -92,15 +93,37 @@ const HomePage = ({ blogs }) => {
         <BlogForm createBlog={handleCreateBlog} />
       </Toggleable>
 
-      {sortedBlogs.map((blog, index) =>
-        <Blog
-          key={blog.id}
-          blog={blog} 
-          likePost={handleLike}
-          deletePost={handleDeleteBlog}
-          user={user}
-        />
-      )}
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                blog title
+              </TableCell>
+              <TableCell>
+                author
+              </TableCell>
+              <TableCell>
+                link
+              </TableCell>
+              <TableCell>
+                likes
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedBlogs.map((blog, index) =>
+              <Blog
+              key={blog.id}
+              blog={blog} 
+              likePost={handleLike}
+              deletePost={handleDeleteBlog}
+              user={user}
+              />
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
 
   )
