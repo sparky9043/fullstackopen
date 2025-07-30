@@ -59,6 +59,7 @@ const Blog = ({ blog, likePost, deletePost, user }) => {
       <div id="blog-author">{blog.author}</div>
       <Button
         variant={viewDetails ? "contained" : "outlined"}
+        size="small"
         onClick={handleView}
         id="view-button"
       >
