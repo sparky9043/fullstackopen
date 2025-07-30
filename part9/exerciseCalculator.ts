@@ -8,7 +8,12 @@ interface TrainingStats {
   average: number,
 }
 
-const exercisesCalculator = (trainingDays: number[]): TrainingStats => {
+const exercisesCalculator = (trainingDaysArray: number[]): TrainingStats => {
+  const periodLength: number = trainingDaysArray.length;
+  const trainingDays: number = trainingDaysArray.filter(number => number !== 0).length;
+
+  console.log(periodLength, trainingDays)
+
   return { 
     periodLength: 7,
     trainingDays: 5,
@@ -20,4 +25,6 @@ const exercisesCalculator = (trainingDays: number[]): TrainingStats => {
   }
 }
 
-console.log(exercisesCalculator([2, 0, 2, 0, 2, 0, 2]))
+// console.log(
+  exercisesCalculator([2, 0, 2, 0, 2, 0, 2])
+// )
