@@ -8,23 +8,39 @@ interface TrainingStats {
   average: number,
 }
 
-const exercisesCalculator = (trainingDaysArray: number[]): TrainingStats => {
-  const periodLength: number = trainingDaysArray.length;
-  const trainingDays: number = trainingDaysArray.filter(number => number !== 0).length;
+const exercisesCalculator = (dailyExerciseHours: number[], target: number): TrainingStats => {
+  const periodLength = dailyExerciseHours.length;
+  const trainingDays = dailyExerciseHours.filter(number => number !== 0).length;
+  const totalTrainingHours = dailyExerciseHours.reduce((prev, curr) => prev + curr, 0)
+  const average = totalTrainingHours / periodLength;
+  const difference = average - target;
+  const success = difference > 0;
+  const ratingDescriptions = [
+    'gotta try harder!',
+    'not too bad but could be better',
+    'great work! you went above and beyond!',
+  ]
 
-  console.log(periodLength, trainingDays)
+  let rating;
+  if (success) {
+    rating = 3;
+  } else if (Math.abs(difference) <= 0.5) {
+    rating = 2;
+  } else if (Math.abs(difference) <= 1) {
+    rating = 1;
+  }
 
-  return { 
-    periodLength: 7,
-    trainingDays: 5,
-    success: false,
-    rating: 2,
-    ratingDescription: 'not too bad but could be better',
-    target: 2,
-    average: 1.9285714285714286
+  return {
+    periodLength,
+    trainingDays,
+    success,
+    rating,
+    ratingDescription: ratingDescriptions[rating - 1],
+    target,
+    average,
   }
 }
 
-// console.log(
-  exercisesCalculator([2, 0, 2, 0, 2, 0, 2])
-// )
+console.log(
+  exercisesCalculator([3, 0, 2, 4.5, 0, 3, 1], 2)
+)
