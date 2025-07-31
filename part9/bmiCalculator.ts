@@ -2,7 +2,7 @@ import helper from './utils/helper';
 
 const calculateBmi = (height: number, weight: number): string => {
 
-  const heightInMeters = height / 100
+  const heightInMeters = height / 100;
   const bmi: number = weight / (heightInMeters * heightInMeters);
 
   if (bmi >= 30) {
@@ -14,19 +14,19 @@ const calculateBmi = (height: number, weight: number): string => {
   } else {
     return 'Underweight';
   }
-}
+};
 
 if (require.main === module) {
   try {
-    const { height, weight } = helper.parseArgumentsBmi(process.argv)
-    console.log(calculateBmi(height, weight))
+    const { height, weight } = helper.parseArgumentsBmi(process.argv);
+    console.log(calculateBmi(height, weight));
   } catch (error) {
     let errorMessage = 'Error: ';
     if (error instanceof Error) {
       errorMessage += error.message;
     }
-    console.log(errorMessage)
+    console.log(errorMessage);
   }
 }
 
-export default calculateBmi
+export default calculateBmi;

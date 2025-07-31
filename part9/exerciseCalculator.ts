@@ -1,4 +1,4 @@
-import helper from './utils/helper'
+import helper from './utils/helper';
 
 interface TrainingStats {
   periodLength: number,
@@ -13,7 +13,7 @@ interface TrainingStats {
 const exercisesCalculator = (dailyExerciseHours: number[], target: number): TrainingStats => {
   const periodLength = dailyExerciseHours.length;
   const trainingDays = dailyExerciseHours.filter(number => number !== 0).length;
-  const totalTrainingHours = dailyExerciseHours.reduce((prev, curr) => prev + curr, 0)
+  const totalTrainingHours = dailyExerciseHours.reduce((prev, curr) => prev + curr, 0);
   const average = totalTrainingHours / periodLength;
   const difference = average - target;
   const success = difference > 0;
@@ -21,7 +21,7 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
     'gotta try harder!',
     'not too bad but could be better',
     'great work! you went above and beyond!',
-  ]
+  ];
 
   let rating;
   if (success) {
@@ -31,7 +31,7 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
   } else if (Math.abs(difference) <= 1) {
     rating = 1;
   } else {
-    throw new Error('invalid rating')
+    throw new Error('invalid rating');
   }
 
   return {
@@ -42,8 +42,8 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
     ratingDescription: ratingDescriptions[rating - 1],
     target,
     average,
-  }
-}
+  };
+};
 
 try {
   const { target, days } = helper.parseArgumentsTraining(process.argv);
@@ -51,7 +51,7 @@ try {
 } catch (error: unknown) {
   let errorMessage = 'Error: ';
   if (error instanceof Error) {
-    errorMessage += error.message
+    errorMessage += error.message;
   }
-  console.log(errorMessage)
+  console.log(errorMessage);
 }
