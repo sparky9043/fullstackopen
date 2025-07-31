@@ -16,7 +16,7 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
   const totalTrainingHours = dailyExerciseHours.reduce((prev, curr) => prev + curr, 0);
   const average = totalTrainingHours / periodLength;
   const difference = average - target;
-  const success = difference > 0;
+  const success = difference >= 0;
   const ratingDescriptions = [
     'gotta try harder!',
     'not too bad but could be better',
