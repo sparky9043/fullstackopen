@@ -22,13 +22,13 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
     'not too bad but could be better',
     'great work! you went above and beyond!',
   ];
-
+  
   let rating;
   if (success) {
     rating = 3;
   } else if (Math.abs(difference) <= 0.5) {
     rating = 2;
-  } else if (Math.abs(difference) <= 1) {
+  } else if (Math.abs(difference) > 0.5) {
     rating = 1;
   } else {
     throw new Error('invalid rating');
@@ -57,3 +57,5 @@ if (require.main === module) {
     console.log(errorMessage);
   } 
 }
+
+export default exercisesCalculator;
