@@ -45,13 +45,15 @@ const exercisesCalculator = (dailyExerciseHours: number[], target: number): Trai
   };
 };
 
-try {
-  const { target, days } = helper.parseArgumentsTraining(process.argv);
-  console.log(exercisesCalculator(days, target));
-} catch (error: unknown) {
-  let errorMessage = 'Error: ';
-  if (error instanceof Error) {
-    errorMessage += error.message;
-  }
-  console.log(errorMessage);
+if (require.main === module) {
+  try {
+    const { target, days } = helper.parseArgumentsTraining(process.argv);
+    console.log(exercisesCalculator(days, target));
+  } catch (error: unknown) {
+    let errorMessage = 'Error: ';
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    }
+    console.log(errorMessage);
+  } 
 }
