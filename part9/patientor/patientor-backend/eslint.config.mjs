@@ -1,8 +1,9 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import stylistic from "@stylistic/eslint-plugin";
+import { defineConfig } from 'eslint/config'
 
-export default tseslint.config({
+export default defineConfig({
   files: ['**/*.ts'],
   extends: [
     eslint.configs.recommended,
@@ -17,6 +18,7 @@ export default tseslint.config({
   plugins: {
     "@stylistic": stylistic,
   },
+  ignores: ['build/*'],
   rules: {
     '@stylistic/semi': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'error',
