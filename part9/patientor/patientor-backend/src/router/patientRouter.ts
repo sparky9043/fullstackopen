@@ -4,7 +4,7 @@ import patientService from '../services/patientService';
 const patientRouter = express.Router();
 
 patientRouter.get('/', (_req, res) => {
-  const savedPatients = patientService.getPatients();
+  const savedPatients = patientService.getPatientsWithoutSSN();
   res.json(savedPatients);
 });
 
