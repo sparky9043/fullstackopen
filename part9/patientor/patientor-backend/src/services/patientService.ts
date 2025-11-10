@@ -1,8 +1,13 @@
 import patientsData from '../../data/patients';
-import { Patient } from '../types';
+import { Patient, PatientWithoutSSN } from '../types';
 
 const getPatients = (): Patient[] => {
   return patientsData;
 };
 
-export default { getPatients };
+const getPatientsWithoutSSN = (): PatientWithoutSSN[] => {
+  return patientsData.map(({ id, name, dateOfBirth, gender, occupation }) =>
+    ({ id, name, dateOfBirth, gender, occupation }));
+};
+
+export default { getPatients, getPatientsWithoutSSN };
