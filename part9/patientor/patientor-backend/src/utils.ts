@@ -14,10 +14,10 @@ const parseName = (name: unknown) => {
 };
 
 const isDate = (date: string): boolean => {
-  return Boolean(Date.parse(date))
+  return Boolean(Date.parse(date));
 };
 
-const parseDate = (date: unknown): string => {
+const parseDateOfBirth = (date: unknown): string => {
   if (!date || !isString(date) || !isDate(date)) {
     throw new Error('invalid or missing date: ' + date);
   }
@@ -25,26 +25,55 @@ const parseDate = (date: unknown): string => {
   return date;
 };
 
-const parseSSN = (input: unknown): string => {
-  if (!input || !isString(input)) {
-    throw new Error('invalid or missing ssn' + input);
+const parseSSN = (ssn: unknown): string => {
+  if (!ssn || !isString(ssn)) {
+    throw new Error('invalid or missing ssn' + ssn);
   }
 
-  return input;
+  return ssn;
+};
+
+const parseGender = (gender: unknown): string => {
+  if (!gender || !isString(gender)) {
+    throw new Error('invalid or missing gender' + gender);
+  }
+
+  return gender;
+};
+
+const parseOccupation = (occupation: unknown): string => {
+  if (!occupation || !isString(occupation)) {
+    throw new Error('invalid or missing occupation' + occupation);
+  }
+
+  return occupation;
 };
 
 const toNewPatient = (object: unknown): NewPatient => {
-  console.log(object);
-  const newPatient = {
-    id: uuid(),
-    name: 'Tommy Hilfiger',
-    dateOfBirth: '1998-12-17',
-    ssn: '311238-AAX',
-    gender: 'male',
-    occupation: 'king of the world',
-  };
+  if (!object || typeof object !== 'object') {
+    throw new Error('Incorect or missing data');
+  }
 
-  return newPatient;
+  if (
+    'name' in object &&
+    'dateOfBirth' in object &&
+    'ssn' in object &&
+    'gender' in object &&
+    'occupation' in object
+  ) {
+    const newPatient = {
+      id: uuid(),
+      name: parseName(object.name),
+      dateOfBirth: parseDateOfBirth(object.dateOfBirth),
+      ssn: parseSSN(object.ssn),
+      gender: parseGender(object.gender),
+      occupation: parseOccupation(object.occupation),
+    };
+
+    return newPatient;
+  }
+    
+  throw new Error('Incorrect data: some fields are missing');
 };
 
 export default { toNewPatient };
