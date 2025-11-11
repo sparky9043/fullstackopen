@@ -1,4 +1,4 @@
-import { NewPatient } from './types';
+import { Gender, NewPatient } from './types';
 import { v1 as uuid } from 'uuid';
 
 const isString = (input: unknown): input is string => {
@@ -33,8 +33,12 @@ const parseSSN = (ssn: unknown): string => {
   return ssn;
 };
 
-const parseGender = (gender: unknown): string => {
-  if (!gender || !isString(gender)) {
+const isGender = (gender: string): gender is Gender => {
+  return Object.values(Gender).map(g => g.toString()).includes(gender);
+};
+
+const parseGender = (gender: unknown): Gender => {
+  if (!gender || !isString(gender) || !isGender(gender)) {
     throw new Error('invalid or missing gender' + gender);
   }
 
