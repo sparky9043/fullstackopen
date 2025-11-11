@@ -1,7 +1,7 @@
 import express, { Response } from 'express';
 import patientService from '../services/patientService';
 import { PatientWithoutSSN } from '../types';
-import toNewPatient from '../utils';
+import utils from '../utils';
 
 const patientRouter = express.Router();
 
@@ -11,7 +11,7 @@ patientRouter.get('/', (_req, res: Response<PatientWithoutSSN[]>) => {
 });
 
 patientRouter.post('/', (req, res) => {
-  const newPatientData = toNewPatient(req.body);
+  const newPatientData = utils.toNewPatient(req.body);
   const savedPatient = patientService.addPatient(newPatientData);
   res.json(savedPatient);
 });

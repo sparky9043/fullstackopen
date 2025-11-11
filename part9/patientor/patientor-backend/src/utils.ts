@@ -19,4 +19,4 @@ const toNewPatient = (object: unknown): NewPatient => {
   return newPatient;
 };
 
-export default toNewPatient;
+export default { toNewPatient };
