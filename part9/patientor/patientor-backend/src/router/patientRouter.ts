@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import express, { Response } from 'express';
 import patientService from '../services/patientService';
 import { PatientWithoutSSN } from '../types';
+import toNewPatient from '../utils';
 
 const patientRouter = express.Router();
 
@@ -11,7 +11,8 @@ patientRouter.get('/', (_req, res: Response<PatientWithoutSSN[]>) => {
 });
 
 patientRouter.post('/', (req, res) => {
-  const savedPatient = patientService.addPatient(req.body);
+  const newPatientData = toNewPatient(req.body);
+  const savedPatient = patientService.addPatient(newPatientData);
   res.json(savedPatient);
 });
 
