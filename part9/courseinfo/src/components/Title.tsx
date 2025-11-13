@@ -2,7 +2,7 @@ interface TitleProps {
   text: string;
 };
 
-const Title = ({ text }: TitleProps) =>
-  <h1>{ text }</h1>;
+const Title = (props: TitleProps) =>
+  <h1>{ props.text }</h1>;
 
 export default Title;
