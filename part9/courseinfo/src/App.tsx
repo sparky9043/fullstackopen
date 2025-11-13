@@ -1,21 +1,20 @@
 // import Content from './components/Content';
-interface CoursePartBasic {
+interface CoursePartBase {
   name: string;
   exerciseCount: number;
+}
+
+interface CoursePartBasic extends CoursePartBase {
   description: string;
   kind: 'basic';
 }
 
-interface CoursePartGroup {
-  name: string;
-  exerciseCount: number;
+interface CoursePartGroup extends CoursePartBase {
   groupProjectCount: number;
   kind: 'group';
 }
 
-interface CoursePartBackground {
-  name: string;
-  exerciseCount: number;
+interface CoursePartBackground extends CoursePartBase {
   description: string;
   backgroundMaterial: string;
   kind: 'background';
