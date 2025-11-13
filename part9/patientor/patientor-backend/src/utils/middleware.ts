@@ -16,6 +16,9 @@ const errorHandler = (error: unknown, _req: Request, res: Response, next: NextFu
   if (error instanceof z.ZodError) {
     logger.info('Error', error.message);
     res.status(400).json({ error: error.issues });
+  } else if (error instanceof Error) {
+    logger.error('Error:', error.message);
+    res.status(400).json({ error: error.message });
   }
   next();
 };

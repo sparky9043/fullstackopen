@@ -17,7 +17,7 @@ patientRouter.get('/:id', (req, res) => {
   if (savedPatient) {
     res.json(savedPatient);
   } else {
-    res.sendStatus(400);
+    throw new Error('patient not found');
   }
 });
 
