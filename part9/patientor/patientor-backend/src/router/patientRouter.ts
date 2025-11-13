@@ -1,7 +1,7 @@
 import express, { Response } from 'express';
 import patientService from '../services/patientService';
 import { PatientWithoutSSN } from '../types';
-import utils from '../utils';
+import utils from '../utils/utils';
 
 const patientRouter = express.Router();
 

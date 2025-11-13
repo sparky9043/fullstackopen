@@ -1,5 +1,5 @@
 import { Patient } from '../src/types';
-import utils from '../src/utils';
+import utils from '../src/utils/utils';
 
 const data = [
   {

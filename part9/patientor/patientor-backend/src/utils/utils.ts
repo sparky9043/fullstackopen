@@ -1,4 +1,4 @@
-import { Gender, NewPatient } from './types';
+import { Gender, NewPatient } from '../types';
 import { v1 as uuid } from 'uuid';
 
 const isString = (input: unknown): input is string => {
