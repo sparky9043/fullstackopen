@@ -1,3 +1,4 @@
+import Content from './components/Content';
 import Title from './components/Title';
 
 const App = () => {
@@ -22,15 +23,13 @@ const App = () => {
   return (
     <div>
       <Title text={courseName} />
-      <p>
-        {courseParts[0].name} {courseParts[0].exerciseCount}
-      </p>
-      <p>
-        {courseParts[1].name} {courseParts[1].exerciseCount}
-      </p>
-      <p>
-        {courseParts[2].name} {courseParts[2].exerciseCount}
-      </p>
+      {courseParts.map(course =>
+        <Content
+          key={course.name}
+          courseName={course.name}
+          exerciseCount={course.exerciseCount}
+        />
+      )}
       <p>
         Number of exercises {totalExercises}
       </p>
