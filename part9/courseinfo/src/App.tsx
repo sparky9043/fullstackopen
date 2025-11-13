@@ -1,4 +1,7 @@
-// import Content from './components/Content';
+import Content from './components/Content';
+import Title from './components/Title';
+import Total from './components/Total';
+
 interface CoursePartBase {
   name: string;
   exerciseCount: number;
@@ -21,11 +24,6 @@ interface CoursePartBackground extends CoursePartBase {
 }
 
 type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
-
-
-import Content from './components/Content';
-import Title from './components/Title';
-import Total from './components/Total';
 
 const App = () => {
   const courseName = "Half Stack application development";
