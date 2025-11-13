@@ -1,4 +1,4 @@
-import Header from './components/header';
+import Title from './components/Title';
 
 const App = () => {
   const courseName = "Half Stack application development";
@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <Header text={courseName} />
+      <Title text={courseName} />
       <p>
         {courseParts[0].name} {courseParts[0].exerciseCount}
       </p>
