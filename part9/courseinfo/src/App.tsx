@@ -1,3 +1,5 @@
+import Header from './components/header';
+
 const App = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
@@ -19,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>{courseName}</h1>
+      <Header text={courseName} />
       <p>
         {courseParts[0].name} {courseParts[0].exerciseCount}
       </p>
