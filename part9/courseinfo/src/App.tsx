@@ -1,5 +1,6 @@
 import Content from './components/Content';
 import Title from './components/Title';
+import Total from './components/Total';
 
 const App = () => {
   const courseName = "Half Stack application development";
@@ -30,9 +31,7 @@ const App = () => {
           exerciseCount={course.exerciseCount}
         />
       )}
-      <p>
-        Number of exercises {totalExercises}
-      </p>
+      <Total total={totalExercises} />
     </div>
   );
 };
