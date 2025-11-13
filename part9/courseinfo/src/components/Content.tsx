@@ -1,4 +1,4 @@
-export interface ContentProps {
+interface ContentProps {
   courseName: string,
   exerciseCount: number,
 };
