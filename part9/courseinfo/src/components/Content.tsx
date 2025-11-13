@@ -1,13 +1,19 @@
 interface ContentProps {
-  courseName: string,
+  courses: Course[],
+};
+
+interface Course {
+  name: string,
   exerciseCount: number,
 };
 
 const Content = (props: ContentProps) => {
   return (
-    <p>
-      {props.courseName} {props.exerciseCount}
-    </p>
+    <div>
+      {props.courses.map((course: Course) => <p key={course.name}>
+        {course.name} {course.exerciseCount}
+      </p>)}
+    </div>
   )
 }
 

@@ -1,3 +1,4 @@
+// import Content from './components/Content';
 import Content from './components/Content';
 import Title from './components/Title';
 import Total from './components/Total';
@@ -24,13 +25,7 @@ const App = () => {
   return (
     <div>
       <Title text={courseName} />
-      {courseParts.map(course =>
-        <Content
-          key={course.name}
-          courseName={course.name}
-          exerciseCount={course.exerciseCount}
-        />
-      )}
+      <Content courses={courseParts} />
       <Total total={totalExercises} />
     </div>
   );
