@@ -11,6 +11,11 @@ const getPatientsWithoutSSN = (): PatientWithoutSSN[] => {
     ({ id, name, dateOfBirth, gender, occupation }));
 };
 
+const getPatientById = (id: string): PatientWithoutSSN | undefined => {
+  const savedPatient = patientsData.find(p => p.id === id);
+  return savedPatient;
+};
+
 const addPatient = (patientObj: NewPatient): Patient => {
   const newPatient = {
     ...patientObj,
@@ -21,4 +26,4 @@ const addPatient = (patientObj: NewPatient): Patient => {
   return newPatient;
 };
 
-export default { getPatients, getPatientsWithoutSSN, addPatient };
+export default { getPatients, getPatientsWithoutSSN, getPatientById, addPatient };

@@ -11,9 +11,15 @@ patientRouter.get('/', (_req, res: Response<PatientWithoutSSN[]>) => {
   res.json(savedPatients);
 });
 
-// patientRouter.get('/:id', (_req, res) => {
+patientRouter.get('/:id', (req, res) => {
+  const savedPatient = patientService.getPatientById(req.params.id);
 
-// });
+  if (savedPatient) {
+    res.json(savedPatient);
+  } else {
+    res.sendStatus(400);
+  }
+});
 
 patientRouter.post('/', middleware.newPatientParser, (req: Request<unknown, unknown, NewPatient>, res: Response<Patient>) => {
   const savedPatient = patientService.addPatient(req.body);
