@@ -14,35 +14,35 @@ const Part = (props: PartProps) => {
 
     switch (props.course.kind) {
       case 'basic':
-        return <p>
+        return <div>
           <em>
             {props.course.description}
           </em>
-        </p>
+        </div>
       case 'group':
-        return <p>
+        return <div>
           <em>
             project exercises {props.course.groupProjectCount}
           </em>
-        </p>
+        </div>
       case 'background':
         return <div>
           <em>
             {props.course.description}
           </em>
-          <p>
+          <div>
             submit to&nbsp;
               {props.course.backgroundMaterial}
-          </p>
+          </div>
         </div>
       case 'special':
         return <div>
           <em>
             {props.course.description}
           </em>
-          <p>
+          <div>
             required skills: {props.course.requirements.join(', ')}
-          </p>
+          </div>
         </div>
       default:
         return assertNever(props.course);
