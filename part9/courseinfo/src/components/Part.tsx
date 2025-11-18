@@ -7,7 +7,11 @@ interface PartProps {
 const Part = (props: PartProps) => {
   console.log(props);
   return (
-    <p>Part activated</p>
+    <div>
+      <strong>
+        {props.course.name} {props.course.exerciseCount}
+      </strong>
+    </div>
   )
 };
 

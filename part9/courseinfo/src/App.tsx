@@ -9,6 +9,7 @@ interface CoursePartBase {
 
 interface CoursePartDescription extends CoursePartBase {
   description: string;
+  kind: 'basic' | 'group' | 'background' | 'special';
 }
 
 interface CoursePartBasic extends CoursePartDescription {
