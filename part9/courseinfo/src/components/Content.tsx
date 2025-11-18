@@ -1,16 +1,13 @@
-interface ContentProps {
-  courses: Course[],
-};
+import type { CoursePartBase } from '../App'
 
-interface Course {
-  name: string,
-  exerciseCount: number,
+interface ContentProps {
+  courses: CoursePartBase[],
 };
 
 const Content = (props: ContentProps) => {
   return (
     <div>
-      {props.courses.map((course: Course) => <p key={course.name}>
+      {props.courses.map((course: CoursePartBase) => <p key={course.name}>
         {course.name} {course.exerciseCount}
       </p>)}
     </div>
