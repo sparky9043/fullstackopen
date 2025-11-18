@@ -27,9 +27,7 @@ const Part = (props: PartProps) => {
           </em>
           <p>
             submit to&nbsp;
-            <span>
               {props.course.backgroundMaterial}
-            </span>
           </p>
         </div>
       case 'special':
@@ -37,6 +35,9 @@ const Part = (props: PartProps) => {
           <em>
             {props.course.description}
           </em>
+          <p>
+            required skills: {props.course.requirements.join(', ')}
+          </p>
         </div>
     }
   }
