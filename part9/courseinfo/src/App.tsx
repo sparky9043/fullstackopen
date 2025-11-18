@@ -25,7 +25,7 @@ interface CoursePartBackground extends CoursePartDescription {
   kind: 'background';
 }
 
-type CoursePart = CoursePartBasic | CoursePartDescription | CoursePartGroup | CoursePartBackground;
+export type CoursePart = CoursePartBasic | CoursePartDescription | CoursePartGroup | CoursePartBackground;
 
 const App = () => {
   const courseName = "Half Stack application development";
