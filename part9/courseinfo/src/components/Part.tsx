@@ -32,6 +32,12 @@ const Part = (props: PartProps) => {
             </span>
           </p>
         </div>
+      case 'special':
+        return <div>
+          <em>
+            {props.course.description}
+          </em>
+        </div>
     }
   }
 
