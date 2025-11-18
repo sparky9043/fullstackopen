@@ -5,8 +5,13 @@ interface PartProps {
 }
 
 const Part = (props: PartProps) => {
-  console.log(props);
-  const courseParts = (): React.ReactNode => {
+  const courseParts = (): React.ReactNode | never => {
+    const assertNever = (value: never): never => {
+      throw new Error(
+        `Unhandled discriminated union member: ${JSON.stringify(value)}`
+      );
+    };
+
     switch (props.course.kind) {
       case 'basic':
         return <p>
@@ -39,6 +44,8 @@ const Part = (props: PartProps) => {
             required skills: {props.course.requirements.join(', ')}
           </p>
         </div>
+      default:
+        return assertNever(props.course);
     }
   }
 
