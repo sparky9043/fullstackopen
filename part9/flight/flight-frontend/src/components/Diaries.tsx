@@ -1,4 +1,5 @@
 import type { Diary } from '../types';
+import DiaryEntry from './DiaryEntry';
 
 interface DiariesProps {
   diaries: Diary[],
@@ -7,9 +8,9 @@ interface DiariesProps {
 const Diaries = (props: DiariesProps) => {
   
   return (
-    <div>
-      {props.diaries.map(diary => <li key={diary.id}>{diary.weather}</li>)}
-    </div>
+    <ul>
+      {props.diaries.map(diary => <DiaryEntry key={diary.id} diary={diary} />)}
+    </ul>
   )
 }
 
