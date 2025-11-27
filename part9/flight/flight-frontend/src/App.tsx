@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import type { Diary } from './types'
+import Diaries from './components/Diaries'
 const baseUrl = 'http://localhost:3000/api/diaries'
 
 const App = () => {
@@ -15,10 +16,10 @@ const App = () => {
   if (!diaries) {
     return <p>Loading...</p>
   }
-  
+
   return (
     <div>
-      {diaries.map(diary => <li key={diary.id}>{diary.weather}</li>)}
+      <Diaries diaries={diaries} />
     </div>
   )
 }
