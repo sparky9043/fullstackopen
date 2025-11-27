@@ -15,9 +15,7 @@ const App = () => {
   if (!diaries) {
     return <p>Loading...</p>
   }
-
-  console.log(diaries);
-
+  
   return (
     <div>
       {diaries.map(diary => <li key={diary.id}>{diary.weather}</li>)}
