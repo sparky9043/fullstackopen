@@ -41,6 +41,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Add new entry</h2>
       <ul>
         <li>
           <label htmlFor="date">Date</label>

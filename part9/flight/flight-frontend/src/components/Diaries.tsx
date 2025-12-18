@@ -8,9 +8,12 @@ interface DiariesProps {
 const Diaries = (props: DiariesProps) => {
   
   return (
-    <ul>
-      {props.diaries.map(diary => <DiaryEntry key={diary.id} diary={diary} />)}
-    </ul>
+    <div>
+      <h2>Diary entries</h2>
+      <ul>
+        {props.diaries.map(diary => <DiaryEntry key={diary.id} diary={diary} />)}
+      </ul>
+    </div>
   )
 }
 
