@@ -75,7 +75,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="rainy"
-                onChange={(event) => updateWeather(event)}
+                onChange={updateWeather}
               />
               <label htmlFor="rainy">rainy</label>
             </div>
@@ -84,7 +84,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="sunny"
-                onChange={(event) => updateWeather(event)}
+                onChange={updateWeather}
               />
               <label htmlFor="cloudy">sunny</label>
             </div>
@@ -93,7 +93,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="windy"
-                onChange={(event) => updateWeather(event)}
+                onChange={updateWeather}
               />
               <label htmlFor="windy">windy</label>
             </div>
@@ -102,7 +102,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="cloudy"
-                onChange={(event) => updateWeather(event)}
+                onChange={updateWeather}
               />
               <label htmlFor="cloudy">cloudy</label>
             </div>
