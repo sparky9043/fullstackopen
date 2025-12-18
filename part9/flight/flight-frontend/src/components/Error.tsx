@@ -4,7 +4,7 @@ interface ErrorProps {
 
 const Error = (props: ErrorProps) => {
   return (
-    <p>{props.errorMessage}</p>
+    <p className='error-message'>{props.errorMessage}</p>
   )
 }
 
