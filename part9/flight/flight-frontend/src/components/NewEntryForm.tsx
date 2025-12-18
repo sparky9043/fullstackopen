@@ -18,8 +18,10 @@ const NewEntryForm = () => {
           <label htmlFor="comment">Comment</label>
           <input type="text" id='comment' />
         </li>
+        <li>
+          <button type="submit">add</button>
+        </li>
       </ul>
-      <button type="submit">add</button>
     </form>
   )
 }
