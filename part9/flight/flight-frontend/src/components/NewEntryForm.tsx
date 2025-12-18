@@ -24,7 +24,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log(date, weather);
     if (!date || !visibility || !weather || !comment) {
       props.onUpdateErrorMessage('Make sure to completed all the fields');
       throw new Error('Make sure to completed all the fields');
