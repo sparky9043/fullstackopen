@@ -27,6 +27,11 @@ const NewEntryForm = (props: NewEntryFormProps) => {
       } else {
         props.onUpdateErrorMessage(result?.response?.data);
       }
+
+      setDate('');
+      setVisibility('');
+      setWeather('');
+      setComment('');
     } catch (error) {
       if (error instanceof Error) {
         props.onUpdateErrorMessage(error.message);
