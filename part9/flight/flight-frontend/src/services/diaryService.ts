@@ -9,6 +9,10 @@ export const getAllDiaries = async () => {
 }
 
 export const createDiary = async (newDiary: NewDiary) => {
-  return axios.post<Diary>(baseUrl, newDiary)
-    .then(response => response.data);
+  try {
+    const response = await axios.post<Diary>(baseUrl, newDiary)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 }

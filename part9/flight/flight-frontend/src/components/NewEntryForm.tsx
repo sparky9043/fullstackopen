@@ -12,10 +12,13 @@ const NewEntryForm = (props: NewEntryFormProps) => {
   const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    createDiary({ date, visibility, weather, comment })
-      .then(data => props.onUpdateDiary(data));
+    const savedDiary = await createDiary({ date, visibility, weather, comment });
+
+    if (savedDiary) {
+      props.onUpdateDiary(savedDiary);
+    }
   }
 
   return (
