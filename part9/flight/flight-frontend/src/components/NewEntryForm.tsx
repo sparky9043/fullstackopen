@@ -5,6 +5,7 @@ import axios from 'axios';
 
 interface NewEntryFormProps {
   onUpdateDiary: (diaryEntry: Diary) => void;
+  onUpdateErrorMessage: (message: string) => void;
 }
 
 const NewEntryForm = (props: NewEntryFormProps) => {
@@ -12,17 +13,13 @@ const NewEntryForm = (props: NewEntryFormProps) => {
   const [visibility, setVisibility] = useState('');
   const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     const result = await createDiary({ date, visibility, weather, comment });
 
     if (!result || axios.isAxiosError(result)) {
-      setErrorMessage(result?.response?.data);
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 3000);
+      props.onUpdateErrorMessage(result?.response?.data);
     } else {
       props.onUpdateDiary(result);
     }
@@ -71,7 +68,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
           <button type="submit">add</button>
         </li>
       </ul>
-      {errorMessage && <p>{errorMessage}</p>}
     </form>
   )
 }

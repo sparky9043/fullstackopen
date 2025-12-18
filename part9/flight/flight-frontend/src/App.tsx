@@ -4,9 +4,11 @@ import Diaries from './components/Diaries';
 import { getAllDiaries } from './services/diaryService';
 import NewEntryForm from './components/NewEntryForm';
 import './App.css';
+import Error from './components/Error';
 
 const App = () => {
   const [diaries, setDiaries] = useState<Diary[] | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     getAllDiaries()
@@ -21,9 +23,20 @@ const App = () => {
     setDiaries(diaries.concat(diaryEntry));
   }
 
+  const updateErrorMessage = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => {
+      setErrorMessage('');
+    }, 5000);
+  }
+
   return (
     <div>
-      <NewEntryForm onUpdateDiary={updateDiaries} />
+      {errorMessage && <Error errorMessage={errorMessage} />}
+      <NewEntryForm
+        onUpdateDiary={updateDiaries}
+        onUpdateErrorMessage={updateErrorMessage}
+      />
       <Diaries diaries={diaries} />
     </div>
   )
