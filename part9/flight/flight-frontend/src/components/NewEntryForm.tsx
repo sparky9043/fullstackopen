@@ -1,4 +1,5 @@
 import { useState, type SyntheticEvent } from 'react';
+import { createDiary } from '../services/diaryService';
 
 const NewEntryForm = () => {
   const [date, setDate] = useState('');
@@ -8,6 +9,7 @@ const NewEntryForm = () => {
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
+    createDiary({ date, visibility, weather, comment });
   }
 
   return (
