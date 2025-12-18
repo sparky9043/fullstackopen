@@ -16,12 +16,21 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    const result = await createDiary({ date, visibility, weather, comment });
-
-    if (result && !axios.isAxiosError(result)) {
-      props.onUpdateDiary(result);
-    } else {
-      props.onUpdateErrorMessage(result?.response?.data);
+    try {
+      if (!date || !visibility || !weather || !comment) {
+        throw new Error('Make sure all the fields are completed');
+      }
+      const result = await createDiary({ date, visibility, weather, comment });
+      
+      if (result && !axios.isAxiosError(result)) {
+        props.onUpdateDiary(result);
+      } else {
+        props.onUpdateErrorMessage(result?.response?.data);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        props.onUpdateErrorMessage(error.message);
+      }
     }
   }
 
