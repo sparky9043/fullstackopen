@@ -1,7 +1,7 @@
 const NewEntryForm = () => {
   return (
     <form>
-      
+      new form
     </form>
   )
 }
