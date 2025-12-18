@@ -18,6 +18,10 @@ const NewEntryForm = (props: NewEntryFormProps) => {
     setWeather(event.target.value);
   }
 
+  const updateVisibility = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVisibility(event.target.value);
+  }
+
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     console.log(date, weather);
@@ -59,13 +63,49 @@ const NewEntryForm = (props: NewEntryFormProps) => {
           />
         </li>
         <li>
-          <label htmlFor="visibility">Visibility</label>
-          <input 
-            id='visibility'
-            type="text"
-            value={visibility}
-            onChange={(event) => setVisibility(event.target.value)}
-          />
+          <fieldset>
+            <legend>Visibility</legend>
+            <div>
+              <input
+                type="radio"
+                name="visibility"
+                value="great"
+                id="great"
+                onChange={updateVisibility}
+              />
+              <label htmlFor="">great</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="visibility"
+                value="good"
+                id="good"
+                onChange={updateVisibility}
+              />
+              <label htmlFor="">good</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="visibility"
+                value="ok"
+                id="ok"
+                onChange={updateVisibility}
+              />
+              <label htmlFor="">ok</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="visibility"
+                value="poor"
+                id="poor"
+                onChange={updateVisibility}
+              />
+              <label htmlFor="">poor</label>
+            </div>
+          </fieldset>
         </li>
         <li>
           <fieldset>
@@ -75,6 +115,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="rainy"
+                id="rainy"
                 onChange={updateWeather}
               />
               <label htmlFor="rainy">rainy</label>
@@ -84,6 +125,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="sunny"
+                id="sunny"
                 onChange={updateWeather}
               />
               <label htmlFor="cloudy">sunny</label>
@@ -93,6 +135,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="windy"
+                id="windy"
                 onChange={updateWeather}
               />
               <label htmlFor="windy">windy</label>
@@ -102,6 +145,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 type="radio"
                 name="weather"
                 value="cloudy"
+                id="cloudy"
                 onChange={updateWeather}
               />
               <label htmlFor="cloudy">cloudy</label>
