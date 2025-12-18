@@ -18,7 +18,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
     event.preventDefault();
     if (!date || !visibility || !weather || !comment) {
       props.onUpdateErrorMessage('Make sure to completed all the fields');
-      return;
+      throw new Error('Make sure to completed all the fields');
     }
 
     try {
@@ -29,9 +29,11 @@ const NewEntryForm = (props: NewEntryFormProps) => {
       setVisibility('');
       setWeather('');
       setComment('');
-    } catch (error) {
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         props.onUpdateErrorMessage(error.response?.data ?? 'Failed to create diary');
+      } else if (error instanceof Error) {
+        props.onUpdateErrorMessage(error.message);
       } else {
         props.onUpdateErrorMessage('Unexpected error occurred');
       }
