@@ -1,7 +1,12 @@
 import { useState, type SyntheticEvent } from 'react';
 import { createDiary } from '../services/diaryService';
+import type { Diary } from '../types';
 
-const NewEntryForm = () => {
+interface NewEntryFormProps {
+  onUpdateDiary: (diaryEntry: Diary) => void;
+}
+
+const NewEntryForm = (props: NewEntryFormProps) => {
   const [date, setDate] = useState('');
   const [visibility, setVisibility] = useState('');
   const [weather, setWeather] = useState('');
@@ -9,7 +14,8 @@ const NewEntryForm = () => {
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
-    createDiary({ date, visibility, weather, comment });
+    createDiary({ date, visibility, weather, comment })
+      .then(data => props.onUpdateDiary(data));
   }
 
   return (

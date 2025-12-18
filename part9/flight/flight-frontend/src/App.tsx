@@ -17,9 +17,13 @@ const App = () => {
     return <p>Loading...</p>
   }
 
+  const updateDiaries = (diaryEntry: Diary) => {
+    setDiaries(diaries.concat(diaryEntry));
+  }
+
   return (
     <div>
-      <NewEntryForm />
+      <NewEntryForm onUpdateDiary={updateDiaries} />
       <Diaries diaries={diaries} />
     </div>
   )
