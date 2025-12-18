@@ -3,16 +3,23 @@ const NewEntryForm = () => {
     <form>
       <ul>
         <li>
-          <input type="text" />
+          <label htmlFor="date">Date</label>
+          <input type="text" id='date' />
         </li>
         <li>
-          <input type="text" />
+          <label htmlFor="visibility">Visibility</label>
+          <input type="text" id='visibility' />
         </li>
         <li>
-          <input type="text" />
+          <label htmlFor="weather">Weather</label>
+          <input type="text" id='weather' />
+        </li>
+        <li>
+          <label htmlFor="comment">Comment</label>
+          <input type="text" id='comment' />
         </li>
       </ul>
-      <button type="submit"></button>
+      <button type="submit">add</button>
     </form>
   )
 }
