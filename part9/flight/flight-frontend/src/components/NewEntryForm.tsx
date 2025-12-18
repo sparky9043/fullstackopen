@@ -1,22 +1,53 @@
+import { useState, type SyntheticEvent } from 'react';
+
 const NewEntryForm = () => {
+  const [date, setDate] = useState('');
+  const [visibility, setVisibility] = useState('');
+  const [weather, setWeather] = useState('');
+  const [comment, setComment] = useState('');
+
+  const handleSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <ul>
         <li>
           <label htmlFor="date">Date</label>
-          <input type="text" id='date' />
+          <input
+            id='date'
+            value={date}
+            type="text"
+            onChange={(event) => setDate(event.target.value)}
+          />
         </li>
         <li>
           <label htmlFor="visibility">Visibility</label>
-          <input type="text" id='visibility' />
+          <input 
+            id='visibility'
+            type="text"
+            value={visibility}
+            onChange={(event) => setVisibility(event.target.value)}
+          />
         </li>
         <li>
           <label htmlFor="weather">Weather</label>
-          <input type="text" id='weather' />
+          <input 
+            id='weather'
+            type="text"
+            value={weather}
+            onChange={(event) => setWeather(event.target.value)}
+          />
         </li>
         <li>
           <label htmlFor="comment">Comment</label>
-          <input type="text" id='comment' />
+          <input 
+            id='comment'
+            type="text"
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
+          />
         </li>
         <li>
           <button type="submit">add</button>
