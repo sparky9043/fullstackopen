@@ -18,10 +18,10 @@ const NewEntryForm = (props: NewEntryFormProps) => {
     event.preventDefault();
     const result = await createDiary({ date, visibility, weather, comment });
 
-    if (!result || axios.isAxiosError(result)) {
-      props.onUpdateErrorMessage(result?.response?.data);
-    } else {
+    if (result && !axios.isAxiosError(result)) {
       props.onUpdateDiary(result);
+    } else {
+      props.onUpdateErrorMessage(result?.response?.data);
     }
   }
 
