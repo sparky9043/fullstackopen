@@ -13,6 +13,8 @@ export const createDiary = async (newDiary: NewDiary) => {
     const response = await axios.post<Diary>(baseUrl, newDiary)
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (axios.isAxiosError(error)) {
+      console.log(error.response?.data);
+    }
   }
 }
