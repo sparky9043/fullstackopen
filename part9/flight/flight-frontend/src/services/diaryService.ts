@@ -14,7 +14,7 @@ export const createDiary = async (newDiary: NewDiary) => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response?.data);
+      return error;
     }
   }
 }

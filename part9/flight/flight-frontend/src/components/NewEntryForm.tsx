@@ -1,6 +1,7 @@
 import { useState, type SyntheticEvent } from 'react';
 import { createDiary } from '../services/diaryService';
 import type { Diary } from '../types';
+import axios from 'axios';
 
 interface NewEntryFormProps {
   onUpdateDiary: (diaryEntry: Diary) => void;
@@ -11,18 +12,22 @@ const NewEntryForm = (props: NewEntryFormProps) => {
   const [visibility, setVisibility] = useState('');
   const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    const savedDiary = await createDiary({ date, visibility, weather, comment });
+    const result = await createDiary({ date, visibility, weather, comment });
 
-    if (savedDiary) {
-      props.onUpdateDiary(savedDiary);
+    if (!result || axios.isAxiosError(result)) {
+      setErrorMessage(result?.response?.data)
+    } else {
+      props.onUpdateDiary(result);
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      {errorMessage && <p>{errorMessage}</p>}
       <ul>
         <li>
           <label htmlFor="date">Date</label>
