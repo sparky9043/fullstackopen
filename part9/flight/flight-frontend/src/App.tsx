@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
     getAllDiaries()
       .then(data => setDiaries(data));
-  }, []);
+  }, [diaries]);
 
   if (!diaries) {
     return <p>Loading...</p>
