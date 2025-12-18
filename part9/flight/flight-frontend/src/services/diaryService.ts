@@ -9,6 +9,6 @@ export const getAllDiaries = async () => {
 }
 
 export const createDiary = async (newDiary: NewDiary): Promise<Diary> => {
-  const response = await axios.post<Diary>(baseUrl, newDiary)
-  return response.data;
+  return axios.post<Diary>(baseUrl, newDiary)
+    .then(response => response.data);
 }
