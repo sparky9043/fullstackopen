@@ -20,7 +20,9 @@ const App = () => {
   }
 
   const updateDiaries = (diaryEntry: Diary) => {
-    setDiaries(diaries.concat(diaryEntry));
+    setDiaries(prev =>
+      prev ? [...prev, diaryEntry] : [diaryEntry]
+    );
   }
 
   const updateErrorMessage = (message: string) => {
