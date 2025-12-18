@@ -14,8 +14,13 @@ const NewEntryForm = (props: NewEntryFormProps) => {
   const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
 
+  const updateWeather = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setWeather(event.target.value);
+  }
+
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    console.log(date, weather);
     if (!date || !visibility || !weather || !comment) {
       props.onUpdateErrorMessage('Make sure to completed all the fields');
       throw new Error('Make sure to completed all the fields');
@@ -63,13 +68,45 @@ const NewEntryForm = (props: NewEntryFormProps) => {
           />
         </li>
         <li>
-          <label htmlFor="weather">Weather</label>
-          <input 
-            id='weather'
-            type="text"
-            value={weather}
-            onChange={(event) => setWeather(event.target.value)}
-          />
+          <fieldset>
+            <legend>Weather</legend>
+            <div>
+              <input
+                type="radio"
+                name="weather"
+                value="rainy"
+                onChange={(event) => updateWeather(event)}
+              />
+              <label htmlFor="rainy">rainy</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="weather"
+                value="sunny"
+                onChange={(event) => updateWeather(event)}
+              />
+              <label htmlFor="cloudy">sunny</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="weather"
+                value="windy"
+                onChange={(event) => updateWeather(event)}
+              />
+              <label htmlFor="windy">windy</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="weather"
+                value="cloudy"
+                onChange={(event) => updateWeather(event)}
+              />
+              <label htmlFor="cloudy">cloudy</label>
+            </div>
+          </fieldset>
         </li>
         <li>
           <label htmlFor="comment">Comment</label>
