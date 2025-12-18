@@ -4,11 +4,11 @@ import type { Diary, NewDiary } from '../types';
 const baseUrl = 'http://localhost:3000/api/diaries';
 
 export const getAllDiaries = async () => {
-  return axios.get<Diary[]>(baseUrl)
-    .then(response => response.data);
+  const response = await axios.get<Diary[]>(baseUrl)
+  return response.data;
 }
 
 export const createDiary = async (newDiary: NewDiary): Promise<Diary> => {
-  return axios.post<Diary>(baseUrl, newDiary)
-    .then(response => response.data);
+  const response = await axios.post<Diary>(baseUrl, newDiary)
+  return response.data;
 }

@@ -16,12 +16,12 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    if (!date || !visibility || !weather || !comment) {
+      props.onUpdateErrorMessage('Make sure to completed all the fields');
+      return;
+    }
 
     try {
-      if (!date || !visibility || !weather || !comment) {
-        throw new Error('Make sure all the fields are completed');
-      }
-
       const diary = await createDiary({ date, visibility, weather, comment });
       props.onUpdateDiary(diary);
 
