@@ -16,25 +16,24 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+
     try {
       if (!date || !visibility || !weather || !comment) {
         throw new Error('Make sure all the fields are completed');
       }
-      const result = await createDiary({ date, visibility, weather, comment });
-      
-      if (result && !axios.isAxiosError(result)) {
-        props.onUpdateDiary(result);
-      } else {
-        props.onUpdateErrorMessage(result?.response?.data);
-      }
+
+      const diary = await createDiary({ date, visibility, weather, comment });
+      props.onUpdateDiary(diary);
 
       setDate('');
       setVisibility('');
       setWeather('');
       setComment('');
     } catch (error) {
-      if (error instanceof Error) {
-        props.onUpdateErrorMessage(error.message);
+      if (axios.isAxiosError(error)) {
+        props.onUpdateErrorMessage(error.response?.data ?? 'Failed to create diary');
+      } else {
+        props.onUpdateErrorMessage('Unexpected error occurred');
       }
     }
   }
