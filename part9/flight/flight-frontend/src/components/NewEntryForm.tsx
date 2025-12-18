@@ -19,7 +19,11 @@ const NewEntryForm = (props: NewEntryFormProps) => {
     const result = await createDiary({ date, visibility, weather, comment });
 
     if (!result || axios.isAxiosError(result)) {
-      setErrorMessage(result?.response?.data)
+      setErrorMessage(result?.response?.data);
+      console.log(result);
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
     } else {
       props.onUpdateDiary(result);
     }
@@ -27,7 +31,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {errorMessage && <p>{errorMessage}</p>}
       <ul>
         <li>
           <label htmlFor="date">Date</label>
@@ -69,6 +72,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
           <button type="submit">add</button>
         </li>
       </ul>
+      {errorMessage && <p>{errorMessage}</p>}
     </form>
   )
 }
