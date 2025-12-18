@@ -1,7 +1,18 @@
 const NewEntryForm = () => {
   return (
     <form>
-      new form
+      <ul>
+        <li>
+          <input type="text" />
+        </li>
+        <li>
+          <input type="text" />
+        </li>
+        <li>
+          <input type="text" />
+        </li>
+      </ul>
+      <button type="submit"></button>
     </form>
   )
 }
