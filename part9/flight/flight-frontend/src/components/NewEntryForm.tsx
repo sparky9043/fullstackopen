@@ -49,9 +49,8 @@ const NewEntryForm = (props: NewEntryFormProps) => {
           <input
             id='date'
             value={date}
-            type="text"
+            type="date"
             onChange={(event) => setDate(event.target.value)}
-            required
           />
         </li>
         <li>
@@ -61,7 +60,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
             type="text"
             value={visibility}
             onChange={(event) => setVisibility(event.target.value)}
-            required
           />
         </li>
         <li>
@@ -71,7 +69,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
             type="text"
             value={weather}
             onChange={(event) => setWeather(event.target.value)}
-            required
           />
         </li>
         <li>
@@ -81,7 +78,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
             type="text"
             value={comment}
             onChange={(event) => setComment(event.target.value)}
-            required
           />
         </li>
         <li>
