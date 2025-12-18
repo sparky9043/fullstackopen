@@ -6,9 +6,9 @@ interface DiaryEntryProps {
 
 const DiaryEntry = ({ diary }: DiaryEntryProps) => {
   return <li>
-    <div>{diary.date}</div>
-    <div>{diary.visibility}</div>
-    <div>{diary.weather}</div>
+    <h3>{diary.date}</h3>
+    <p>visibility: {diary.visibility}</p>
+    <p>weather: {diary.weather}</p>
   </li>
 }
 
