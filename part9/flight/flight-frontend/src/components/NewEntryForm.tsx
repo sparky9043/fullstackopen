@@ -20,7 +20,6 @@ const NewEntryForm = (props: NewEntryFormProps) => {
 
     if (!result || axios.isAxiosError(result)) {
       setErrorMessage(result?.response?.data);
-      console.log(result);
       setTimeout(() => {
         setErrorMessage('');
       }, 3000);
