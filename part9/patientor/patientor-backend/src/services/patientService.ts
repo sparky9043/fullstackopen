@@ -11,7 +11,7 @@ const getPatientsWithoutSSN = (): PatientWithoutSSN[] => {
     ({ id, name, dateOfBirth, gender, occupation }));
 };
 
-const getPatientById = (id: string): PatientWithoutSSN | undefined => {
+const getPatientById = (id: string): Patient | undefined => {
   const savedPatient = patientsData.find(p => p.id === id);
   return savedPatient;
 };
