@@ -72,7 +72,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 id="great"
                 onChange={updateVisibility}
               />
-              <label htmlFor="">great</label>
+              <label htmlFor="great">great</label>
             </div>
             <div>
               <input
@@ -82,7 +82,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 id="good"
                 onChange={updateVisibility}
               />
-              <label htmlFor="">good</label>
+              <label htmlFor="good">good</label>
             </div>
             <div>
               <input
@@ -92,7 +92,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 id="ok"
                 onChange={updateVisibility}
               />
-              <label htmlFor="">ok</label>
+              <label htmlFor="ok">ok</label>
             </div>
             <div>
               <input
@@ -102,7 +102,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 id="poor"
                 onChange={updateVisibility}
               />
-              <label htmlFor="">poor</label>
+              <label htmlFor="poor">poor</label>
             </div>
           </fieldset>
         </li>
@@ -127,7 +127,7 @@ const NewEntryForm = (props: NewEntryFormProps) => {
                 id="sunny"
                 onChange={updateWeather}
               />
-              <label htmlFor="cloudy">sunny</label>
+              <label htmlFor="sunny">sunny</label>
             </div>
             <div>
               <input
