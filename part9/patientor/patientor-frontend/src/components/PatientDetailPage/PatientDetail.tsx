@@ -28,10 +28,10 @@ const PatientDetail = () => {
       <Typography variant="h4" style={{ marginBottom: "0.5em", fontWeight: "bold" }}>
         {patientDetails.name} {patientDetails.gender === 'male' ? '♂' : '♀'}
       </Typography>
-      <Typography>
+      <Typography variant='body2'>
         {patientDetails.ssn}
       </Typography>
-      <Typography>
+      <Typography variant='body2'>
         {patientDetails.occupation}
       </Typography>
     </div>
