@@ -1,25 +1,38 @@
-import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiBaseUrl } from '../../constants';
 import { Typography } from '@mui/material';
+import patients from '../../services/patients';
+import { Patient } from '../../types';
 
 const PatientDetail = () => {
   const { id: patientId } = useParams();
+  const [patientDetails, setPatientDetails] = useState<Patient | null | undefined>(null);
 
   useEffect(() => {
     const fetchPatientById = async () => {
-      const response = await axios.get(`${apiBaseUrl}/patients/${patientId}`);
-      console.log(response.data);
+      if (patientId) {
+        const patient = await patients.getPatientById(patientId);
+        setPatientDetails(patient);
+      }
     };
 
     void fetchPatientById();
   }, [patientId]);
 
+  if (!patientDetails) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
-      <Typography variant="h4" style={{ marginBottom: "0.5em" }}>
-        Hello
+      <Typography variant="h4" style={{ marginBottom: "0.5em", fontWeight: "bold" }}>
+        {patientDetails.name} {patientDetails.gender === 'male' ? '♂' : '♀'}
+      </Typography>
+      <Typography>
+        {patientDetails.ssn}
+      </Typography>
+      <Typography>
+        {patientDetails.occupation}
       </Typography>
     </div>
   );
