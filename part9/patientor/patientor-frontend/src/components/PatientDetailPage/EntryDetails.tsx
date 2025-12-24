@@ -1,5 +1,6 @@
-import { Typography } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import type { Entry } from '../../types';
+import DiagnosisDetails from './DiagnosisDetails';
 
 interface EntryDetailProps {
   entry: Entry;
@@ -72,6 +73,13 @@ const EntryDetails = ({ entry }: EntryDetailProps) => {
       <Typography variant='body1'>
         diagnosed by {entry.specialist}
       </Typography>
+      <List>
+        {entry.diagnosisCodes && 
+          entry.diagnosisCodes.map(code =>
+            <DiagnosisDetails key={code} code={code} />
+          )
+        }
+      </List>
     </div>
   );
 };
