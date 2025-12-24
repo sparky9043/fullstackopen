@@ -7,7 +7,7 @@ import middleware from '../utils/middleware';
 const patientRouter = express.Router();
 
 patientRouter.get('/', (_req, res: Response<PatientWithoutSSN[]>) => {
-  const savedPatients = patientService.getPatientsWithoutSSN();
+  const savedPatients = patientService.getPatients();
   res.json(savedPatients);
 });
 
