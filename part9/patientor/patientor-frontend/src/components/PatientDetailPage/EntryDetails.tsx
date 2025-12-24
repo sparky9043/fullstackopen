@@ -74,7 +74,7 @@ const EntryDetails = ({ entry }: EntryDetailProps) => {
         diagnosed by {entry.specialist}
       </Typography>
       <List>
-        {entry.diagnosisCodes && 
+        {entry.diagnosisCodes &&
           entry.diagnosisCodes.map(code =>
             <DiagnosisDetails key={code} code={code} />
           )
