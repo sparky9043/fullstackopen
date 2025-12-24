@@ -12,6 +12,15 @@ const newPatientParser = (req: Request, _res: Response, next: NextFunction) => {
   }
 };
 
+const newEntryParser = (req: Request, _res: Response, next: NextFunction) => {
+  try {
+    utils.newEntryDataBaseSchema.parse(req.body);
+    next();
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+
 const errorHandler = (error: unknown, _req: Request, res: Response, next: NextFunction) => {
   if (error instanceof z.ZodError) {
     logger.info('Error', error.message);
@@ -23,4 +32,4 @@ const errorHandler = (error: unknown, _req: Request, res: Response, next: NextFu
   next();
 };
 
-export default { newPatientParser, errorHandler };
+export default { newPatientParser, newEntryParser, errorHandler };
