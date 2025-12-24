@@ -1,6 +1,9 @@
 import { List, Typography } from '@mui/material';
 import type { Entry } from '../../types';
 import DiagnosisDetails from './DiagnosisDetails';
+import WorkIcon from '@mui/icons-material/Work';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 interface EntryDetailProps {
   entry: Entry;
@@ -20,6 +23,7 @@ const EntryDetails = ({ entry }: EntryDetailProps) => {
         return <div>
           <Typography>
             Health Level: {entry.healthCheckRating}
+            <MonitorHeartIcon />
           </Typography>
         </div>;
       case 'Hospital':
@@ -31,6 +35,7 @@ const EntryDetails = ({ entry }: EntryDetailProps) => {
                   </Typography>
                   <Typography>
                     Reason: {entry.discharge.criteria}
+                    <LocalHospitalIcon />
                   </Typography>
                 </>
               : null}
@@ -39,6 +44,7 @@ const EntryDetails = ({ entry }: EntryDetailProps) => {
         return <div>
           <Typography>
             Employer Name: {entry.employerName}
+            <WorkIcon />
           </Typography>
           {entry.sickLeave
             ? <div>
