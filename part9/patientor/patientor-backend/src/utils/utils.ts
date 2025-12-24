@@ -13,7 +13,7 @@ const newEntryDataBaseSchema = z.object({
   description: z.string(),
   date: z.iso.date(),
   specialist: z.string(),
-  diagnosisCodes: z.array(z.string()),
+  diagnosisCodes: z.array(z.string()).optional(),
 });
 
 export default { newPatientDataSchema, newEntryDataBaseSchema };

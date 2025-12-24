@@ -36,8 +36,7 @@ patientRouter.post('/', middleware.newPatientParser, (req: Request<unknown, unkn
 patientRouter.post('/:id/entries', middleware.newEntryParser, (req: Request<{ id: string }, unknown, EntryWithoutId> , _res: Response<Entry>) => {
   patientService.addEntryToPatient(req.body);
 
-  const savedPatient = patientService.getPatientById(req.params.id);
-  console.log(savedPatient);
+  patientService.getPatientById(req.params.id);
 });
 
 export default patientRouter;
