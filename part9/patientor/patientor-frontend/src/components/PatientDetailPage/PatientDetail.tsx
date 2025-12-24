@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import patients from '../../services/patients';
 import { Patient } from '../../types';
+import EntryDetails from './EntryDetails';
 
 const PatientDetail = () => {
   const { id: patientId } = useParams();
@@ -34,6 +35,10 @@ const PatientDetail = () => {
       <Typography variant='body2'>
         {patientDetails.occupation}
       </Typography>
+      {patientDetails.entries.length > 0 &&
+       patientDetails.entries
+        .map(entry =>
+          <EntryDetails key={entry.id} entry={entry} />)}
     </div>
   );
 };
