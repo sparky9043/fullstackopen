@@ -35,10 +35,14 @@ const PatientDetail = () => {
       <Typography variant='body2'>
         {patientDetails.occupation}
       </Typography>
-      {patientDetails.entries.length > 0 &&
-       patientDetails.entries
-        .map(entry =>
-          <EntryDetails key={entry.id} entry={entry} />)}
+      <Typography variant="h5" style={{ fontWeight: 'bold' }}>
+        entries
+      </Typography>
+      {patientDetails.entries.length
+        ? patientDetails.entries.map(entry =>
+            <EntryDetails key={entry.id} entry={entry} />)
+        : null
+      }
     </div>
   );
 };
