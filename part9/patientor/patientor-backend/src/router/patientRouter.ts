@@ -4,6 +4,11 @@ import { Entry, EntryWithoutId, NewPatient, Patient, PatientWithoutSSN } from '.
 import middleware from '../utils/middleware';
 // import utils from '../utils/utils';
 
+interface TypedRequestBodyParams<Params, ReqBody> extends Express.Request {
+  params: Params,
+  body: ReqBody,
+};
+
 const patientRouter = express.Router();
 
 patientRouter.get('/', (_req, res: Response<PatientWithoutSSN[]>) => {
@@ -33,11 +38,11 @@ patientRouter.post('/', middleware.newPatientParser, (req: Request<unknown, unkn
 
 */
 
-patientRouter.post('/:id/entries', middleware.newEntryParser, (req: Request<unknown, unknown, EntryWithoutId> , _res: Response<Entry>) => {
+patientRouter.post('/:id/entries', middleware.newEntryParser, (req: TypedRequestBodyParams<{ id: string }, EntryWithoutId> , _res: Response<Entry>) => {
   patientService.addEntryToPatient(req.body);
 
-  // const savedPatient = patientService.getPatientById(req.params.id);
-  // console.log(savedPatient);
+  const savedPatient = patientService.getPatientById(req.params.id);
+  console.log(savedPatient);
 });
 
 export default patientRouter;
