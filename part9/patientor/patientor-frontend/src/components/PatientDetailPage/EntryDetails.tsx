@@ -72,7 +72,10 @@ const EntryDetails = ({ entry }: EntryDetailProps) => {
   return (
     <div style={entryStyles}>
       <Typography variant='body1'>
-        {entry.date} {entry.description}
+        {entry.date}
+      </Typography>
+      <Typography variant='body2' fontStyle='italic'>
+        {entry.description}
       </Typography>
       ---
       {entryDetailByType()}
