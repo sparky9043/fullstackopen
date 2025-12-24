@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import patients from '../../services/patients';
 import { Patient } from '../../types';
 import EntryDetails from './EntryDetails';
@@ -38,10 +38,14 @@ const PatientDetail = () => {
       <Typography variant="h5" style={{ fontWeight: 'bold' }}>
         entries
       </Typography>
-      {patientDetails.entries.length
-        ? patientDetails.entries.map(entry =>
-            <EntryDetails key={entry.id} entry={entry} />)
-        : null
+      {patientDetails.entries.length > 0
+        ? <List>
+          {patientDetails.entries.map(entry =>
+            <EntryDetails key={entry.id} entry={entry} />)}
+        </List>
+        : <Typography variant='h5'>
+          no entries
+        </Typography> 
       }
     </div>
   );
