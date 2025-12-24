@@ -26,6 +26,13 @@ patientRouter.post('/', middleware.newPatientParser, (req: Request<unknown, unkn
   res.json(savedPatient);
 });
 
+/*
+  To continue next time:
+  1. make sure the id is parsed properly to identify patient
+  2. learn how to parse request.params.id along with how to type Response in express
+
+*/
+
 patientRouter.post('/:id/entries', middleware.newEntryParser, (req: Request<unknown, unknown, EntryWithoutId> , _res: Response<Entry>) => {
   patientService.addEntryToPatient(req.body);
 
