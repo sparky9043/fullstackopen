@@ -64,12 +64,12 @@ const patients: Patient[] = [
     entries: [
       {
         id: 'd811e46d-70b3-4d90-b090-4535c7cf8fb1',
-        date: '2015-01-02',
-        type: 'Hospital',
-        specialist: 'MD House',
-        diagnosisCodes: ['S62.5'],
         description:
           "Healing time appr. 2 weeks. patient doesn't remember how he got the injury.",
+        date: '2015-01-02',
+        specialist: 'MD House',
+        type: 'Hospital',
+        diagnosisCodes: ['S62.5'],
         discharge: {
           date: '2015-01-16',
           criteria: 'Thumb has healed.',
@@ -128,11 +128,11 @@ const patients: Patient[] = [
       },
       {
         id: 'fcd59fa6-c4b4-4fec-ac4d-df4fe1f85f62',
+        description: 'Prescriptions renewed.',
         date: '2019-09-10',
         specialist: 'MD House',
         type: 'OccupationalHealthcare',
         employerName: 'FBI',
-        description: 'Prescriptions renewed.',
       },
       {
         id: '37be178f-a432-4ba4-aac2-f86810e36a15',
