@@ -20,7 +20,7 @@ const PatientDetail = () => {
     };
 
     void fetchPatientById();
-  }, [patientId]);
+  }, [patientId, patientDetails]);
 
   if (!patientDetails) {
     return <p>Loading...</p>;
