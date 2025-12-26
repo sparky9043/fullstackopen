@@ -28,7 +28,7 @@ const newEntryHealthCheckSchema = newEntryDataBaseSchemaWithId.strict().extend({
 const newEntryOccupationalHealthcareSchema = newEntryDataBaseSchemaWithId.strict().extend({
   type: z.string('OccupationalHealthcare'),
   employerName: z.string(),
-  sickLeave: z.object({
+  sickLeave: z.strictObject({
     startDate: z.iso.date(),
     endDate: z.iso.date(),
   }).optional(),
