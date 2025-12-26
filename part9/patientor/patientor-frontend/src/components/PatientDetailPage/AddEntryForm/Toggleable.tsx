@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { useState } from 'react';
 
 interface ToggleableProps {
@@ -11,11 +12,11 @@ const Toggleable = (props: ToggleableProps) => {
   return (
     <div>
       <div style={{ display: !toggle ? 'block' : 'none' }}>
-        <button onClick={() => setToggle(prev => !prev)}>{!props.text ? 'show': props.text}</button>
+        <Button variant='outlined' onClick={() => setToggle(prev => !prev)}>{!props.text ? 'show': props.text}</Button>
       </div>
       <div style={{ display: toggle ? 'block' : 'none' }}>
         {props.children}
-        <button onClick={() => setToggle(prev => !prev)}>cancel</button>
+        <Button variant='outlined' onClick={() => setToggle(prev => !prev)}>cancel</Button>
       </div>
     </div>
   );
