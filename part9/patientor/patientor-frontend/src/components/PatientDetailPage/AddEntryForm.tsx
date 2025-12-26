@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import patientService from '../../services/patients';
 import { useParams } from 'react-router-dom';
 import { EntryWithoutId } from '../../types';
+import { AxiosError } from 'axios';
 
 type AddEntryFormProps = {
   onSuccess: () => void;
@@ -94,13 +95,16 @@ const AddEntryForm = (props: AddEntryFormProps) => {
       setDischargeDate('');
       setDischargeCriteria('');
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
+      let message = 'Error: ';
+      if (error instanceof AxiosError) {
+        message = message + error.response?.data.error[0].message;
+        setErrorMessage(message);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
       }
     }
   };
-
-  console.log(errorMessage);
 
   const formStyle = {
     border: '2px solid black',
@@ -117,6 +121,7 @@ const AddEntryForm = (props: AddEntryFormProps) => {
 
   return (
     <form onSubmit={handleSubmitEntry} style={formStyle}>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       <div>
         <Typography variant='h5'>
           entry
