@@ -50,7 +50,7 @@ const addEntry = async (object: EntryWithoutId, patientId: string) => {
         }).then(response => response.data);
       }
     case 'Hospital':
-      return;
+      return await axios.post<Entry>(url, object).then(response => response.data);
     default:
       throw new Error(`invalid type. try again`);
   }

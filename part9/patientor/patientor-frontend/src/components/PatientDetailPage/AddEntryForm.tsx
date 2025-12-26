@@ -72,7 +72,7 @@ const AddEntryForm = () => {
         };
 
         await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
-        
+        navigate(0);
       }
       
     } catch (error) {
