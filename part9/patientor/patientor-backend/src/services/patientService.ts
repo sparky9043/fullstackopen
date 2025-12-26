@@ -41,7 +41,7 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
 
   const parsedEntry = parseDiagnosisCodes(entryObject);
 
-  const parseEntryType = (object: unknown): Entry => {
+  const parseEntryByType = (object: unknown): Entry => {
     if (
       !object                     ||
       typeof object !== 'object'  ||
@@ -49,6 +49,7 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
     ) {
       throw new Error('');
     }
+    
     return object as Entry;
   };
 
@@ -62,7 +63,7 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
     id: uuid(),
   };
 
-  const savedEntry = parseEntryType(entry);
+  const savedEntry = parseEntryByType(entry);
   savedPatient?.entries.push(savedEntry);
 
   return savedEntry;
