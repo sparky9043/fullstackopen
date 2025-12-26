@@ -49,8 +49,10 @@ const addEntry = async (object: EntryWithoutId, patientId: string) => {
           sickLeave: object.sickLeave,
         }).then(response => response.data);
       }
+    case 'Hospital':
+      return;
     default:
-      throw new Error(`invalid type: ${object.type}`);
+      throw new Error(`invalid type. try again`);
   }
   // const { data } = await axios.post<Entry>(
   //   `${apiBaseUrl}/patients/${patientId}/entries`,

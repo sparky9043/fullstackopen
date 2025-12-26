@@ -17,6 +17,8 @@ const AddEntryForm = () => {
   const [employerName, setEmployerName] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
+  const [dischargeDate, setDischargeDate] = useState<string>('');
+  const [dischargeCriteria, setDischargeCriteria] = useState<string>('');
   
   if (!patientId) {
     return null;
@@ -24,6 +26,7 @@ const AddEntryForm = () => {
 
   const showHealthCheckRating = type === 'HealthCheck';
   const showOccupationalInputs = type === 'OccupationalHealthcare';
+  const showDischargeInputs = type === 'Hospital';
 
   const handleSubmitEntry = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -59,6 +62,17 @@ const AddEntryForm = () => {
 
         await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
         navigate(0);
+      } else if (type === 'Hospital') {
+        const occupationalHealthcareEntry = {
+          ...baseEntry,
+          discharge: {
+            date: dischargeDate,
+            criteria: dischargeCriteria,
+          },
+        };
+
+        await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
+        
       }
       
     } catch (error) {
@@ -193,6 +207,33 @@ const AddEntryForm = () => {
                   type='date'
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
+                />
+              </ListItem>
+            </>
+          }
+
+          {showDischargeInputs && 
+            <>
+              <ListItem>
+                <InputLabel
+                  htmlFor='dischargeDate'
+                >discharge date</InputLabel>
+                <Input
+                  id='dischargeDate'
+                  value={dischargeDate}
+                  onChange={(e) => setDischargeDate(e.target.value)}
+                  type='date'
+                />
+              </ListItem>
+              <ListItem>
+                <InputLabel
+                  htmlFor='dischargeCriteria'
+                >discharge criteria</InputLabel>
+                <Input
+                  id='dischargeCriteria'
+                  value={dischargeCriteria}
+                  onChange={(e) => setDischargeCriteria(e.target.value)}
+                  type='text'
                 />
               </ListItem>
             </>
