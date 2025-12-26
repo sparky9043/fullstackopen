@@ -1,41 +1,52 @@
 import { Button, Input, InputLabel, List, ListItem, Typography } from '@mui/material';
 import React, { useState } from 'react';
-// import { useParams } from 'react-router-dom';
+import patientService from '../../services/patients';
+import { useNavigate, useParams } from 'react-router-dom';
+import { EntryWithoutId } from '../../types';
 
 const AddEntryForm = () => {
-  // const { id: patientId } = useParams();
+  const navigate = useNavigate();
+  const { id: patientId } = useParams();
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [specialist, setSpecialist] = useState<string>('');
   const [diagnosis, setDiagnosis] = useState<string>('');
   const [type, setType] = useState<string>('HealthCheck');
   const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
-  // console.log(patientId);
+  
+  if (!patientId) {
+    return null;
+  }
 
   const showHealthCheckRating = type === 'HealthCheck';
 
-  const handleSubmitEntry = (event: React.SyntheticEvent) => {
-    const diagnosisCodes = diagnosis.split(',').map(d => d.trim());
-
-    const baseEntry = {
-      description,
-      date,
-      specialist,
-      diagnosisCodes,
-      type,
-    };
-    
-    if (type === 'HealthCheck') {
-      const healthCheckEntry = {
-        ...baseEntry,
-        healthCheckRating,
-      };
-
-      console.log(healthCheckEntry);
-    }
-
-
+  const handleSubmitEntry = async (event: React.SyntheticEvent) => {
     event.preventDefault();
+    try {
+
+      const diagnosisCodes = diagnosis.split(',').map(d => d.trim());
+      
+      const baseEntry = {
+        description,
+        date,
+        specialist,
+        diagnosisCodes,
+        type,
+      };
+      
+      if (type === 'HealthCheck') {
+        const healthCheckEntry = {
+          ...baseEntry,
+          healthCheckRating,
+        };
+        
+        await patientService.addEntry(healthCheckEntry as EntryWithoutId, patientId);
+        navigate(0);
+      } 
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formStyle = {
