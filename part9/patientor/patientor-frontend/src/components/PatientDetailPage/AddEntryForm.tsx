@@ -1,5 +1,5 @@
 import { Button, Input, InputLabel, List, ListItem, Typography } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const AddEntryForm = () => {
@@ -8,10 +8,11 @@ const AddEntryForm = () => {
   const [entryDate, setEntryDate] = useState<string>('');
   const [specialist, setSpecialist] = useState<string>('');
   const [diagnosisCodes, setDiagnosisCodes] = useState<string>('');
+  const [type, setType] = useState<string>('HealthCheck');
   console.log(patientId);
 
   const handleSubmitEntry = (event: React.SyntheticEvent) => {
-    console.log(entryDate, entryDescription);
+    console.log(specialist, type);
     event.preventDefault();
   };
 
@@ -46,7 +47,7 @@ const AddEntryForm = () => {
           />
         </ListItem>
         <ListItem>
-          <InputLabel>
+          <InputLabel htmlFor='entryDescription'>
             description
           </InputLabel>
           <Input
@@ -57,7 +58,7 @@ const AddEntryForm = () => {
           />
         </ListItem>
         <ListItem>
-          <InputLabel>
+          <InputLabel htmlFor='specialist'>
             specialist
           </InputLabel>
           <Input
@@ -68,7 +69,7 @@ const AddEntryForm = () => {
           />
         </ListItem>
         <ListItem>
-          <InputLabel>
+          <InputLabel htmlFor='diagnosisCodes'>
             diagnosis codes
           </InputLabel>
           <Input
@@ -77,6 +78,20 @@ const AddEntryForm = () => {
             id='diagnosisCodes'
             type='text'
           />
+        </ListItem>
+        <ListItem>
+          <InputLabel htmlFor='type'>
+            entry type
+          </InputLabel>
+          <select
+            id='type'
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option value='HealthCheck'>Health Check</option>
+            <option value='OccupationalHealthcare'>Occupational Healthcare</option>
+            <option value='Hospital'>Hospital</option>
+          </select>
         </ListItem>
       </List>
 
