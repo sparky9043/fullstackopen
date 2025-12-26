@@ -71,8 +71,12 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
       utils.newEntryOccupationalHealthcareSchema.parse(savedEntry);
       savedPatient?.entries.push(savedEntry);
       return savedEntry;
+    case 'Hospital':
+      utils.newEntryHospitalSchema.parse(savedEntry);
+      savedPatient?.entries.push(savedEntry);
+      return savedEntry;
     default:
-      throw new Error(`${entryObject.type} is unknown`);
+      throw new Error('type is unknown');
   }
 
 };

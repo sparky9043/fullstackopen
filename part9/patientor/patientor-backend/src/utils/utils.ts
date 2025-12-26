@@ -30,4 +30,18 @@ const newEntryOccupationalHealthcareSchema = z.object({
   }).optional(),
 });
 
-export default { newPatientDataSchema, newEntryDataBaseSchema, newEntryHealthCheckSchema, newEntryOccupationalHealthcareSchema };
+const newEntryHospitalSchema = z.object({
+  type: z.string('Hospital'),
+  discharge: z.object({
+    date: z.iso.date(),
+    criteria: z.string(),
+  }),
+});
+
+export default {
+  newPatientDataSchema,
+  newEntryDataBaseSchema,
+  newEntryHealthCheckSchema,
+  newEntryOccupationalHealthcareSchema,
+  newEntryHospitalSchema,
+};
