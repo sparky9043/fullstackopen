@@ -1,18 +1,28 @@
 import { Button, Input, InputLabel, List, ListItem, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 const AddEntryForm = () => {
-  const { id: patientId } = useParams();
-  const [entryDescription, setEntryDescription] = useState<string>('');
-  const [entryDate, setEntryDate] = useState<string>('');
+  // const { id: patientId } = useParams();
+  const [description, setDescription] = useState<string>('');
+  const [date, setDate] = useState<string>('');
   const [specialist, setSpecialist] = useState<string>('');
-  const [diagnosisCodes, setDiagnosisCodes] = useState<string>('');
+  const [diagnosis, setDiagnosis] = useState<string>('');
   const [type, setType] = useState<string>('HealthCheck');
-  console.log(patientId);
+  // console.log(patientId);
 
   const handleSubmitEntry = (event: React.SyntheticEvent) => {
-    console.log(specialist, type);
+    const diagnosisCodes = diagnosis.split(',').map(d => d.trim());
+
+    const entry = {
+      description,
+      date,
+      specialist,
+      diagnosisCodes,
+      type,
+    };
+    
+    console.log(entry);
     event.preventDefault();
   };
 
@@ -38,22 +48,22 @@ const AddEntryForm = () => {
       </div>
       <List style={{ listStyle: 'none' }}>
         <ListItem>
-          <InputLabel htmlFor='entryDate'>date</InputLabel>
+          <InputLabel htmlFor='date'>date</InputLabel>
           <Input  
-            value={entryDate}
-            id='entryDate'
+            value={date}
+            id='date'
             type='date'
-            onChange={(e) => setEntryDate(e.currentTarget.value)}
+            onChange={(e) => setDate(e.currentTarget.value)}
           />
         </ListItem>
         <ListItem>
-          <InputLabel htmlFor='entryDescription'>
+          <InputLabel htmlFor='description'>
             description
           </InputLabel>
           <Input
-            value={entryDescription}
-            onChange={(e) => setEntryDescription(e.currentTarget.value)}
-            id='entryDescription'
+            value={description}
+            onChange={(e) => setDescription(e.currentTarget.value)}
+            id='description'
             type='text'
           />
         </ListItem>
@@ -69,13 +79,13 @@ const AddEntryForm = () => {
           />
         </ListItem>
         <ListItem>
-          <InputLabel htmlFor='diagnosisCodes'>
+          <InputLabel htmlFor='diagnosis'>
             diagnosis codes
           </InputLabel>
           <Input
-            value={diagnosisCodes}
-            onChange={(e) => setDiagnosisCodes(e.currentTarget.value)}
-            id='diagnosisCodes'
+            value={diagnosis}
+            onChange={(e) => setDiagnosis(e.currentTarget.value)}
+            id='diagnosis'
             type='text'
           />
         </ListItem>
