@@ -5,6 +5,7 @@ import patients from '../../services/patients';
 import { Patient } from '../../types';
 import EntryDetails from './EntryDetails';
 import Toggleable from '../Toggleable';
+import AddEntryForm from './AddEntryForm';
 
 const PatientDetail = () => {
   const { id: patientId } = useParams();
@@ -28,7 +29,7 @@ const PatientDetail = () => {
   return (
     <div>
       <Toggleable text='add patient entry'>
-        <p>Hello</p>
+        <AddEntryForm />
       </Toggleable>
       <Typography variant="h4" style={{ marginBottom: "0.5em", fontWeight: "bold" }}>
         {patientDetails.name} {patientDetails.gender === 'male' ? '♂' : '♀'}
