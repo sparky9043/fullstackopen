@@ -33,33 +33,22 @@ const addEntry = async (object: EntryWithoutId, patientId: string) => {
 
   const { description, date, specialist, diagnosisCodes, type } = object;
 
-  switch (type) {
-    case 'HealthCheck':
-      return await axios.post<Entry>(url, object).then(response => response.data);
-    case 'OccupationalHealthcare':
-      if (!object.sickLeave?.startDate || !object.sickLeave?.endDate) {
-        return await axios.post<Entry>(url, {
-          description, date, specialist, diagnosisCodes, type,
-          employerName: object.employerName,
-        }).then(response => response.data);
-      } else {
-        return await axios.post<Entry>(url, {
-          description, date, specialist, diagnosisCodes, type,
-          employerName: object.employerName,
-          sickLeave: object.sickLeave,
-        }).then(response => response.data);
-      }
-    case 'Hospital':
-      return await axios.post<Entry>(url, object).then(response => response.data);
-    default:
-      throw new Error(`invalid type. try again`);
+  if (type === 'OccupationalHealthcare') {
+    if (!object.sickLeave?.startDate || !object.sickLeave?.endDate) {
+      return await axios.post<Entry>(url, {
+        description, date, specialist, diagnosisCodes, type,
+        employerName: object.employerName,
+      }).then(response => response.data);
+    } else {
+      return await axios.post<Entry>(url, {
+        description, date, specialist, diagnosisCodes, type,
+        employerName: object.employerName,
+        sickLeave: object.sickLeave,
+      }).then(response => response.data);
+    }
+  } else {
+    return await axios.post<Entry>(url, object).then(response => response.data);
   }
-  // const { data } = await axios.post<Entry>(
-  //   `${apiBaseUrl}/patients/${patientId}/entries`,
-  //   object
-  // );
-
-  // return data;
 };
 
 export default {
