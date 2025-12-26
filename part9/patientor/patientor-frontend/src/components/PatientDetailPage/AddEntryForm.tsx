@@ -4,13 +4,18 @@ import patientService from '../../services/patients';
 import { useParams } from 'react-router-dom';
 import { EntryWithoutId } from '../../types';
 
-const AddEntryForm = () => {
+type AddEntryFormProps = {
+  onSuccess: () => void;
+};
+
+const AddEntryForm = (props: AddEntryFormProps) => {
   const { id: patientId } = useParams();
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [specialist, setSpecialist] = useState<string>('');
   const [diagnosis, setDiagnosis] = useState<string>('');
   const [type, setType] = useState<string>('HealthCheck');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   
   // HealthCheck
   const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
@@ -35,7 +40,6 @@ const AddEntryForm = () => {
   const handleSubmitEntry = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
-
       const diagnosisCodes = diagnosis.split(',').map(d => d.trim());
       
       const baseEntry = {
@@ -77,6 +81,7 @@ const AddEntryForm = () => {
         await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
       }
       
+      props.onSuccess();
       setDate('');
       setDescription('');
       setSpecialist('');
@@ -88,10 +93,14 @@ const AddEntryForm = () => {
       setEndDate('');
       setDischargeDate('');
       setDischargeCriteria('');
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
     }
   };
+
+  console.log(errorMessage);
 
   const formStyle = {
     border: '2px solid black',

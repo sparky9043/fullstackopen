@@ -10,6 +10,8 @@ import AddEntryForm from './AddEntryForm';
 const PatientDetail = () => {
   const { id: patientId } = useParams();
   const [patientDetails, setPatientDetails] = useState<Patient | null | undefined>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const refetchPatient = () => setRefreshKey(k => k + 1);
 
   useEffect(() => {
     const fetchPatientById = async () => {
@@ -20,7 +22,7 @@ const PatientDetail = () => {
     };
 
     void fetchPatientById();
-  }, [patientId, patientDetails]);
+  }, [patientId, refreshKey]);
 
   if (!patientDetails) {
     return <p>Loading...</p>;
@@ -29,7 +31,7 @@ const PatientDetail = () => {
   return (
     <div>
       <Toggleable text='add patient entry'>
-        <AddEntryForm />
+        <AddEntryForm onSuccess={refetchPatient} />
       </Toggleable>
       <Typography variant="h4" style={{ marginBottom: "0.5em", fontWeight: "bold" }}>
         {patientDetails.name} {patientDetails.gender === 'male' ? '♂' : '♀'}
