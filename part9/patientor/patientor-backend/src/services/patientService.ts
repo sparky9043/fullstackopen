@@ -1,6 +1,7 @@
 import patientsData from '../../data/patients';
-import { Patient, PatientWithoutSSN, NewPatient, EntryWithoutId } from '../types';
+import { Patient, PatientWithoutSSN, NewPatient, EntryWithoutId, Diagnosis, Entry } from '../types';
 import { v1 as uuid } from 'uuid';
+// import diagnosesService from './diagnosesService';
 
 const getPatients = (): Patient[] => {
   return patientsData;
@@ -27,8 +28,44 @@ const addPatient = (patientObj: NewPatient): Patient => {
   return newPatient;
 };
 
-const addEntryToPatient = (entryObject: EntryWithoutId) => {
-  console.log(entryObject);
+const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) => {
+  const savedPatient = getPatientById(patientId);
+
+  const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> => {
+    if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
+      return [] as Array<Diagnosis['code']>;
+    }
+
+    return object.diagnosisCodes as Array<Diagnosis['code']>;
+  };
+
+  const parsedEntry = parseDiagnosisCodes(entryObject);
+
+  const parseEntryType = (object: unknown): Entry => {
+    if (
+      !object                     ||
+      typeof object !== 'object'  ||
+      !('type' in object)
+    ) {
+      throw new Error('');
+    }
+    return object as Entry;
+  };
+
+  const entry = {
+    type: 'HealthCheck',
+    description: "this is gonna be a test",
+    date: "2035-12-12",
+    specialist: "Dr. Seuss",
+    parsedEntry,
+    healthCheckRating: 1,
+    id: uuid(),
+  };
+
+  const savedEntry = parseEntryType(entry);
+  savedPatient?.entries.push(savedEntry);
+
+  return savedEntry;
 };
 
-export default { getPatients, getPatientsWithoutSSN, getPatientById, addPatient, addEntryToPatient };
+export default { getPatients, getPatientsWithoutSSN, getPatientById, addPatient, addEntryToPatientById };

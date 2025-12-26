@@ -33,10 +33,10 @@ patientRouter.post('/', middleware.newPatientParser, (req: Request<unknown, unkn
 
 */
 
-patientRouter.post('/:id/entries', middleware.newEntryParser, (req: Request<{ id: string }, unknown, EntryWithoutId> , _res: Response<Entry>) => {
-  patientService.addEntryToPatient(req.body);
+patientRouter.post('/:id/entries', middleware.newEntryParser, (req: Request<{ id: string }, unknown, EntryWithoutId> , res: Response<Entry>) => {
+  const addedEntry = patientService.addEntryToPatientById(req.body, req.params.id);
 
-  patientService.getPatientById(req.params.id);
+  res.json(addedEntry);
 });
 
 export default patientRouter;
