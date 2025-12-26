@@ -16,12 +16,16 @@ const newEntryDataBaseSchema = z.object({
   diagnosisCodes: z.array(z.string()).optional(),
 });
 
-const newEntryHealthCheckSchema = z.object({
+const newEntryDataBaseSchemaWithId = newEntryDataBaseSchema.strict().extend({
+  id: z.string(),
+});
+
+const newEntryHealthCheckSchema = newEntryDataBaseSchemaWithId.strict().extend({
   type: z.string('HealthCheck'),
   healthCheckRating: z.number(),
 });
 
-const newEntryOccupationalHealthcareSchema = z.object({
+const newEntryOccupationalHealthcareSchema = newEntryDataBaseSchemaWithId.strict().extend({
   type: z.string('OccupationalHealthcare'),
   employerName: z.string(),
   sickLeave: z.object({
@@ -30,7 +34,7 @@ const newEntryOccupationalHealthcareSchema = z.object({
   }).optional(),
 });
 
-const newEntryHospitalSchema = z.object({
+const newEntryHospitalSchema = newEntryDataBaseSchemaWithId.strict().extend({
   type: z.string('Hospital'),
   discharge: z.object({
     date: z.iso.date(),
