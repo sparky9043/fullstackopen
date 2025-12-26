@@ -1,11 +1,10 @@
 import { Button, Input, InputLabel, List, ListItem, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import patientService from '../../services/patients';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { EntryWithoutId } from '../../types';
 
 const AddEntryForm = () => {
-  const navigate = useNavigate();
   const { id: patientId } = useParams();
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<string>('');
@@ -49,7 +48,6 @@ const AddEntryForm = () => {
         };
         
         await patientService.addEntry(healthCheckEntry as EntryWithoutId, patientId);
-        navigate(0);
       } else if (type === 'OccupationalHealthcare') {
         const occupationalHealthcareEntry = {
           ...baseEntry,
@@ -61,7 +59,6 @@ const AddEntryForm = () => {
         };
 
         await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
-        navigate(0);
       } else if (type === 'Hospital') {
         const occupationalHealthcareEntry = {
           ...baseEntry,
@@ -72,7 +69,6 @@ const AddEntryForm = () => {
         };
 
         await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
-        navigate(0);
       }
       
     } catch (error) {
