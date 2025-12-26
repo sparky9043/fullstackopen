@@ -16,4 +16,18 @@ const newEntryDataBaseSchema = z.object({
   diagnosisCodes: z.array(z.string()).optional(),
 });
 
-export default { newPatientDataSchema, newEntryDataBaseSchema };
+const newEntryHealthCheckSchema = z.object({
+  type: z.string('HealthCheck'),
+  healthCheckRating: z.number(),
+});
+
+const newEntryOccupationalHealthcareSchema = z.object({
+  type: z.string('OccupationalHealthcare'),
+  employerName: z.string(),
+  sickLeave: z.object({
+    startDate: z.iso.date(),
+    endDate: z.iso.date(),
+  }).optional(),
+});
+
+export default { newPatientDataSchema, newEntryDataBaseSchema, newEntryHealthCheckSchema, newEntryOccupationalHealthcareSchema };

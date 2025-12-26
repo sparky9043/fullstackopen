@@ -1,6 +1,7 @@
 import patientsData from '../../data/patients';
 import { Patient, PatientWithoutSSN, NewPatient, EntryWithoutId, Diagnosis, Entry } from '../types';
 import { v1 as uuid } from 'uuid';
+import utils from '../utils/utils';
 // import diagnosesService from './diagnosesService';
 
 const getPatients = (): Patient[] => {
@@ -60,9 +61,20 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
   };
 
   const savedEntry = parseBaseEntry(entry);
-  savedPatient?.entries.push(savedEntry);
 
-  return savedEntry;
+  switch (entryObject.type) {
+    case 'HealthCheck':
+      utils.newEntryHealthCheckSchema.parse(savedEntry);
+      savedPatient?.entries.push(savedEntry);
+      return savedEntry;
+    case 'OccupationalHealthcare':
+      utils.newEntryOccupationalHealthcareSchema.parse(savedEntry);
+      savedPatient?.entries.push(savedEntry);
+      return savedEntry;
+    default:
+      throw new Error(`${entryObject.type} is unknown`);
+  }
+
 };
 
 export default { getPatients, getPatientsWithoutSSN, getPatientById, addPatient, addEntryToPatientById };
