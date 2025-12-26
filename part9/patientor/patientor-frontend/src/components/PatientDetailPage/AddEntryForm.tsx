@@ -11,11 +11,16 @@ const AddEntryForm = () => {
   const [specialist, setSpecialist] = useState<string>('');
   const [diagnosis, setDiagnosis] = useState<string>('');
   const [type, setType] = useState<string>('HealthCheck');
+  
+  // HealthCheck
   const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
 
+  // Occupational Healthcare
   const [employerName, setEmployerName] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
+
+  // Hospital
   const [dischargeDate, setDischargeDate] = useState<string>('');
   const [dischargeCriteria, setDischargeCriteria] = useState<string>('');
   
@@ -48,6 +53,7 @@ const AddEntryForm = () => {
         };
         
         await patientService.addEntry(healthCheckEntry as EntryWithoutId, patientId);
+
       } else if (type === 'OccupationalHealthcare') {
         const occupationalHealthcareEntry = {
           ...baseEntry,
@@ -71,6 +77,17 @@ const AddEntryForm = () => {
         await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
       }
       
+      setDate('');
+      setDescription('');
+      setSpecialist('');
+      setDiagnosis('');
+      setType('HealthCheck');
+      setHealthCheckRating(0);
+      setEmployerName('');
+      setStartDate('');
+      setEndDate('');
+      setDischargeDate('');
+      setDischargeCriteria('');
     } catch (error) {
       console.log(error);
     }
