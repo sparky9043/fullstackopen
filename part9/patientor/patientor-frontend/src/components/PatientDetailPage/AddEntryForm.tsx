@@ -9,12 +9,15 @@ const AddEntryForm = () => {
   const [specialist, setSpecialist] = useState<string>('');
   const [diagnosis, setDiagnosis] = useState<string>('');
   const [type, setType] = useState<string>('HealthCheck');
+  const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
   // console.log(patientId);
+
+  const showHealthCheckRating = type === 'HealthCheck';
 
   const handleSubmitEntry = (event: React.SyntheticEvent) => {
     const diagnosisCodes = diagnosis.split(',').map(d => d.trim());
 
-    const entry = {
+    const baseEntry = {
       description,
       date,
       specialist,
@@ -22,7 +25,16 @@ const AddEntryForm = () => {
       type,
     };
     
-    console.log(entry);
+    if (type === 'HealthCheck') {
+      const healthCheckEntry = {
+        ...baseEntry,
+        healthCheckRating,
+      };
+
+      console.log(healthCheckEntry);
+    }
+
+
     event.preventDefault();
   };
 
@@ -103,6 +115,23 @@ const AddEntryForm = () => {
             <option value='Hospital'>Hospital</option>
           </select>
         </ListItem>
+        {showHealthCheckRating && <ListItem>
+          <InputLabel
+            htmlFor='healthCheckRating'
+          >
+            Health Check Rating
+          </InputLabel>
+            <select
+              id='healthCheckRating'
+              value={healthCheckRating}
+              onChange={(e) => setHealthCheckRating(Number(e.target.value))}
+            >
+              <option value={0}>0</option>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </select>
+          </ListItem>}
       </List>
 
       <Button style={buttonStyle} type='submit' variant='contained'>
