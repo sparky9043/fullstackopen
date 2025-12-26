@@ -13,12 +13,17 @@ const AddEntryForm = () => {
   const [diagnosis, setDiagnosis] = useState<string>('');
   const [type, setType] = useState<string>('HealthCheck');
   const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
+
+  const [employerName, setEmployerName] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
   
   if (!patientId) {
     return null;
   }
 
   const showHealthCheckRating = type === 'HealthCheck';
+  const showOccupationalInputs = type === 'OccupationalHealthcare';
 
   const handleSubmitEntry = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -42,7 +47,19 @@ const AddEntryForm = () => {
         
         await patientService.addEntry(healthCheckEntry as EntryWithoutId, patientId);
         navigate(0);
-      } 
+      } else if (type === 'OccupationalHealthcare') {
+        const occupationalHealthcareEntry = {
+          ...baseEntry,
+          employerName,
+          sickLeave: {
+            startDate,
+            endDate,
+          },
+        };
+
+        await patientService.addEntry(occupationalHealthcareEntry as EntryWithoutId, patientId);
+        navigate(0);
+      }
       
     } catch (error) {
       console.log(error);
@@ -143,6 +160,43 @@ const AddEntryForm = () => {
               <option value={3}>3</option>
             </select>
           </ListItem>}
+
+          {showOccupationalInputs &&
+            <>
+              <ListItem>
+                <InputLabel>
+                  Employer Name
+                </InputLabel>
+                <Input
+                  type='text'
+                  value={employerName}
+                  onChange={(e) => setEmployerName(e.target.value)}
+                  />
+              </ListItem>
+              <ListItem>
+                <InputLabel htmlFor='startDate'>
+                  Start Date
+                </InputLabel>
+                <Input
+                  id='startDate'
+                  type='date'
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </ListItem>
+              <ListItem>
+                <InputLabel htmlFor='endDate'>
+                  End Date
+                </InputLabel>
+                <Input
+                  id='endDate'
+                  type='date'
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </ListItem>
+            </>
+          }
       </List>
 
       <Button style={buttonStyle} type='submit' variant='contained'>
