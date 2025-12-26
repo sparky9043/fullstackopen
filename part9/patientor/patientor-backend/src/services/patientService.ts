@@ -39,9 +39,9 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
     return object.diagnosisCodes as Array<Diagnosis['code']>;
   };
 
-  const parsedEntry = parseDiagnosisCodes(entryObject);
+  const diagnosisCodes = parseDiagnosisCodes(entryObject);
 
-  const parseEntryByType = (object: unknown): Entry => {
+  const parseBaseEntry = (object: unknown): Entry => {
     if (
       !object                     ||
       typeof object !== 'object'  ||
@@ -54,16 +54,12 @@ const addEntryToPatientById = (entryObject: EntryWithoutId, patientId: string) =
   };
 
   const entry = {
-    type: 'HealthCheck',
-    description: "this is gonna be a test",
-    date: "2035-12-12",
-    specialist: "Dr. Seuss",
-    parsedEntry,
-    healthCheckRating: 1,
     id: uuid(),
+    ...entryObject,
+    diagnosisCodes,
   };
 
-  const savedEntry = parseEntryByType(entry);
+  const savedEntry = parseBaseEntry(entry);
   savedPatient?.entries.push(savedEntry);
 
   return savedEntry;
